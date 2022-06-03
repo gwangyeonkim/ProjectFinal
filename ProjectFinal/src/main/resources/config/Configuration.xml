@@ -3,4 +3,16 @@
 <configuration>
 
 
+	<settings>        
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>  
+	
+	<typeAliases>
+		<typeAlias type="com.min.noti.vo.NotiVo" alias="NotiVo"/>
+	</typeAliases>
+
+ 	<mappers>
+ 		<mapper resource="spls/Project_Statement.xml"/>
+ 		<mapper resource="spls/Noti_Statement.xml"/>
+ 	</mappers>
 </configuration>
