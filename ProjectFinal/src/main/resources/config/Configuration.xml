@@ -9,6 +9,9 @@
 	
 	<typeAliases>
 		<typeAlias type="com.min.noti.vo.NotiVo" alias="NotiVo"/>
+		<typeAlias type="com.min.proj.vo.ProjectVo" alias="ProjVo"/>
+		<typeAlias type="com.min.proj.vo.ProjMemListVo" alias="ProjMemListVo"/>
+		<typeAlias type="com.min.proj.vo.FixHistoryVo" alias="FixHistoryVo"/>
 	</typeAliases>
 
  	<mappers>
