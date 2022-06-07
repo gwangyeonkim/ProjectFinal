@@ -4,13 +4,8 @@ public class FixHistoryVo {
 	private String fixId        ;
 	private String docId        ;
 	private String fixContent   ;
-	private String fixManager   ;
+	private String fixName   ;
 	private String fixDate      ;
-	@Override
-	public String toString() {
-		return "FixHistoryVo [fixId=" + fixId + ", docId=" + docId + ", fixContent=" + fixContent + ", fixManager="
-				+ fixManager + ", fixDate=" + fixDate + "]";
-	}
 	public String getFixId() {
 		return fixId;
 	}
@@ -29,11 +24,11 @@ public class FixHistoryVo {
 	public void setFixContent(String fixContent) {
 		this.fixContent = fixContent;
 	}
-	public String getFixManager() {
-		return fixManager;
+	public String getFixName() {
+		return fixName;
 	}
-	public void setFixManager(String fixManager) {
-		this.fixManager = fixManager;
+	public void setFixName(String fixName) {
+		this.fixName = fixName;
 	}
 	public String getFixDate() {
 		return fixDate;
@@ -41,6 +36,10 @@ public class FixHistoryVo {
 	public void setFixDate(String fixDate) {
 		this.fixDate = fixDate;
 	}
-	
+	@Override
+	public String toString() {
+		return "FixHistoryVo [fixId=" + fixId + ", docId=" + docId + ", fixContent=" + fixContent + ", fixName="
+				+ fixName + ", fixDate=" + fixDate + "]";
+	}
 	
 }
