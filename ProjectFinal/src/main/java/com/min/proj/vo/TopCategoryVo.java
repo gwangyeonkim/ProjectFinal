@@ -43,6 +43,9 @@ public class TopCategoryVo {
 	public String getDocId() {
 		return docId;
 	}
+	public void setTopStep(String topStep) {
+		this.topStep = topStep;
+	}
 	public String getTopStep() {
 		return topStep;
 	}

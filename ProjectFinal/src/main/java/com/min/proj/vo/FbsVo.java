@@ -13,11 +13,14 @@ public class FbsVo {
 	private  String fbsStep       ;
 	private  String fbsDelflag    ;
 	private  String fbsDate       ;
-	@Override
-	public String toString() {
-		return "FbsVo [midId=" + midId + ", topId=" + topId + ", fbsName=" + fbsName + ", fbsCode=" + fbsCode
-				+ ", fbsContent=" + fbsContent + ", fbsImp=" + fbsImp + ", fbsLevel=" + fbsLevel + ", fbsManager="
-				+ fbsManager + ", fbsStep=" + fbsStep + ", fbsDelflag=" + fbsDelflag + ", fbsDate=" + fbsDate + "]";
+	
+	private TopCategoryVo topVo;
+	
+	public TopCategoryVo getTopVo() {
+		return topVo;
+	}
+	public void setTopVo(TopCategoryVo topVo) {
+		this.topVo = topVo;
 	}
 	public String getMidId() {
 		return midId;
@@ -85,6 +88,17 @@ public class FbsVo {
 	public void setFbsDate(String fbsDate) {
 		this.fbsDate = fbsDate;
 	}
+	
+	@Override
+	public String toString() {
+		return "FbsVo [midId=" + midId + ", topId=" + topId + ", fbsName=" + fbsName + ", fbsCode=" + fbsCode
+				+ ", fbsContent=" + fbsContent + ", fbsImp=" + fbsImp + ", fbsLevel=" + fbsLevel + ", fbsManager="
+				+ fbsManager + ", fbsStep=" + fbsStep + ", fbsDelflag=" + fbsDelflag + ", fbsDate=" + fbsDate
+				+ ", topVo=" + topVo + "]";
+	}
+	
+
+	
 	
 	
 }
