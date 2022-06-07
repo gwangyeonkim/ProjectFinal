@@ -9,10 +9,12 @@
 	
 	<typeAliases>
 		<typeAlias type="com.min.noti.vo.NotiVo" alias="NotiVo"/>
+		<typeAlias type="com.min.sche.vo.ScheduleVo" alias="scheVo"/>
 	</typeAliases>
 
  	<mappers>
  		<mapper resource="spls/Project_Statement.xml"/>
  		<mapper resource="spls/Noti_Statement.xml"/>
+ 		<mapper resource="sqls/Schedule_Statement.xml"/>
  	</mappers>
 </configuration>
