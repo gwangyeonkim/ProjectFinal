@@ -49,8 +49,8 @@
 	</insert>
 	
 	<!-- ProjMemListDao -->
-	<select id="chkProjMem" parameterType="java.util.Map" resultType="java.lang.Integer">
-	SELECT COUNT(*) 
+	<select id="chkProjMem" parameterType="java.lang.String" resultType="ProjMemListVo">
+	SELECT MEM_ID, PROJ_NAME, PROJ_PM
 	FROM PROJMEMLIST gp 
 		WHERE MEM_ID =#{memId} AND PROJ_DELFLAG ='N'
 	</select>
@@ -81,7 +81,7 @@
 	</select>
 	
 	<update id="changePm" parameterType="java.util.Map">
-	UPDATE GUN_PROJMEMLIST 
+	UPDATE PROJMEMLIST 
 		SET PROJ_PM = CASE WHEN PROJ_PM = 'Y' THEN 'N' ELSE 'Y' END
 		WHERE MEM_ID IN(#{memId1},#{memId2})
 	</update>

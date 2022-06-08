@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>Document</title>
         <meta charset="UTF-8">
@@ -78,7 +79,7 @@
             </div>
             <div class="items">
                 <br/>
-                <b onclick="location.href='./signUp.do'">signUp</b>
+                <b>signUp</b>
             </div>
         </div>
 
@@ -179,7 +180,7 @@
                 </div>
             </div>
         </div>
-        
+        <h1><a href="./project.do">프로젝트테스트라인</a></h1>
     </body>
     <script>
         $(document).ready(function () {
@@ -187,6 +188,5 @@
                 $("#loginModal").modal();
             });
         });
-        
     </script>
 </html>
