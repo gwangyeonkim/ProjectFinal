@@ -10,7 +10,7 @@
 	<typeAliases>
 		<typeAlias type="com.min.noti.vo.NotiVo" alias="NotiVo"/>
 
-		<typeAlias type="com.min.sche.vo.ScheduleVo" alias="scheVo"/>
+		<typeAlias type="com.min.sche.vo.ScheduleVo" alias="ScheduleVo"/>
 		<typeAlias type="com.min.proj.vo.ProjectVo" alias="ProjVo"/>
 		<typeAlias type="com.min.proj.vo.ProjMemListVo" alias="ProjMemListVo"/>
 		<typeAlias type="com.min.proj.vo.FixHistoryVo" alias="FixHistoryVo"/>
@@ -19,5 +19,6 @@
  	<mappers>
  		<mapper resource="spls/Project_Statement.xml"/>
  		<mapper resource="spls/Noti_Statement.xml"/>
+ 		<mapper resource="spls/Schedule_Statement.xml"/>
  	</mappers>
 </configuration>

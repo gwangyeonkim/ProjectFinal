@@ -1,5 +1,11 @@
 package com.min.sche.service;
 
-public interface IScheduleService {
+import java.util.List;
 
+import com.min.sche.vo.ScheduleVo;
+
+public interface IScheduleService {
+	
+	public List<ScheduleVo> getAllSchedule();
+	
 }
