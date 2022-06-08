@@ -78,7 +78,7 @@
             </div>
             <div class="items">
                 <br/>
-                <b>signUp</b>
+                <b onclick="location.href='./signUp.do'">signUp</b>
             </div>
         </div>
 
@@ -179,6 +179,7 @@
                 </div>
             </div>
         </div>
+        
     </body>
     <script>
         $(document).ready(function () {
@@ -186,5 +187,6 @@
                 $("#loginModal").modal();
             });
         });
+        
     </script>
 </html>
