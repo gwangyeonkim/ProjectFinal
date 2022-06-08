@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.min.sche.mapper.ScheduleDaoImpl">
+
+	<select id="getAllSchedule" resultType="ScheduleVo">
+		SELECT DOC_ID, FBS_NAME, WBS_CODE, WBS_NAME, WBS_CONENT, WBS_START_DATE, WBS_END_DATE
+			FROM WBS_VIEW
+	</select>
+
 </mapper>
