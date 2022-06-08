@@ -19,6 +19,5 @@
  	<mappers>
  		<mapper resource="spls/Project_Statement.xml"/>
  		<mapper resource="spls/Noti_Statement.xml"/>
- 		<mapper resource="sqls/Schedule_Statement.xml"/>
  	</mappers>
 </configuration>
