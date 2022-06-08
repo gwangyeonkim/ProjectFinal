@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.min.proj.vo.ProjMemListVo;
+import com.min.proj.vo.ProjectVo;
 
 @Repository
 public class ProjMemListDaoImpl implements IProjMemListDao{
@@ -18,7 +19,7 @@ public class ProjMemListDaoImpl implements IProjMemListDao{
 	private final String NS = "Project.";
 
 	@Override
-	public int chkProjMem(String memId) {
+	public ProjMemListVo chkProjMem(String memId) {
 		return sqlSession.selectOne(NS+"chkProjMem",memId);
 	}
 

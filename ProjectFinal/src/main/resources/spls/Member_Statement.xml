@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.min.mema.mapper.MemberDaoImpl">
+
+
+	<select id="loginChk" parameterType="String" resultType="MemVo">
+	  SELECT MEM_ID, MEM_PW 
+		FROM MEMBERLIST 
+			WHERE MEMBER_ID = #{member_id} 
+	</select>
+
+	<select id="chkUserId" parameterType="String" resultType="Integer">
+	  SELECT COUNT(*) 
+		FROM MEMBERLIST
+			WHERE MEMBER_ID = #{member_id}
+	</select>
+
+	<insert id="signUp" parameterType="MemVo">
+		INSERT INTO MEMBERLIST
+		(MEMBER_ID, MEM_NAME, MEM_PW, MEM_ADDR, MEM_BIRTH, MEM_PHONE, MEM_EMAIL)
+		VALUES(#{member_id}, #{mem_name}, #{mem_pw},#{mem_addr},#{mem_birth}, #{mem_phone},#{mem_email})
+	</insert>
+
+
+</mapper>
