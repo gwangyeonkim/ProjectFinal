@@ -23,7 +23,7 @@ import com.min.mema.vo.MemberVo;
 @Controller
 public class MemberCtrl {
 	
-	@Autowired
+	@Autowired  
 	private IMemberService service;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberCtrl.class);

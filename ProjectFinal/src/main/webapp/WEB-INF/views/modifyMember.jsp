@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body>  
 
 <h1>${loginVo} 안녕하세요</h1>
 <h1>${memberVo.id} 안녕하세요</h1>

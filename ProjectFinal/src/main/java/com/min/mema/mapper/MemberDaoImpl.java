@@ -60,6 +60,6 @@ public class MemberDaoImpl implements IMemberDao {
 		logger.info("MemberDaoImpl modifyMember {}" , vo);
 		return sqlSession.update(NS+"modifyMember",vo);
 	}
-	
+	 
 	
 }

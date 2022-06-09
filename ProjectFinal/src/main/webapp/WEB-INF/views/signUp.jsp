@@ -21,7 +21,7 @@
             <label for="userId">User id</label>
             <input type="text" placeholder="Enter ID" id="userId" name="memberId">
             <span class="checkIdComment">ID은 2자 이상 10자 이하로 설정해주시기 바랍니다.</span>
-            <input type="hidden" id="doubleCheckId"/>
+            <input type="hidden" id="doubleCheckId"/>  
         </div>
         <div class="form-group">
             <label for="username">User name</label>

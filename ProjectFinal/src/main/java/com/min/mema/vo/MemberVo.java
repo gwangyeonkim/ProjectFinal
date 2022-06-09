@@ -6,7 +6,7 @@ public class MemberVo implements Serializable{
 	
 	private static final long serialVersionUID = -5905648803516270918L;
 	
-	private String memberId;
+	private String memberId;  
 	private String memName;
 	private String memPw;
 	private String memAddr;

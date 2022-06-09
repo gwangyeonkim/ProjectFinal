@@ -12,7 +12,7 @@
     </head>
     <body>
 
-        <div class="wrapper">
+        <div class="wrapper">  
             
             <div class="nav">
                 <a href="#" class="logo">Home</a>

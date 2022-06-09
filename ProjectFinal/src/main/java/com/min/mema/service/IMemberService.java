@@ -22,5 +22,5 @@ public interface IMemberService {
 	public String chkHp(String hp);
 	
 	public int modifyMember(MemberVo vo);
-
+  
 }

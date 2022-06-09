@@ -12,7 +12,7 @@
     </head>
     <body>
 		<a href="./modifyMember.do">회원정보 수정 페이지 이동</a>
-        <div class="wrapper">
+        <div class="wrapper">  
         <h1>${loginVo} 안녕하세요</h1>
 		<h1>${memberVo} 안녕하세요</h1>
             
