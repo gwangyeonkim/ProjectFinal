@@ -9,7 +9,7 @@ public interface IMemberDao {
 	 * @param pw 로그인시 입력된 pw를 받아오는 파라미터
 	 * @return
 	 */
-	public MemberVo loginChk(String id, String pw);
+	public MemberVo loginChk(String id, String pw); 
 	
 	/**
 	 * @param id 중복체크시 입력된 id를 받아오는 파라미터
@@ -25,5 +25,7 @@ public interface IMemberDao {
 	 */
 	
 	public int signUp(MemberVo vo);
+	
+	public int modifyMember(MemberVo vo);
 	
 }
