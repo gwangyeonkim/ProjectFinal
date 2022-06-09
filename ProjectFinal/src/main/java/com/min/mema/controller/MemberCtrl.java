@@ -42,16 +42,20 @@ public class MemberCtrl {
 		
 		MemberVo loginVo = service.loginChk(vo.getMemberId(),vo.getMemPw());
 		System.out.println(loginVo+"++++++++++++++++++");
+		
+		PrintWriter out = resp.getWriter();
+		
 		if (loginVo == null) {
-			PrintWriter out = resp.getWriter();
 			System.out.println(loginVo+"++++++++++++++++++");
 			out.print("<script>alert('로그인이 실패하였습니다.'); location.href='./home.do';</script>");
 			out.flush();
 //			return "redirect:/home.do";
 		}else {
 			model.addAttribute("loginVo", loginVo);
+//			out.print("<script>alert('로그인이 실패하였습니다.'); location.href='./index.do';</script>");
+//			out.flush();
 		}
-			return "index";
+			return "modifyMember";
 	}
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public String signUp() {
@@ -103,6 +107,8 @@ public class MemberCtrl {
 	
 	@RequestMapping(value = "/modifyMember.do" , method = RequestMethod.POST)
 	public String modifyMember(MemberVo vo) {
+		logger.info("MemberCtrl modifyMember {}", vo);
+		service.modifyMember(vo);
 		
 		return "modifyMember";
 	}
