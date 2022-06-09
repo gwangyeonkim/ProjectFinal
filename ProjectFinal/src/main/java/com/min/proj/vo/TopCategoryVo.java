@@ -10,7 +10,7 @@ public class TopCategoryVo {
 	private String topDate    ;
 	@Override
 	public String toString() {
-		return "TopCategoryVo [topId=" + topId + ", docId=" + docId + ", topCode=" + topCode + ", topName=" + topName
+		return "topId=" + topId + ", docId=" + docId + ", topCode=" + topCode + ", topName=" + topName
 				+ ", topStep=" + topStep + ", topDelflag=" + topDelflag + ", topDate=" + topDate + "]";
 	}
 	public String getTopCode() {

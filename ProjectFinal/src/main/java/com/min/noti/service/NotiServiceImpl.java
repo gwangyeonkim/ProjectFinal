@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.min.noti.mapper.INotiDao;
 import com.min.noti.vo.NotiVo;
 
 
@@ -13,7 +14,7 @@ import com.min.noti.vo.NotiVo;
 @Service
 public class NotiServiceImpl implements INotiService {
 	@Autowired
-	private INotiService dao;
+	private INotiDao dao;
 	
 	@Override
 	public int notification_insert_privacy() {

@@ -91,10 +91,10 @@ public class FbsVo {
 	
 	@Override
 	public String toString() {
-		return "FbsVo [midId=" + midId + ", topId=" + topId + ", fbsName=" + fbsName + ", fbsCode=" + fbsCode
+		return "[midId=" + midId + ", topId=" + topId + ", fbsName=" + fbsName + ", fbsCode=" + fbsCode
 				+ ", fbsContent=" + fbsContent + ", fbsImp=" + fbsImp + ", fbsLevel=" + fbsLevel + ", fbsManager="
 				+ fbsManager + ", fbsStep=" + fbsStep + ", fbsDelflag=" + fbsDelflag + ", fbsDate=" + fbsDate
-				+ ", topVo=" + topVo + "]";
+				+ "," + topVo;
 	}
 	
 
