@@ -145,25 +145,25 @@ public class ProjTest {
 //	@Test
 	public void newTopCategory() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("projName", "창창일학1");
-		map.put("topCode", "A01");
-		map.put("topName", "더미값3");
+		map.put("projName", "자두과");
+		map.put("topCode", "A02");
+		map.put("topName", "프로젝트");
 		int n = topDao.newTopCategory(map);
 		System.out.println(n);
 		
 	}
 	
-//	@Test
+	@Test
 	public void newFbs() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("projName", "창창일학1");
-		map.put("topName", "더미값3");
-		map.put("midName", "더미값의 기능 2");
-		map.put("midCode", "01");
-		map.put("midContent", "더미값2 기능입니다.");
-		map.put("midImp", "3");
-		map.put("midLevel", "3");
-		map.put("midManager", "이창훈");
+		map.put("projName", "자두과");
+		map.put("topName", "회원");
+		map.put("fbsName", "로그인");
+		map.put("fbsCode", "01");
+		map.put("fbsContent", "로그인 기능입니다.");
+		map.put("fbsImp", "5");
+		map.put("fbsLevel", "3");
+		map.put("fbsManager", "이창훈");
 		
 		int n = fbsDao.newFbs(map);
 		System.out.println(n);
@@ -218,7 +218,7 @@ public class ProjTest {
 		// 공백, null이 제거된 List 출력 
 		System.out.println(list1); // [A, B]
 	}
-	@Test
+//	@Test
 	public void selectFixHistory() {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("memId", "PM001");
