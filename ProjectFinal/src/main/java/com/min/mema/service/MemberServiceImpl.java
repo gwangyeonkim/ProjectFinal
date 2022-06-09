@@ -39,7 +39,7 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public int chkUserId(String id) {
 		return dao.chkUserId(id);
-	}
+	}  
 
 	@Override
 	public String chkEmail(String email) {
@@ -90,6 +90,11 @@ public class MemberServiceImpl implements IMemberService {
   	    }
 		
 		return Integer.toString(certificatedNum);
+	}
+	
+	@Override
+	public int modifyMember(MemberVo vo) {
+		return dao.modifyMember(vo);
 	}
 
 }
