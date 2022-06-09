@@ -15,7 +15,7 @@
         <style>
             body {
                 min-width: 1200px;
-            }
+            }  
             #img {
                 margin: 0 auto;
                 width: 1200px;
