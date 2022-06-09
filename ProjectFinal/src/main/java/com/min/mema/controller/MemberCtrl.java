@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,20 +28,20 @@ public class MemberCtrl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberCtrl.class);
 
-//	@RequestMapping(value = "/loginPage.do", method = RequestMethod.GET)
-//	public String loginForm() {
-//		logger.info("로그인페이지 이동");
-//		return "loginPage";
-//	}
-//	
+	@RequestMapping(value = "/loginPage.do", method = RequestMethod.GET)
+	public String loginForm() {
+		logger.info("로그인페이지 이동");
+		return "loginPage";
+	}
+	
 	
 	@RequestMapping(value = "/loginPage.do", method = RequestMethod.POST)
 	public String login(MemberVo vo, Model model, HttpServletResponse resp) throws IOException {
-		logger.info("LoginController 로그인 값 {}",vo);
+		logger.info("LoginController 로그인 값 {}", vo);
 		resp.setContentType("text/html; charset=UTF-8;");
 		
-		MemberVo loginVo = service.loginChk(vo.getMember_id(),vo.getMem_pw());
-		
+		MemberVo loginVo = service.loginChk(vo.getMemberId(),vo.getMemPw());
+		System.out.println(loginVo+"++++++++++++++++++");
 		if (loginVo == null) {
 			PrintWriter out = resp.getWriter();
 			System.out.println(loginVo+"++++++++++++++++++");
@@ -50,13 +51,22 @@ public class MemberCtrl {
 		}else {
 			model.addAttribute("loginVo", loginVo);
 		}
-			return "main";
+			return "index";
 	}
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public String signUp() {
 		logger.info("MemberCtrl signUp 페이지 이동");
 		return "signUp";
 	}
+	
+	@RequestMapping(value = "/singUp.do", method = RequestMethod.POST)
+	public String maingo(MemberVo vo, Model model) {
+		logger.info("MemberCtrl signUp 페이지 이동 {} :" ,vo);
+//		System.out.println("회원가입 정보"+vo.toString());
+		service.signUp(vo);
+		return "home";
+	}
+	
 	
 	@RequestMapping(value = "/chkUserId.do" ,method = RequestMethod.GET)
 	@ResponseBody
@@ -76,11 +86,25 @@ public class MemberCtrl {
 		return service.chkEmail(email);
 	}
 	
+	
+	
 	@RequestMapping(value = "/checkHp.do", method = RequestMethod.GET)
 	@ResponseBody
 	public String checkPh(@RequestParam String Hp) {
 		
 		return service.chkHp(Hp);
+	}
+	
+	@GetMapping(value = "/modifyMember.do")
+	public String modifyMember() {
+		
+		return "modifyMember";
+	}
+	
+	@RequestMapping(value = "/modifyMember.do" , method = RequestMethod.POST)
+	public String modifyMember(MemberVo vo) {
+		
+		return "modifyMember";
 	}
 	
 }

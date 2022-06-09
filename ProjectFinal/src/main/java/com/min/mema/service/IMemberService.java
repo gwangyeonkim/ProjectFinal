@@ -20,5 +20,7 @@ public interface IMemberService {
 	 * @param hp값을 받아와서 인증번호 전송
 	 */
 	public String chkHp(String hp);
+	
+	public int modifyMember(MemberVo vo);
 
 }

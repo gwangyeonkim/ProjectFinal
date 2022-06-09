@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <html>
-    <head>
-        <title>Document</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link
-            rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<head>
+<title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>
             body {
                 min-width: 1200px;
@@ -59,7 +57,8 @@
         </style>
     </head>
     <body>
-
+	
+		
         <div class="wrapper">
             <div class="items">
                 <br/>
@@ -152,18 +151,18 @@
                         </h4>
                     </div>
                     <div class="modal-body" style="padding:40px 50px;">
-                        <form role="form">
+                        <form action="./loginPage.do" method="post" role="form">
                             <div class="form-group">
                                 <label for="usrname">
                                     <span class="glyphicon glyphicon-user"></span>아이디
                                 </label>
-                                <input type="text" class="form-control" id="usrname" placeholder="아이디입력">
+                                <input type="text" class="form-control" name="memberId" id="usrname">
                             </div>
                             <div class="form-group">
                                 <label for="psw">
                                     <span class="glyphicon glyphicon-eye-open"></span>비밀번호
                                 </label>
-                                <input type="text" class="form-control" id="psw" placeholder="비밀번호입력">
+                                <input type="text" class="form-control" name="memPw" id="psw">
                             </div>
                             <div class="checkbox">
                                 <label><input type="checkbox" value="" checked="checked">Remember me</label>

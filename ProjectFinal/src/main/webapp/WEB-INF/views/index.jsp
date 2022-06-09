@@ -11,14 +11,16 @@
         <script src="js/index.js"></script>
     </head>
     <body>
-
+		<a href="./modifyMember.do">회원정보 수정 페이지 이동</a>
         <div class="wrapper">
+        <h1>${loginVo} 안녕하세요</h1>
+		<h1>${memberVo} 안녕하세요</h1>
             
             <div class="nav">
                 <a href="#" class="logo">Home</a>
                 <div class="nav-right">
                     <a id="loginInfo">
-                        loginInfo
+<%--                         loginInfo${loginVo.id} --%>
                         <img id="chatIcon" alt="chat" src="img/chat.png"/>
                         <img id="notiIcon" alt="notification" src="img/notification.png"/>
                         <span id="notiNonCheck">&#128308;</span>

@@ -20,19 +20,19 @@
     <form action="./singUp.do" method="post">
         <div class="form-group">
             <label for="userId">User id</label>
-            <input type="text" placeholder="Enter ID" id="userId" name="mem_id">
+            <input type="text" placeholder="Enter ID" id="userId" name="memberId">
             <span class="checkIdComment">ID은 2자 이상 10자 이하로 설정해주시기 바랍니다.</span>
             <input type="hidden" id="doubleCheckId"/>
         </div>
         <div class="form-group">
             <label for="username">User name</label>
-            <input type="text" placeholder="Enter name" id="name" name="mem_name">
+            <input type="text" placeholder="Enter name" id="name" name="memName">
             <span class="point checkNameComment">name은 2자 이상 10자 이하로 설정해주시기 바랍니다.</span>
             <input type="hidden" id="doubleCheckName"/>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="Password" placeholder="Enter password" id="password" name="mem_pw">
+            <input type="Password" placeholder="Enter password" id="password" name="memPw">
         </div>
         <div class="form-group">
             <label for="password">Validation Password</label>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" class="email" type="text" name="mem_email" title="이메일 주소를 입력해주세요." required/>
+            <input id="email" class="email" type="text" name="memEmail" title="이메일 주소를 입력해주세요." required/>
             <button><span id="checkEmailBtn" class="btn btn-info">인증번호 보내기</span><br/></button><br>
       <label for="validEmail">Validation Email</label>
              <input id="validEmail" class="number" type="text" name="sm_email2" title="인증번호 입력" disabled required/> -->
@@ -52,12 +52,12 @@
         </div>
         <div class="form-group">
             <label for="datepicker">birthDay</label>
-            <input type="text" placeholder="Enter birthDay" id="datepicker" name="mem_birth">
+            <input type="text" placeholder="Enter birthDay" id="datepicker" name="memBirth">
         </div>
         
         <div class="form-group">
             <label for="username">address</label>
-            <input type="text" id="address_kakao" name="mem_addr" readonly />
+            <input type="text" id="address_kakao" name="memAddr" readonly />
             <input type="text" name="address_detail" />
 <!--             <input type="text" placeholder="Enter ID" id="id" name="mem_addr"> -->
 <!--             <span class="point checkNameComment">ID은 2자 이상 10자 이하로 설정해주시기 바랍니다.</span> -->
@@ -67,7 +67,7 @@
         
         <div class="form-group">
               <label for="Hp">H.P</label>
-            <input id="Hp" class="Hp" type="text" name="mem_phone"  required/>
+            <input id="Hp" class="Hp" type="text" name="memPhone"  required/>
             <button><span id="checkHpBtn" class="btn btn-info">인증번호 보내기</span><br/></button><br>
           <label for="validHp">H.P 인증하기</label>
             <input id="validHp" class="number" type="text" name="sm_Hp2" title="인증번호 입력" disabled required/>
@@ -148,7 +148,7 @@ $("#checkEmailBtn").click(function(){
         cache : false,
         success:function(data){
             if(data == "error"){
-                alert("핸드폰 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+                alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
                 $("#email").attr("autofocus",true);
                 $(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
                 $(".checkEmailComment").css("color","red");

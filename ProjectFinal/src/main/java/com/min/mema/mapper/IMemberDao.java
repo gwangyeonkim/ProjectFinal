@@ -26,4 +26,6 @@ public interface IMemberDao {
 	
 	public int signUp(MemberVo vo);
 	
+	public int modifyMember(MemberVo vo);
+	
 }

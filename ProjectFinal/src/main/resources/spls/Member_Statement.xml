@@ -3,23 +3,29 @@
 <mapper namespace="com.min.mema.mapper.MemberDaoImpl">
 
 
-	<select id="loginChk" parameterType="String" resultType="MemVo">
-	  SELECT MEM_ID, MEM_PW 
+	<select id="loginChk" parameterType="java.lang.String" resultType="MemVo">
+		SELECT MEMBER_ID, MEM_PW 
 		FROM MEMBERLIST 
-			WHERE MEMBER_ID = #{member_id} 
+			WHERE MEMBER_ID = #{memberId} 
 	</select>
 
-	<select id="chkUserId" parameterType="String" resultType="Integer">
+	<select id="chkUserId" parameterType="java.lang.String" resultType="Integer">
 	  SELECT COUNT(*) 
 		FROM MEMBERLIST
-			WHERE MEMBER_ID = #{member_id}
+			WHERE MEMBER_ID = #{memberId}
 	</select>
 
 	<insert id="signUp" parameterType="MemVo">
 		INSERT INTO MEMBERLIST
 		(MEMBER_ID, MEM_NAME, MEM_PW, MEM_ADDR, MEM_BIRTH, MEM_PHONE, MEM_EMAIL)
-		VALUES(#{member_id}, #{mem_name}, #{mem_pw},#{mem_addr},#{mem_birth}, #{mem_phone},#{mem_email})
+		VALUES(#{memberId}, #{memName}, #{memPw},#{memAddr},#{memBirth}, #{memPhone},#{memEmail})
 	</insert>
+	
+	<update id="modigyMember" parameterType="MemVo">
+		UPDATE ADMIN.MEMBERLIST
+		SET MEM_NAME= #{mem_name}, MEM_PW=#{mem_pw}, MEM_ADDR=#{mem_addr}, MEM_PHONE=#{mem_phone}, MEM_EMAIL=#{mem_email}
+		WHERE MEMBER_ID={memberId}
+	</update>
 
 
 </mapper>

@@ -91,5 +91,10 @@ public class MemberServiceImpl implements IMemberService {
 		
 		return Integer.toString(certificatedNum);
 	}
+	
+	@Override
+	public int modifyMember(MemberVo vo) {
+		return dao.modifyMember(vo);
+	}
 
 }
