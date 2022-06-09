@@ -46,7 +46,7 @@ public class NotiCtrl {
 		Date notiDate = null;
 		
 		for (int i = 0; i < All_lists.size(); i++) {	
-			String s = All_lists.get(i).getNoti_regdate();
+			String s = All_lists.get(i).getNotiRegdate();
 						try {
 							currentDate = formatter.parse(date2);
 							notiDate = formatter.parse(s);
@@ -66,14 +66,14 @@ public class NotiCtrl {
 	
 		model.addAttribute("lists",lists);	
 		model.addAttribute("count",count);
-		return "regist2";
+		return "projectMain_notification";
 	}
 	
 	@RequestMapping(value = "/notifieded.do", method = RequestMethod.POST)
 	public Map<String, Object> notifieded(@RequestParam Map<String, Object> map){
 		Map<String,Object> map1 = new HashMap<String, Object>();
 		Map<String,Object> map2 = new HashMap<String, Object>();
-		map1.put("noti_id", map.get("notiId") );
+		map1.put("notiId", map.get("notiId") );
 		int n = service.notification_update(map1);
 		if(n>0) {
 			map2.put("isc","성공");
@@ -87,9 +87,9 @@ public class NotiCtrl {
 	public String ArlimList(Model model) {
 		String s = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("mem_id", "GD006");
-		List<NotiVo> All_lists=service.notification_my_noti(map);
-		model.addAttribute("AllLists",All_lists);	
+		map.put("memId", "CH001");
+		List<NotiVo> AllLists=service.notification_my_noti(map);
+		model.addAttribute("AllLists",AllLists);	
 		return "ArlimList";
 	}
 	
@@ -98,7 +98,7 @@ public class NotiCtrl {
 		Map<String,Object> map1 = new HashMap<String, Object>();
 		Map<String,Object> map2 = new HashMap<String, Object>();
 		System.out.println("@@@@@@@@@@@"+map.get("notiId"));
-		map1.put("noti_id", map.get("notiId") );
+		map1.put("notiId", map.get("notiId") );
 		int n = service.notification_delete(map1);
 		if(n>0) {
 			map2.put("isc","성공");
