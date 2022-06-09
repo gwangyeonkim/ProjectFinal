@@ -1,0 +1,174 @@
+
+/* ----------header-------------- */
+
+.nav {
+    width: 100%-30px;
+    height: 60px;
+    background-color: rgb(49, 47, 47);
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+}
+
+.nav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 25px;
+    border-radius: 4px;
+
+}
+
+.nav a.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nav a.active {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.nav a.active:hover {
+    background-color: rgb(30, 255, 236);
+    color: black;
+    transition: 0.3s;
+}
+
+.nav-right {
+    float: right;
+}
+
+/* @media screen and (max-width: 500px) {
+    .nav a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+    .nav-right {
+        float: none;
+    }
+} */
+
+/* -----------body--------------- */
+body {
+    background-color: rgb(128, 128, 128);
+    padding: 50px;
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 1400px;
+    min-height: 800px;
+    background: white;
+    border-radius: 10px 10px 10px 10px;
+}
+
+/* ---------------------------- */
+#mySidenav a {
+    position: absolute;
+    left: -80px;
+    transition: 0.15s;
+    padding: 15px;
+    width: 100px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    background-color: #000000;
+}
+
+
+#loginInfo {
+    position: relative;
+}
+
+#loginInfo > img {
+    cursor: pointer;
+}
+
+#chatIcon {
+    position: absolute;
+    right: 120px;
+    top: 1px;
+}
+
+#notiIcon {
+    position: absolute;
+    right: 220px;
+    top: 1px;
+}
+
+#notiNonCheck{
+    position: absolute;
+    right: 220px;
+    top: 1px;
+}
+
+#notiCount{
+    position: absolute;
+    right: 229px;
+    top: 1px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* 안에 div 설정임 */
+.content > .child1 {
+    margin: 200px auto 100px auto;/*margin : 위 오른쪽 아래 왼쪽*/
+    background-color: skyblue;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 20px;
+    width: 500px;
+    height: 300px;
+}
+
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+    margin-left: 50px;
+  }
+  
+  .dropdown .dropbtn {
+    margin-top: 12px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #f9f9f9;
+    background-color: gray;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }

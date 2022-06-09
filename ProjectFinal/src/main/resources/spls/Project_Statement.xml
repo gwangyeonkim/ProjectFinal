@@ -115,6 +115,7 @@
 		<result property="fbsLevel" column="FBS_LEVEL"/>
 		<result property="fbsManager" column="FBS_MANAGER"/>
 		<result property="fbsStep" column="FBS_STEP"/>
+		<result property="midId" column="MID_ID"/>
 		
 		<result property="topVo.topName" column="TOP_NAME"/>
 		<result property="topVo.topCode" column="TOP_CODE"/>
@@ -122,9 +123,10 @@
 	</resultMap>
 	
 	<select id="selectFbs" parameterType="java.util.Map" resultMap="joinFbs">
-	SELECT TOP_NAME,TOP_CODE,TOP_STEP , FBS_NAME  ,
-                        FBS_CODE ,FBS_CONTENT ,FBS_IMP ,
-                                FBS_LEVEL , FBS_MANAGER, FBS_STEP 
+	SELECT b.TOP_ID, TOP_NAME,TOP_CODE,TOP_STEP , 
+			MID_ID, FBS_NAME, FBS_CODE ,
+					FBS_CONTENT ,FBS_IMP ,FBS_LEVEL , 
+						FBS_MANAGER, FBS_STEP
         FROM (SELECT TOP_ID,TOP_NAME,TOP_CODE, TOP_STEP 
 	             FROM DOCUMENT gd 
 	             INNER JOIN TOPCATEGORY gm 
