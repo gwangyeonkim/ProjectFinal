@@ -29,4 +29,10 @@ public class TopCategoryServiceImpl implements ITopCategoryService{
 		return dao.fixTopCategory(map);
 	}
 
+	@Override
+	public int deleteTopCategory(String topId) {
+		logger.info("TopCategoryServiceImpl deleteTopCategory {}",topId);
+		return dao.deleteTopCategory(topId);
+	}
+
 }
