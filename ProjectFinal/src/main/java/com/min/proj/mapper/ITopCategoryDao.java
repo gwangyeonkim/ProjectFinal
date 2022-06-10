@@ -17,4 +17,12 @@ public interface ITopCategoryDao {
 	 * @return 1 성공
 	 */
 	public int fixTopCategory(Map<String, String>map);
+	
+	/**
+	 * 대분류를 삭제하는 메소드(단일사용 X, 로직구현을 위한 추가 쿼리임)
+	 * @param topId
+	 * @return
+	 */
+	public int deleteTopCategory(String topId);
+	
 }

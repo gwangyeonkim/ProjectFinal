@@ -26,4 +26,10 @@ public class TopCategoryDaoImpl implements ITopCategoryDao{
 		return sqlSession.update(NS+"fixTopCategory",map);
 	}
 
+
+	@Override
+	public int deleteTopCategory(String topId) {
+		return sqlSession.delete(NS+"deleteTopCategory",topId);
+	}
+
 }
