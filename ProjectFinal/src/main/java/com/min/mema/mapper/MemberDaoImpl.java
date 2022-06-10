@@ -58,7 +58,6 @@ public class MemberDaoImpl implements IMemberDao {
 	@Override
 	public int modifyMember(MemberVo vo) {
 		logger.info("MemberDaoImpl modifyMember {}" , vo);
-		
 		String encodePw =passwordEncoder.encode(vo.getMemPw());
 		vo.setMemPw(encodePw);
 		return sqlSession.update(NS+"modifyMember",vo);

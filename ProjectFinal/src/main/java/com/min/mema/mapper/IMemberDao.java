@@ -26,6 +26,12 @@ public interface IMemberDao {
 	
 	public int signUp(MemberVo vo);
 	
+	/**
+	 * 회원정보 수정 
+	 * @param vo 회원정보 수정 시 입력된 정보를 받아오는 파라미터
+	 * @return
+	 */
+	
 	public int modifyMember(MemberVo vo);
 	
 }
