@@ -13,75 +13,76 @@
 </head>
 <body>
 <div id="grid"></div> 
-<button onclick="newFbs()">작성</button>
+<button onclick="Fbs()">조회</button>
+<button onclick="newRow()">행추가</button>
+<button onclick="finFbs()">완료</button>
 <script type="text/javascript">
 var Grid = tui.Grid;
 var el;
 var options;
-var data;
-const grid = new Grid({
-		  el: document.getElementById('grid'),
-		  columns: [
-			 	 {
-				    header: '대분류',
-				    name: 'topName',
-				    editor: 'text'
-				  },
-				  {
-					header:'대분류 코드',
-				    name: 'topCode',
-				    editor: 'text'
-				  },
-				  {
-				    header: '중분류',
-				    name: 'fbsName',
-				    editor: 'text'
-				  },
-				  {
-				    header: '중분류 코드',
-				    name: 'fbsCode',
-				    editor: 'text'
-				  },
-				
-				{
-					header : '기능설명',
-					name : 'fbsContent',
-				    editor: 'text'
-				}, 
-				{
-					header : '중요도',
-					name : 'fbsImp',
-				    editor: 'text',
-				},
-				{
-					header : '난이도',
-					name : 'fbsLevel',
-				    editor: 'text'
-				},
-				{
-					header : '담당자',
-					name : 'fbsManager',
-				    editor: 'text'
-				}
-		]
-	});
-	//GRID 에 데이터를 입력한다.
-	var arrData = 
-		$.ajax({
-			url : "./selectFbs.do",
-			method : "POST",
-			success : function(result){
-				console.log('안뇽하세용');
-// 				 for (var i = 0; i < result.size(); i++) {
-// 					grid.resetData(result(i));
-// 			    }
-				console.log(result);
-				console.log(result[0]);
-				
-				grid.resetData(result);
-			}
+	const grid = new Grid({
+			  el: document.getElementById('grid'),
+			  columns: [
+				 	 {
+					    header: '대분류',
+					    name: 'topName',
+					    editor: 'text'
+					    
+					  },
+					  {
+						header:'대분류 코드',
+					    name: 'topCode',
+					    editor: 'text'
+					  },
+					  {
+					    header: '중분류',
+					    name: 'fbsName',
+					    editor: 'text'
+					  },
+					  {
+					    header: '중분류 코드',
+					    name: 'fbsCode',
+					    editor: 'text'
+					  },
+					
+					{
+						header : '기능설명',
+						name : 'fbsContent',
+					    editor: 'text'
+					}, 
+					{
+						header : '중요도',
+						name : 'fbsImp',
+					    editor: 'text',
+					},
+					{
+						header : '난이도',
+						name : 'fbsLevel',
+					    editor: 'text'
+					},
+					{
+						header : '담당자',
+						name : 'fbsManager',
+					    editor: 'text'
+					}
+			]
 		});
-	
+	var arrData = function (){
+		
+			$.ajax({
+				url : "./selectFbs.do",
+				method : "POST",
+				success : function(result){
+					console.log('안뇽하세용!!');
+					console.log(result);
+					console.log(result[0]);
+					grid.resetData(result);
+				}
+			});
+	}
+function Fbs(){
+		//GRID 에 데이터를 입력한다.
+		arrData();
 	class CustomTextEditor {
 	      constructor(props) {
 	        const el = document.createElement('input');
@@ -105,16 +106,65 @@ const grid = new Grid({
 	      }
 	    }
 	
-	    grid.on('dblclick', (ev) => {
-	      console.log('after change:', ev.rowKey);
-	      console.log('after change:', ev.columnName);
-	      
+	grid.on('editingFinish', (ev) => {
+	       	console.log('after change:', ev);
+			console.log('음 생각되로 되랑');
+			console.log(grid.getRow(1));
+			let jsonArr = grid.getRow(ev.rowKey);
+		    console.log('@@@@@@@');
+		    console.log(jsonArr.topName);
+		    console.log(jsonArr.topCode);
+		    
+		    
+			if(jsonArr.topName!=null && jsonArr.topCode!=null){
+				console.log('무야야야야얏호');
+				  $.ajax({
+	 				url : "./newTopCategory.do",
+	 				method : "POST",
+	 				data:jsonArr,
+	 				success : function(result){
+	 					console.log('대분류 저장했습니다.');
+	 					}
+	 				});
+			}
+		    
 	    })
-	    
-// 	    grid.on('click', (ev) => {
-// 			console.log(ev.rowKey);
+}
+
+	function newRow(){
+		$.ajax({
+			url : "./newFbsRow.do",
+			method : "GET",
+			success : function(result){
+				console.log('행추가 완료');
+				console.log(result);
+				$.ajax({
+					url : "./selectFbs.do",
+					method : "POST",
+					success : function(result){
+						console.log(result);
+						console.log(result[0]);
+						
+						grid.resetData(result);
+					}
+				});
+			}
+		});
+	}
+	
+	function finFbs(){
+     	
+    }
+		
+// 		$.ajax({
+// 			url : "./newFbs.do",
+// 			method : "GET",
+// 			success : function(result){
+// 				console.log('작성이 완료지롱');
+// 				console.log(result);
+// 			}
 // 		});
-// 	    grid.resetData(gridData);
+	
 </script>
 </body>
 </html>

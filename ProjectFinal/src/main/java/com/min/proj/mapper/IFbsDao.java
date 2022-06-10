@@ -23,7 +23,7 @@ public interface IFbsDao {
 	
 	/**
 	 * FBS를 수정하는 메소드
-	 * @param map  fbsName fbs이름,fbsCode fbs코드,fbsContent fbs내용,fbsImp 중요도 ,fbsLevel 난이도 ,fbsManager 담당자
+	 * @param map  fbsName fbs이름,fbsCode fbs코드,fbsContent fbs내용,fbsImp 중요도 ,fbsLevel 난이도 ,fbsManager 담당자, topId 대분류ID
 	 * @return 1 성공
 	 */
 	public int fixFbs(Map<String, String> map);
