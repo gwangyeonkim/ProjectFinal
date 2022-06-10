@@ -6,7 +6,7 @@ public interface ITopCategoryService {
 
 	/**
 	 * TopCategory(대분류) 작성하는 메소드 
-	 * @param map projName 프로젝트 이름, topCode 코드번호, topContent  내용 3개의 키값으로 구성
+	 * @param map projName 프로젝트 이름, topCode 코드번호, topName  내용 3개의 키값으로 구성
 	 * @return 1 성공
 	 */
 	public int newTopCategory(Map<String, String>map);
@@ -17,5 +17,12 @@ public interface ITopCategoryService {
 	 * @return 1 성공
 	 */
 	public int fixTopCategory(Map<String, String>map);
+	
+	/**
+	 * 대분류를 삭제하는 메소드(단일사용 X, 로직구현을 위한 추가 쿼리임)
+	 * @param topId
+	 * @return
+	 */
+	public int deleteTopCategory(String topId);
 	
 }

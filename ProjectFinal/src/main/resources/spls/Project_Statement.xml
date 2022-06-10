@@ -106,6 +106,11 @@
 		WHERE TOP_ID=#{topId}
 	</update>
 	
+	<delete id="deleteTopCategory" parameterType="java.lang.String">
+	DELETE FROM TOPCATEGORY
+	WHERE TOP_ID=#{topId}
+	</delete>
+	
 	<!-- FBS -->
 	<resultMap type="com.min.proj.vo.FbsVo" id="joinFbs">
 		<result property="fbsName" column="FBS_NAME"/>
@@ -164,7 +169,7 @@
 	<update id="fixFbs" parameterType="java.util.Map">
 	UPDATE FBS b
 		SET FBS_NAME=#{fbsName}, FBS_CODE=#{fbsCode}, FBS_CONTENT=#{fbsContent}, 
-		FBS_IMP=#{fbsImp}, FBS_LEVEL=#{fbsLevel}, FBS_MANAGER=#{fbsManager}
+		FBS_IMP=#{fbsImp}, FBS_LEVEL=#{fbsLevel}, FBS_MANAGER=#{fbsManager}, TOP_ID=#{topId}
 		WHERE MID_ID=#{midId}
 	</update>
 	<!-- WBS -->
