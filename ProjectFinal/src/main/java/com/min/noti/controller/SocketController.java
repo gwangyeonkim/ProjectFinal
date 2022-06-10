@@ -68,7 +68,6 @@ public class SocketController  implements ServletConfigAware{
 	public void socketOut(HttpSession session, Model model) {
 		logger.info("socketOut 소켓에서 나오기");
 		String mem_id = (String)session.getAttribute("mem_id");
-		 @SuppressWarnings("unchecked")
 		HashMap<String, String> chatList =  (HashMap<String, String>)servletContext.getAttribute("chatList");
 		 
 		 System.out.println("기존 접속 회원 리스트 : " + chatList);
@@ -93,6 +92,7 @@ public class SocketController  implements ServletConfigAware{
 		HashMap<String, String> chatList =  (HashMap<String, String>)servletContext.getAttribute("chatList");
 		HashMap<String, String> removeSession = (HashMap<String,String>)servletContext.getAttribute("removeSession");
 		logger.info("출력되는 chatList " + removeSession);
+		map.put("chatList", chatList);
 		map.put("list", removeSession);
 		return map;
 	} 

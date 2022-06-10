@@ -287,7 +287,7 @@ h3{
 
 <body>
 	<div class="messaging">
-	 <h3>채팅방<span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#myModal" ></span> </h3>
+	 <h3>채팅방<span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#myModal"  ></span> </h3>
 	  <!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog modal-sm">
@@ -326,6 +326,8 @@ h3{
 var ws = null;
 var url = null;
 var nick =null;
+
+	
 	
 $(document).ready(function(){
 		
@@ -333,17 +335,18 @@ $(document).ready(function(){
 		
 		nick = $("#nickName").val();
 // 		nick = $("#nickName").	ext();
+		id = "${gr_id}"; 
 		console.log($("#nickName").text()+ "@@@@@@");
 		$(".receive_msg").html("");
 		$(".input_msg_write").show();
 		$(".write_msg").focus();
 		
-		ws = new WebSocket("ws://localhost:8080/20220602_chatting/wsChatGr.do");
-		
+		ws = new WebSocket("ws://localhost:8080/ProjectFinal/wsChatGr.do");
 		ws.onopen = function(){
 			console.log("nickName : " + nick);
 			ws.send("#$nick_"+nick);
 		};
+		
 		
 		ws.onmessage = function(event){
 			var msg = event.data;
@@ -351,6 +354,7 @@ $(document).ready(function(){
 			if(msg.startsWith("<")){ // 입장,  퇴장
 				$(".msg_history").append($("<div>").append($("<p class='enter'>").text(msg))).append("<br><br>");	
 				viewList(id);
+				viewList_enter(id);
 			}else if(msg.startsWith("[나]")){ // 대화내용
 				msg = msg.substring(3);
 // 				$(".msg_history").text("으엥");
@@ -369,9 +373,6 @@ $(document).ready(function(){
 		
 		ws.onclose = function(event){
 			alert("채팅방이 삭제됩니다");
-
-			setTimeout(ws.onopen(), 300);
-			
 		}
 		
 		
@@ -404,21 +405,21 @@ $(document).ready(function(){
 	
 	var pageClosed = false;
 	
-var roomClose= 	function(event){
-			alert("채팅종료");
-			$.ajax({
-				type:"POST",
-				url:"./socketOut.do",
-				async:true,
-				success: function (){
-					alert("작동");
-					pageClosed = true;
-					self.close();
-				}
-			});
-			return  '고고';
-			
-		}
+		var roomClose= 	function(event){
+				alert("채팅종료");
+				$.ajax({
+					type:"POST",
+					url:"./socketOut.do",
+					async:true,
+					success: function (){
+						alert("작동");
+						pageClosed = true;
+						self.close();
+					}
+				});
+				return  '고고';
+				
+			}
 		
 		function disconnection(){
 				ws.close();			
@@ -434,8 +435,26 @@ var roomClose= 	function(event){
 				async:false,
 				success:function(result){
 					for(var k in result.list){
-						console.log( k + "♠♠♠♠♠♠");
+						console.log( k + "♣♣♣♣♣♣♣♣♣♣♣♣♣♣♣");
 						if(result.list[k] == grId){
+							$(".memList").prepend("<p class='memList_p'>"+k+"</p>");
+						}
+					}
+				}
+			});
+		}
+		
+		function viewList_enter(grId){
+			$(".memList").children().remove();
+			$.ajax({
+				type:"post",
+				url:"./viewChatList.do",
+				data: "mem_id="+$("#nickName"),
+				async:false,
+				success:function(result){
+					for(var k in result.chatList){
+						console.log( k + "♠♠♠♠♠♠");
+						if(result.chatList[k] == grId){
 							$(".memList").prepend("<p class='memList_p'>"+k+"</p>");
 						}
 					}
