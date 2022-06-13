@@ -24,16 +24,16 @@
 			<input type="text" id="" name="memberId" value="${loginVo.memberId}" readonly>
 		</div>
 		
-		<div class="form-group">
-            <label for="password">새로운 비밀번호 입력</label>
-            <input type="Password" placeholder="Enter password" id="password" name="memPw" value="${loginVo.memPw}">
-        </div>
-        <div class="form-group">
-            <label for="password">비밀번호 확인</label>
-            <input type="Password" placeholder="Enter password" id="validPassword">
-            <span class="point checkPwdComment"></span>
-            <input type="hidden" id="doubleCheckPwd"/>
-        </div>
+<!-- 		<div class="form-group"> -->
+<!--             <label for="password">새로운 비밀번호 입력</label> -->
+<!--             <input type="Password" placeholder="Enter password" id="password" name="memPw" value="$"> -->
+<!--         </div> -->
+<!--         <div class="form-group"> -->
+<!--             <label for="password">비밀번호 확인</label> -->
+<!--             <input type="Password" placeholder="Enter password" id="validPassword"> -->
+<!--             <span class="point checkPwdComment"></span> -->
+<!--             <input type="hidden" id="doubleCheckPwd"/> -->
+<!--         </div> -->
         
         <div class="form-group">
             <label for="email">Email</label>
@@ -85,18 +85,25 @@ window.onload = function(){
     });
 }
 
-//비밀번호 확인
-$("#validPassword").blur(function(){
-    if($("#validPassword").val() == $("#password").val()){
-        $(".checkPwdComment").text("비밀번호가 일치합니다.");
-        $(".checkPwdComment").css("color", "green");
-        $("#doubleCheckPwd").val("true");
-    }else{
-        $(".checkPwdComment").text("비밀번호가 일치하지 않습니다.");
-        $(".checkPwdComment").css("color", "red");
-        $("#doubleCheckPwd").val("false");
-    }
+//비밀번호 확인 정규화적용해야함
+$("#validPassword").blur(function() {
+//		비밀번호 정규화 8 ~ 16 영문 숫자 
+var regPw = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+console.log(regPw.test($("#memPw")))
+	if ($("#validPassword").val() == $("#memPw").val()) {
+		$(".checkPwdComment").text("비밀번호가 일치합니다.");
+		$(".checkPwdComment").css("color", "green");
+//			$("#doubleCheckPwd").val("true");
+//			$("#validPassword").attr("disabled", true);
+//			$("#memPw").attr("disabled", true);
+	} else {
+		$(".checkPwdComment").text("비밀번호가 일치하지 않습니다.");
+		$(".checkPwdComment").css("color", "red");
+//			$("#doubleCheckPwd").val("false");
+//			$("#memPw").focus();
+	}
 });
+
 
 
 var code = "";

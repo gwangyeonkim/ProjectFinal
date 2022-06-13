@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.min.noti.vo.NotiVo;
+import com.min.noti.vo.MemListVo;
 
 
 public interface INotiService {
@@ -20,4 +21,6 @@ public interface INotiService {
 	public int notification_delete(Map<String, Object> map);
 	
 	public int notification_count(Map<String, Object> map);
+	
+	public MemListVo chatting_groupName(Map<String, Object> map);
 }

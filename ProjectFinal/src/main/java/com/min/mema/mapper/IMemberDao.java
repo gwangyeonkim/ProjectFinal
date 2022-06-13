@@ -1,5 +1,6 @@
 package com.min.mema.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import com.min.mema.vo.MemberVo;
@@ -37,5 +38,8 @@ public interface IMemberDao {
 	public int modifyMember(MemberVo vo);
 	
 	public String findIdmdmber(Map<String, Object> map);
+	
+	
+	public List<MemberVo> memberlistAll(MemberVo vo);
 	
 }
