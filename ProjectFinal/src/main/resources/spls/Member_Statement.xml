@@ -26,6 +26,12 @@
 		SET MEM_PW=#{memPw}, MEM_ADDR=#{memAddr}, MEM_PHONE=#{memPhone}, MEM_EMAIL=#{memEmail}
 		WHERE MEMBER_ID= #{memberId}
 	</update>
+	
+	<select id="findIdmdmber" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT MEMBER_ID 
+			FROM MEMBERLIST
+			WHERE MEM_NAME = #{memName} AND MEM_EMAIL = #{memEmail}
+	</select>
 
 
 </mapper>

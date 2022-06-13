@@ -111,6 +111,15 @@
 	WHERE TOP_ID=#{topId}
 	</delete>
 	
+	<delete id="deleteNullTopCategory" parameterType="java.lang.String">
+	DELETE FROM TOPCATEGORY t 
+	WHERE TOP_ID IN (SELECT TOP_ID 
+						FROM TOPCATEGORY t 
+						WHERE DOC_ID = (SELECT DOC_ID 
+											FROM DOCUMENT d 
+											WHERE PROJ_NAME =#{projName}) AND TOP_CODE IS NULL)
+	</delete>
+	
 	<!-- FBS -->
 	<resultMap type="com.min.proj.vo.FbsVo" id="joinFbs">
 		<result property="fbsName" column="FBS_NAME"/>
@@ -161,7 +170,7 @@
                                                     FROM FBS gf
                                                     WHERE TOP_ID = ((SELECT TOP_ID 
 																		FROM TOPCATEGORY t 
-																		WHERE DOC_ID = (SELECT DOC_ID FROM DOCUMENT d WHERE PROJ_NAME='창창일학1')
+																		WHERE DOC_ID = (SELECT DOC_ID FROM DOCUMENT d WHERE PROJ_NAME=#{projName})
 																		AND TOP_NAME =#{topName})))+1,
                                     'N', SYSDATE)
 	</insert>
@@ -169,7 +178,7 @@
 	<update id="fixFbs" parameterType="java.util.Map">
 	UPDATE FBS b
 		SET FBS_NAME=#{fbsName}, FBS_CODE=#{fbsCode}, FBS_CONTENT=#{fbsContent}, 
-		FBS_IMP=#{fbsImp}, FBS_LEVEL=#{fbsLevel}, FBS_MANAGER=#{fbsManager}, TOP_ID=#{topId}
+		FBS_IMP=#{fbsImp}, FBS_LEVEL=#{fbsLevel}, FBS_MANAGER=#{fbsManager}
 		WHERE MID_ID=#{midId}
 	</update>
 	<!-- WBS -->
@@ -180,16 +189,12 @@
 	        WBS_NAME, WBS_CONENT, WBS_MANAGER,
 	                WBS_START_DATE, WBS_END_DATE, WBS_FIN_DATE, 
 	                        WBS_STEP, WBS_DELFLAG, WBS_DATE)
-	VALUES('WBS'||PROJ_SEQ.NEXTVAL , (SELECT MID_ID 
-										FROM FBS f 
-										WHERE FBS_NAME = #{midName}), #{wbsCode},
+	VALUES('WBS'||PROJ_SEQ.NEXTVAL , #{midId}, #{wbsCode},
 	                        #{wbsName}, #{wbsContent}, #{wbsManager},
-	                                #{wbsStartDate}, #{wbsFinDate}, NULL, 
+	                                #{wbsStartDate}, #{wbsEndDate}, NULL, 
 	                                        (SELECT NVL(MAX(WBS_STEP),0) 
 	                                            FROM WBS wf
-	                                            WHERE MID_ID=((SELECT MID_ID 
-																	FROM FBS f 
-																	WHERE FBS_NAME = #{midName})))+1, 'N', SYSDATE)
+	                                            WHERE MID_ID=#{midId})+1, 'N', SYSDATE)
 	</insert>
 	
 	<resultMap type="com.min.proj.vo.WbsVo" id="joinWbs">
@@ -224,7 +229,7 @@
 	                                                       ON b.TOP_ID = f.TOP_ID
 	                                                       LEFT OUTER JOIN WBS w
 	                                                       ON f.MID_ID =w.MID_ID 
-	                                                       ORDER BY TOP_STEP,FBS_STEP 
+	                                                       ORDER BY TOP_STEP,FBS_STEP,WBS_STEP
 	</select>
 	
 	<update id="fixWbs" parameterType="java.util.Map">
@@ -233,6 +238,21 @@
 			WBS_START_DATE=#{wbsStartDate}, WBS_END_DATE=#{wbsEndDate}
 		WHERE WBS_ID=#{wbsId}
 	</update>
+	
+	<delete id="deleteNullWbs" parameterType="java.lang.String">
+	DELETE FROM WBS w 
+	WHERE WBS_ID 
+		IN (SELECT WBS_ID 
+				FROM WBS w 
+				WHERE MID_ID IN (SELECT MID_ID 
+									FROM FBS f 
+									WHERE TOP_ID IN (SELECT TOP_ID 
+														FROM TOPCATEGORY t  
+														WHERE DOC_ID = (SELECT DOC_ID 
+																			FROM DOCUMENT d 
+																			WHERE PROJ_NAME =#{projName})))
+																			AND WBS_CODE IS NULL)
+	</delete>
 	
 	<!-- FIXHISTORY -->
 	<insert id="newFix" parameterType="java.util.Map">

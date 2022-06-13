@@ -6,5 +6,22 @@
 		SELECT DOC_ID, FBS_NAME, WBS_CODE, WBS_NAME, WBS_CONENT, WBS_START_DATE, WBS_END_DATE
 			FROM WBS_VIEW
 	</select>
+	
+	<insert id="pScheduleInsert" parameterType="java.util.Map">
+		INSERT INTO SCHEDULE
+			(SCHE_ID, MEM_ID, SCHE_NAME, SCHE_CONTENT, SCHE_START, SCHE_END)
+			VALUES(#{sId}, #{mId}, #{sName}, #{sCont}, #{start}, #{end})
+	</insert>
+	
+	<update id="pScheduleUpdate" parameterType="java.util.Map">
+		UPDATE SCHEDULE
+			SET SCHE_NAME=#{sName}, SCHE_CONTENT=#{sCont}, SCHE_START=#{start}, SCHE_END=#{end}
+			WHERE SCHE_ID=#{sId} AND MEM_ID=#{mId}
+	</update>
+	
+	<delete id="pScheduleDelete" parameterType="java.util.Map">
+		DELETE FROM SCHEDULE
+			WHERE SCHE_ID=#{sId} AND MEM_ID=#{mId}
+	</delete>
 
 </mapper>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <html>
 <head>
 <title>Document</title>
@@ -173,7 +172,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <a href="#">아이디 / 비밀번호 찾기</a>
+                        <input type="button" value="아이디 찾기" onclick="findId()">
+                        <input type="button" value="비밀번호 찾기" onclick="findPw()">
                     </div>
                 </div>
             </div>
@@ -181,6 +181,14 @@
         
     </body>
     <script>
+    function findId(){
+  	  window.open("./findIdMember.do","_blank","width=500px, height=300px");
+    }
+    
+    function findPw(){
+    	  window.open("./findPwMember.do","_blank","width=500px, height=300px");
+      }
+    
         $(document).ready(function () {
             $("#loginBtn").click(function () {
                 $("#loginModal").modal();
