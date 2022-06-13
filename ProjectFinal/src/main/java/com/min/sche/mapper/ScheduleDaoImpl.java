@@ -23,9 +23,9 @@ public class ScheduleDaoImpl implements IScheduleDao {
 	
 
 	@Override
-	public List<ScheduleVo> getAllSchedule() {
-		logger.info("일정 목록 출력");
-		List<ScheduleVo> lists = session.selectList(NS+"getAllSchedule");
+	public List<ScheduleVo> getTeamSchedule(List<String> userList) {
+		logger.info("해당 인원이 맡은 팀일정 가져오기");
+		List<ScheduleVo> lists = session.selectList(NS+"getTeamSchedule", userList);
 		return lists;
 	}
 
@@ -52,5 +52,8 @@ public class ScheduleDaoImpl implements IScheduleDao {
 		int cnt = session.insert(NS+"pScheduleDelete",map);
 		return cnt;
 	}
+
+
+	
 
 }
