@@ -16,8 +16,9 @@ public class ScheduleServiceImpl implements IScheduleService {
 	private IScheduleDao dao;
 	
 	@Override
-	public List<ScheduleVo> getAllSchedule() {
-		return dao.getAllSchedule();
+	public List<ScheduleVo> getTeamSchedule(List<String> userList) {
+		// TODO Auto-generated method stub
+		return dao.getTeamSchedule(userList);
 	}
 
 	@Override
@@ -37,5 +38,7 @@ public class ScheduleServiceImpl implements IScheduleService {
 		// TODO Auto-generated method stub
 		return dao.pScheduleDelete(map);
 	}
+
+	
 
 }

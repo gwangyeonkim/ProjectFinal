@@ -39,19 +39,6 @@ public class TemplateCtrl {
 
 	private Logger logger = LoggerFactory.getLogger(TemplateCtrl.class);
 
-	@RequestMapping(value = "/sessionTest2.do", produces = "application/text; charset=UTF-8")
-	@ResponseBody
-	public String sessionTest(HttpSession session) {
-		String projName = (String) session.getAttribute("projName");
-		String user = (String) session.getAttribute("userId");
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("memId", (String) session.getAttribute("userId"));
-		List<FbsVo> fVo = fbsService.selectFbs(map);
-		String json = JSONArray.toJSONString(fVo);
-		return json;
-
-	}
-
 	@RequestMapping(value = "/fbs.do")
 	public String moveFbs() {
 		logger.info("TemplateCtrl moveFbs");

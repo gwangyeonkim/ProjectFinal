@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONObject;
 import org.json.XML;
 import org.json.simple.JSONArray;
@@ -24,7 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
+import com.min.sche.mapper.IScheduleDao;
+import com.min.sche.service.IScheduleService;
 import com.min.sche.vo.ScheduleVo;
 
 
@@ -37,7 +42,8 @@ public class ScheduleCtrl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleCtrl.class);
 	
-
+	@Autowired
+	IScheduleService service;
 	
 	/**
 	 * 처음 접속을 할 때 현재 년도 정보를 가져간다.
@@ -142,15 +148,6 @@ public class ScheduleCtrl {
 			}
 		}
 		
-		
-		
-		//설날의 마지막날의 end 값을 설 첫날의 end로 변경 
-//		JSONObject endInfo = (JSONObject)sulArr.get(sulArr.size()-1);
-//		String endDate = endInfo.getString("end");
-//		JSONObject sulNal = (JSONObject)sulArr.get(0);
-//		sulNal.put("end", endDate);
-//		arr.add(sulNal);
-		
 		arr.add(startEndChange(sulArr));
 		arr.add(startEndChange(chuArr));
 		
@@ -174,7 +171,36 @@ public class ScheduleCtrl {
 		return info;
 	}
 	
-//DB에서 일정목록 불러오는 메소드 필요함
+	/**
+	 * DB에서 일정 목록을 불러와서 JSONArray[JSONObject] 형태로 만들어서 보내줌
+	 * key의 경우 https://nhn.github.io/tui.calendar/latest/Schedule 에서 확인
+	 * @return DB에 저장된 일정 목록
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/callSchedule.do",method=RequestMethod.POST)
+	@ResponseBody
+	public JSONArray callSchedule(@RequestParam(value="list[]") List<String> nameList) {
+		System.out.println(nameList);
+		List<ScheduleVo> lists = service.getTeamSchedule(nameList);//DB에서 일정목록을 불러옴
+		System.out.println("받아온 리스트@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(lists);
+		JSONArray arr = new JSONArray();//JSONArray[JSONObject] 형태로 만들어서 보내줌
+		for (int i = 0; i < lists.size(); i++) {
+			org.json.simple.JSONObject jsonObj = new org.json.simple.JSONObject();
+			jsonObj.put("id", lists.get(i).getWbsCode());
+			jsonObj.put("calendarId",lists.get(i).getProjName());
+			jsonObj.put("title", lists.get(i).getWbsName());
+			jsonObj.put("category", "time");
+			jsonObj.put("start", lists.get(i).getWbsStartDate());
+			jsonObj.put("end", lists.get(i).getWbsEndDate());
+			jsonObj.put("isAllDay","true");
+			jsonObj.put("isPrivate","true");
+			jsonObj.put("location", lists.get(i).getWbsConent());
+			arr.add(jsonObj);
+		}
+		System.out.println(arr.toJSONString());
+		return arr;
+	}
 	
 	
 }

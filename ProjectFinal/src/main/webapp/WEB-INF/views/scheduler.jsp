@@ -90,7 +90,7 @@ $(document).ready(function() {
 		  defaultView: 'month',
 		  template: templates,
 		  useCreationPopup: true,
-		  useDetailPopup: true
+		  useDetailPopup: false
 		});
 	
 	calendar.setCalendarColor('1', {
@@ -114,7 +114,11 @@ $(document).ready(function() {
 		
 		 calendar.on({
 			'beforeCreateSchedule':function(scheduleData){//일정 생성 버튼 클릭시 발생하는 이벤트
+				if(scheduleData.isPrivate){
+					scheduleData.isPrivate = false; //팀 일정의 경우 isPrivate가 true이기 때문에 개인일정을 isPrivate로 만들어주더라도 false로 바꿔줌
+				}
 				console.log('생성');
+				console.log(scheduleData);
 				console.log(scheduleData.calendarId);//id는 null이라 만들때 seq로 만들어주어야함
 				console.log(scheduleData.title);
 				console.log(scheduleData.location);
@@ -129,6 +133,18 @@ $(document).ready(function() {
 			'beforeDeleteSchedule':function(scheduleData){//삭제할때 발생하는 이벤트
 				console.log(scheduleData.schedule) // 삭제할 일정 정보
 				console.log("삭제");
+			 },
+			 'clickSchedule':function(scheduleData){
+				 if(scheduleData.schedule.isReadOnly){
+					alert("공휴일은 수정할 수 없습니다!");
+					return false;
+				 }else{
+					 //일정 목록 모달띄우고 자기일정은 누르면 상세로 자기꺼 아니거나 팀일정이면 readonly
+				 }
+				 
+			 },
+			 'clickMore':function(){
+				 console.log("날짜클릭");
 			 }
 		}); 
 		
@@ -172,10 +188,13 @@ $(document).ready(function() {
 		});
 		
 
-/* function callSchedule(){
+/* function callSchedule(userList){
 	$.ajax({
 		url: "./callSchedule.do",
-		type:"GET",
+		type:"POST",
+		data:{
+			userList:userList
+		},
 		success: function(data) {
 			console.log(data);
 			calendar.createSchedules(data);
@@ -216,19 +235,35 @@ function checkSelect() {
         chkAll.checked = false;
     }
 
-    var nameList = [];
+    var nameList = new Array();
     checked.forEach(
         function(val){
             nameList.push(val.value);
         }
     );
-    console.log(nameList);
-
+    if(nameList.length !== 0){
+    	console.log(nameList);
+    	$.ajax({
+    		url: "./callSchedule.do",
+    		type:"POST",
+    		data:{
+    			list:nameList
+    		},
+    		success: function(data) {
+    			console.log(data);
+    			/* calendar.createSchedules(data); */
+    		 },
+    		error:function(){
+    			alert("잘못된 요청입니다");
+    		} 
+    	});
+    }
+    
 }
 //---------------------------------
 function checkAll(checkAll) {
     var checkboxes = document.getElementsByName('check');
-    var nameList = [];
+    var nameList = new Array();
     
     checkboxes.forEach((checkbox) => {
         checkbox.checked = checkAll.checked
@@ -241,6 +276,20 @@ function checkAll(checkAll) {
             }
         );
         console.log(nameList);
+        $.ajax({
+    		url: "./callSchedule.do",
+    		type:"POST",
+    		data:{
+    			list:nameList
+    		},
+    		success: function(data) {
+    			console.log(data);
+    			/* calendar.createSchedules(data); */
+    		 },
+    		error:function(){
+    			alert("잘못된 요청입니다");
+    		} 
+    	});
     }
 }
 
@@ -303,7 +352,6 @@ function makeTime(info){
 				<hr style="height: 2px; background-color: black;">
 				<div id="checkList" style="text-align: left; padding-top: 10px;">
 					<input type="checkbox" name="chkAll" onclick="checkAll(this)"><b>ALL</b><br>
-					<input type="checkbox" name="check" value="Team" onclick="checkSelect()"><b>Team</b><br>
 					<input type="checkbox" name="check" value="김광연" onclick="checkSelect()"><b>김광연</b><br>
 					<input type="checkbox" name="check" value="김규철" onclick="checkSelect()"><b>김규철</b><br>
 					<input type="checkbox" name="check" value="박정연" onclick="checkSelect()"><b>박정연</b><br>
