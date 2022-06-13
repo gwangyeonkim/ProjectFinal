@@ -24,9 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.min.sche.service.IScheduleService;
-import com.min.sche.vo.ScheduleVo;
-
 
 /**
  * Handles requests for the application home page.
@@ -37,8 +34,7 @@ public class ScheduleCtrl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleCtrl.class);
 	
-	@Autowired
-	private IScheduleService service;
+
 	
 	/**
 	 * 처음 접속을 할 때 현재 년도 정보를 가져간다.
@@ -55,6 +51,12 @@ public class ScheduleCtrl {
 		return "scheduler";
 	}
 	
+	@RequestMapping(value="/scheboard.do", method=RequestMethod.GET)
+	public String showChart() {
+		logger.info("차트, 그리드 보기");
+		return "scheboard";
+	}
+	
 	/**
 	 * API를 요청하여 공휴일 정보를 받아온다음 toast의 createSchedule 형식에 맞게 데이터를 가공하여 JSONArray로 만들어 보내준다
 	 * 1월1일 신정의 경우 이름이 다른 경우가 있어 처리해주었음
@@ -65,9 +67,9 @@ public class ScheduleCtrl {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="/restDay.do", method=RequestMethod.POST, produces = "application/json; charset=UTF-8;")
+	@RequestMapping(value="/restDay.do", method=RequestMethod.POST,produces = "application/text; charset=utf8")
 	@ResponseBody
-	public JSONArray restDay(@RequestParam String year) throws IOException{
+	public String restDay(@RequestParam String year) throws IOException{
 		String key = "fET3a8HPdgurj21NIvYv%2BpPB3hJ5cgyRtZj4oV%2FU36V7d80cPhkpJ4O5SUR4FHhdenvXtgrCH9Upl6VO8YfFBQ%3D%3D";
 		StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "="+key); /*Service Key*/
@@ -130,6 +132,8 @@ public class ScheduleCtrl {
 			}
 		}
 		
+		
+		
 		//설날의 마지막날의 end 값을 설 첫날의 end로 변경 
 //		JSONObject endInfo = (JSONObject)sulArr.get(sulArr.size()-1);
 //		String endDate = endInfo.getString("end");
@@ -143,7 +147,8 @@ public class ScheduleCtrl {
 		
 		
 		System.out.println(arr.toJSONString());
-		return arr;
+		
+		return arr.toJSONString();
 	}
 	
 	/**

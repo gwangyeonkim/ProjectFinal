@@ -34,8 +34,8 @@
 <script
 	src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
 	
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 	
 </head>
 <style type="text/css">
@@ -201,11 +201,12 @@ function callHoliday(year){
 		data:{"year":year},
 		dataType:"json",
 		success: function(data) {
-			console.log(data)
+			/* console.log(data)
 			 $.each(data, function (i, item) {
-				 calendar.createSchedules(item);
+				 calendar.createSchedules([(item)]);
 				 console.log(item)
-                });
+                }); */
+                calendar.createSchedules(data);
 		},
 		error:function(){
 			alert("잘못된 요청입니다");

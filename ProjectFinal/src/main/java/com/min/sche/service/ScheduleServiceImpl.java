@@ -1,6 +1,7 @@
 package com.min.sche.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,24 @@ public class ScheduleServiceImpl implements IScheduleService {
 	@Override
 	public List<ScheduleVo> getAllSchedule() {
 		return dao.getAllSchedule();
+	}
+
+	@Override
+	public int pScheduleInsert(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.pScheduleInsert(map);
+	}
+
+	@Override
+	public int pScheduleUpdate(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.pScheduleUpdate(map);
+	}
+
+	@Override
+	public int pScheduleDelete(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.pScheduleDelete(map);
 	}
 
 }
