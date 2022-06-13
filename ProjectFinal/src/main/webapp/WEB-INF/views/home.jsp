@@ -57,7 +57,7 @@
     </head>
     <body>
 	
-		
+		${loginVo.memberId}
         <div class="wrapper">
             <div class="items">
                 <br/>
