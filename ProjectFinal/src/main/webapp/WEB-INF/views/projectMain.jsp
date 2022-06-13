@@ -34,7 +34,7 @@
                 <div class="dropdown">
                     <button class="dropbtn">Member</button>
                     <div class="dropdown-content">
-                        <a href="#">1</a>
+                     	<a href="./memberlistAll.do">사용자 검색</a>
                         <a href="#">2</a>
                         <a href="#">3</a>
                     </div>
@@ -56,8 +56,8 @@
                         <!-- 이 notiCount가 미확인 알림 숫자임 -->
                         <span id="notiCount">1</span>
                     </a>
-                    <a href="./modifyMember.do"> ${loginVo.memberId} 님 환영합니다</a>
-                    <a class="active" href="#home">logout</a>
+                    <a href="./mamberInfo.do"> ${loginVo.memberId} 님 환영합니다</a>
+                    <a class="active" href="./logout.do">logout</a>
                 </div>
             </div>
             <div class="content">

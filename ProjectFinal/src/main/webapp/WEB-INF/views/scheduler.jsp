@@ -112,30 +112,14 @@ $(document).ready(function() {
 		    }
 		]);  */
 		
-		 /* calendar.on('beforeCreateSchedule', scheduleData => { //일정 생성 버튼 클릭시 발생하는 이벤트
-			var startTime = scheduleData.start; //시작일
-		    var endTime = scheduleData.end; //종료일
-		    var isAllDay = scheduleData.isAllDay; //하루일정유무boolean
-			console.log('생성');
-		    console.log(scheduleData);
-			});
-		calendar.on('beforeUpdateSchedule', scheduleData => {// 일정 수정 및 드래그를 하였을 때 발생하는 이벤트
-			console.log(scheduleData.schedule); // 수정 전 기존 일정 정보
-			console.log(scheduleData.changes);//변경사항
-			console.log("업데이트 발생");
-			});
-		calendar.on('beforeDeleteSchedule', scheduleData => { //삭제할때 발생하는 이벤트
-			console.log(scheduleData.schedule) // 삭제할 일정 정보
-			console.log("삭제");
-			});  */
-		
 		 calendar.on({
 			'beforeCreateSchedule':function(scheduleData){//일정 생성 버튼 클릭시 발생하는 이벤트
-			  	var startTime = scheduleData.start; //시작일
-				var endTime = scheduleData.end; //종료일
-				var isAllDay = scheduleData.isAllDay; //하루일정유무boolean
 				console.log('생성');
-				console.log(scheduleData);
+				console.log(scheduleData.calendarId);//id는 null이라 만들때 seq로 만들어주어야함
+				console.log(scheduleData.title);
+				console.log(scheduleData.location);
+				console.log(makeTime(scheduleData.start));
+				console.log(makeTime(scheduleData.end));
 			},
 			'beforeUpdateSchedule':function(scheduleData){// 일정 수정 및 드래그를 하였을 때 발생하는 이벤트
 				console.log(scheduleData.schedule); // 수정 전 기존 일정 정보
@@ -145,9 +129,6 @@ $(document).ready(function() {
 			'beforeDeleteSchedule':function(scheduleData){//삭제할때 발생하는 이벤트
 				console.log(scheduleData.schedule) // 삭제할 일정 정보
 				console.log("삭제");
-			 },
-			 'clickSchedule':function(){
-				 console.log("일정클릭");
 			 }
 		}); 
 		
@@ -158,9 +139,7 @@ $(document).ready(function() {
 		nextBtn.addEventListener('click', () => {
 			calendar.next();
 			calInfo.innerText =calendar.getDate().getFullYear()+"년 "+(calendar.getDate().getMonth()+1)+"월";
-			console.log(yearInfo.value);
 			var thisYear = calendar.getDate().getFullYear();
-			console.log(thisYear);
 			if(yearInfo.value != calendar.getDate().getFullYear()){
 				yearInfo.value = calendar.getDate().getFullYear();	
 				calendar.clear();
@@ -168,17 +147,15 @@ $(document).ready(function() {
 				/* callSchedule(); */
 			}
 		});
+		
 		newBtn.addEventListener('click', () =>{
 			calendar.openCreationPopup();
 		});
 
 		prevBtn.addEventListener('click', () => {
-			
 			calendar.prev();
 			calInfo.innerText =calendar.getDate().getFullYear()+"년 "+(calendar.getDate().getMonth()+1)+"월";
-			console.log(yearInfo.value);
 			var thisYear = calendar.getDate().getFullYear();
-			console.log(thisYear);
 			if(yearInfo.value != calendar.getDate().getFullYear()){
 				yearInfo.value = calendar.getDate().getFullYear();
 				calendar.clear();
@@ -194,25 +171,6 @@ $(document).ready(function() {
 			/* callSchedule();   */
 		});
 		
-function callHoliday(year){
-	$.ajax({
-		url: "./restDay.do",
-		type: "POST",
-		data:{"year":year},
-		dataType:"json",
-		success: function(data) {
-			/* console.log(data)
-			 $.each(data, function (i, item) {
-				 calendar.createSchedules([(item)]);
-				 console.log(item)
-                }); */
-                calendar.createSchedules(data);
-		},
-		error:function(){
-			alert("잘못된 요청입니다");
-		}
-	});
-}
 
 /* function callSchedule(){
 	$.ajax({
@@ -228,6 +186,20 @@ function callHoliday(year){
 	});
 } */
 
+function callHoliday(year){
+	$.ajax({
+		url: "./restDay.do",
+		type: "POST",
+		data:{"year":year},
+		dataType:"json",
+		success: function(data) {
+                calendar.createSchedules(data);
+		},
+		error:function(){
+			alert("잘못된 요청입니다");
+		}
+	});
+}
 });
 //---------------------------------
 function checkSelect() {
@@ -274,6 +246,17 @@ function checkAll(checkAll) {
 
 
 //---------------------------------
+
+function makeTime(info){
+	var year = String(info.getFullYear());
+	var month = String(info.getMonth()+1);
+	if(month.length==1){
+		month = '0'+month;
+	}
+	var day = String(info.getDate());
+	var result = year+'-'+month+'-'+day;
+	return result;
+}
 </script>
 <body>
 	<div class="wrapper">
@@ -339,8 +322,7 @@ function checkAll(checkAll) {
 					</button>
 					<button id="today">Today</button>
 				</div>
-				<div id="calendar"
-					style="width: 1000px; height: 600px; display:inline-block;">
+				<div id="calendar" style="width: 1000px; height: 600px; display:inline-block;">
 				</div>
 			</div>
 		</div>
