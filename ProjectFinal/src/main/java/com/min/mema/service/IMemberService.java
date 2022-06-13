@@ -1,5 +1,7 @@
 package com.min.mema.service;
 
+import java.util.Map;
+
 import com.min.mema.vo.MemberVo;
 
 public interface IMemberService {
@@ -22,5 +24,7 @@ public interface IMemberService {
 	public String chkHp(String hp);
 	
 	public int modifyMember(MemberVo vo);
+	
+	public String findIdmdmber(Map<String, Object> map);
   
 }

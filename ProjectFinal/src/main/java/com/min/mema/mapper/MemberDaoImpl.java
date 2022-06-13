@@ -1,5 +1,7 @@
 package com.min.mema.mapper;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 
@@ -27,15 +29,21 @@ public class MemberDaoImpl implements IMemberDao {
 	
 	@Override
 	public MemberVo loginChk(String id, String pw) {
-		System.out.println("MemberDaoImpl"+id + pw+"+++++++++++++++++++++++++++++++++++++++++++");
+//		System.out.println("MemberDaoImpl"+id + pw+"+++++++++++++++++++++++++++++++++++++++++++");
 		
 		MemberVo vo = sqlSession.selectOne(NS+"loginChk",id);
+//		System.out.println(vo);
 		System.out.println(vo+"++++++++++++++++");
-		if (!passwordEncoder.matches(pw, vo.getMemPw())) {
-			System.out.println(vo);
+		
+		if (vo == null) {
+//			System.out.println(vo);
 			return null;
+		}else {
+			if (!passwordEncoder.matches(pw, vo.getMemPw())) {
+				return null;
+			}
 		}
-		System.out.println(vo);
+//		System.out.println(vo);
 		return vo;
 	}
 	
@@ -61,6 +69,12 @@ public class MemberDaoImpl implements IMemberDao {
 		String encodePw =passwordEncoder.encode(vo.getMemPw());  
 		vo.setMemPw(encodePw);
 		return sqlSession.update(NS+"modifyMember",vo);
+	}
+	
+	@Override
+	public String findIdmdmber(Map<String, Object> map) {
+		logger.info("MemberDaoImpl findIdmdmber {}" , map);
+		return sqlSession.selectOne(NS+"findIdmdmber",map);
 	}
 	 
 	
