@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.min.sche.vo.ScheduleVo;
 
 
 /**
@@ -55,6 +58,13 @@ public class ScheduleCtrl {
 	public String showChart() {
 		logger.info("차트, 그리드 보기");
 		return "scheboard";
+	}
+	
+	@RequestMapping(value="/showTable.do", method=RequestMethod.POST)
+	public List<ScheduleVo> showTable(){
+		List<ScheduleVo> lists = new ArrayList<ScheduleVo>();
+		
+		return lists;
 	}
 	
 	/**
