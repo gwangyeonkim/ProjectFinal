@@ -50,7 +50,7 @@
                 <div class="nav-right">
                     <a id="loginInfo">
                     	loginInfo 
-                        <img id="chatIcon" alt="chat" src="img/chat.png"/>
+                        <img id="chatIcon" alt="chat" src="img/chat.png"  onclick="goSocket('S','${loginVo.memberId}')"/>
                         <img id="notiIcon" alt="notification" src="img/notification.png"/>
                         <span id="notiNonCheck">&#128308;</span>
                         <!-- 이 notiCount가 미확인 알림 숫자임 -->
@@ -65,5 +65,11 @@
                 <div class="child1"></div>
             </div>
         </div>
-    </body>
+    </body>  
+   <script>
+	function goSocket(gr_id, mem_id){
+		//CH001++++++++++++++++++++++++++데이터베이스 일치시켜야함++++++++++++++++++++++++++++++
+		 window.open("./socketOpenGr.do?mem_id="+"CH001","그룹체팅", "width=500px, height=735px, toolbar=no, menubar=no, left=300px, top=50px")
+	}
+   </script> 
 </html>

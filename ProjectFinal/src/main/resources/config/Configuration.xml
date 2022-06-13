@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
-
+	
 
 	<settings>        
         <setting name="mapUnderscoreToCamelCase" value="true" />
@@ -9,7 +9,10 @@
 	
 	<typeAliases>
 		<typeAlias type="com.min.mema.vo.MemberVo" alias="MemVo"/>
+		
+		
 		<typeAlias type="com.min.noti.vo.NotiVo" alias="NotiVo"/>
+		<typeAlias type="com.min.noti.vo.MemListVo" alias="MemListVo"/>
 
 
 		<typeAlias type="com.min.sche.vo.ScheduleVo" alias="ScheduleVo"/>
