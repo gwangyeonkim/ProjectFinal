@@ -35,7 +35,7 @@
 	
 	
 	<select id="memberlistAll" resultType="MemVo"> 
-		SELECT MEM_ID FROM PROJMEMLIST p 
+		SELECT MEMBER_ID FROM PROJMEMLIST p 
 		MINUS 
 		SELECT MEMBER_ID FROM MEMBERLIST m
 	</select>
