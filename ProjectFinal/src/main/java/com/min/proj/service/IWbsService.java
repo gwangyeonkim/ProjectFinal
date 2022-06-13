@@ -28,4 +28,11 @@ public interface IWbsService {
 	 */
 	public int fixWbs(Map<String, String> map);
 	
+	/**
+	 * WBS중 작성중인 NULL 값들을 삭제해주는 메소드
+	 * @param projName 프로젝트이름
+	 * @return
+	 */
+	public int deleteNullWbs(String projName);
+	
 }

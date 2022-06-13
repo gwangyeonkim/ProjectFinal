@@ -25,4 +25,13 @@ public interface ITopCategoryDao {
 	 */
 	public int deleteTopCategory(String topId);
 	
+	
+	/**
+	 * 로직적으로 추가된 행 중에서 미작성된 행을 자동으로 삭제해주는 기능
+	 * @param projName 프로젝트 이름
+	 * @return 
+	 */
+	public int deleteNullTopCategory(String projName);
+	
+	
 }

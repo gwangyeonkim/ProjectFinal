@@ -3,8 +3,11 @@ package com.min.mema.controller;
 import java.io.IOException;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,16 +32,17 @@ public class MemberCtrl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberCtrl.class);
 
-	@RequestMapping(value = "/loginPage.do", method = RequestMethod.GET)
-	public String loginForm() {
-		logger.info("로그인페이지 이동");
-		return "loginPage";
-	}
+//	@RequestMapping(value = "/loginPage.do", method = RequestMethod.GET)
+//	public String loginForm() {
+//		logger.info("로그인페이지 이동");
+//		return "loginPage";
+//	}
 	
 	
 	@RequestMapping(value = "/loginPage.do", method = RequestMethod.POST)
-	public String login(MemberVo vo, Model model, HttpServletResponse resp) throws IOException {
+	public String login(MemberVo vo, Model model, HttpServletResponse resp, HttpSession session) throws IOException {
 		logger.info("LoginController 로그인 값 {}", vo);
+		
 		resp.setContentType("text/html; charset=UTF-8;");
 		
 		MemberVo loginVo = service.loginChk(vo.getMemberId(),vo.getMemPw());
@@ -47,16 +52,24 @@ public class MemberCtrl {
 		
 		if (loginVo == null) {
 			System.out.println(loginVo+"++++++++++++++++++");
-			out.print("<script>alert('로그인이 실패하였습니다.'); location.href='./home.do';</script>");
+			out.print("<script>alert('로그인이 실패하였습니다.'); location.href='./home.do'</script>");
 			out.flush();
-//			return "redirect:/home.do";
+			return "redirect:/home.do";
 		}else {
-			model.addAttribute("loginVo", loginVo);
-//			out.print("<script>alert('로그인이 실패하였습니다.'); location.href='./index.do';</script>");
-//			out.flush();
+			session.setAttribute("loginVo", loginVo);
+//			model.addAttribute("loginVo", loginVo);
 		}
-			return "modifyMember";
+			return "projectMain";
 	}
+	
+	
+	@RequestMapping(value = "/projectMain.do", method = RequestMethod.GET)
+	public String projectMain() {
+		logger.info("메인페이지 이동");
+		return "projectMain";
+	}
+	
+	
 	@RequestMapping(value = "/signUp.do", method = RequestMethod.GET)
 	public String signUp() {
 		logger.info("MemberCtrl signUp 페이지 이동");
@@ -64,10 +77,13 @@ public class MemberCtrl {
 	}
 	
 	@RequestMapping(value = "/singUp.do", method = RequestMethod.POST)
-	public String maingo(MemberVo vo, Model model) {
-		logger.info("MemberCtrl signUp 페이지 이동 {} :" ,vo);
-//		System.out.println("회원가입 정보"+vo.toString());
+	public String maingo(MemberVo vo) {
+		logger.info("MemberCtrl signUp 받은값 {} :" ,vo);
+		
+		
 		service.signUp(vo);
+//		System.out.println("회원가입 정보"+vo.toString());
+		
 		return "home";
 	}
 	
@@ -109,8 +125,42 @@ public class MemberCtrl {
 	public String modifyMember(MemberVo vo) {
 		logger.info("MemberCtrl modifyMember {}", vo);
 		service.modifyMember(vo);
-		
 		return "modifyMember";
 	}
+	
+	@RequestMapping(value = "/findIdMember.do", method = RequestMethod.GET)
+	public String findIdMember() {
+		logger.info("MemberCtrl findIdmdmber 이동");
+		return "findIdMember";
+	}
+	
+	@RequestMapping(value = "/findIdMember.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String findIdmdmber(String memName, String memEmail) {
+		Map<String, Object> map = new HashMap<String, Object>()	;
+		map.put("memName", memName);
+		map.put("memEmail", memEmail);
+		System.out.println(map);
+		String id = service.findIdmdmber(map);
+		return (id==null)?"":id;
+	}
+	
+	@RequestMapping(value = "/findPwMember.do", method = RequestMethod.GET)
+	public String findPwMember() {
+		logger.info("MemberCtrl findIdmdmber 이동");
+		return "findPwMember";
+	}
+	
+	@RequestMapping(value = "/findPwMember.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String findPwMember(String memName, String memEmail) {
+		Map<String, Object> map = new HashMap<String, Object>()	;
+		map.put("memName", memName);
+		map.put("memEmail", memEmail);
+		System.out.println(map);
+		String id = service.findIdmdmber(map);
+		return (id==null)?"":id;
+	}
+	
 	
 }
