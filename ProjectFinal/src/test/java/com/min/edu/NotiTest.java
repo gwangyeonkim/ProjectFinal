@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.min.noti.vo.MemListVo;
 import com.min.noti.vo.NotiVo;
 
 
@@ -77,6 +78,14 @@ public class NotiTest {
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("mem_id", "GD006");
 		int n =  sqlSession.selectOne("com.min.noti.mapper.NotiDaoImpl.notification_count", map);
+		System.out.println(n);
+	}
+	
+	@Test
+	public void chatting_groupName() {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("memId", "CH001");
+		MemListVo n =  sqlSession.selectOne("com.min.noti.mapper.NotiDaoImpl.chatting_groupName", map);
 		System.out.println(n);
 	}
 

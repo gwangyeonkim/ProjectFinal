@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.ServletConfigAware;
+
+import com.min.noti.service.INotiService;
+import com.min.noti.vo.MemListVo;
 
 @Controller
 @SessionAttributes("userList")
@@ -31,6 +35,8 @@ public class SocketController  implements ServletConfigAware{
 		servletContext = servletConfig.getServletContext();
 	}
 	
+	@Autowired
+	private INotiService service;
 
 	//--------------- 그룹체팅 ------------------//
 	@RequestMapping(value = "/groupChat.do" , method = RequestMethod.GET)
@@ -41,21 +47,29 @@ public class SocketController  implements ServletConfigAware{
 	
 	// WebSocket 채팅 접속 했을 때
 	@RequestMapping(value = "/socketOpenGr.do" , method = RequestMethod.GET)
-	public String socketOpenGr(HttpSession session, String mem_id, String gr_id, Model model) {
+	public String socketOpenGr(HttpSession session, String mem_id, Model model) {
 		logger.info("socketOpenGr 소켓화면 이동 1) 리스트에 접속자 넣기");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put ("memId", mem_id);
+		System.out.println(mem_id +"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		MemListVo mvo = service.chatting_groupName(map);
+		System.out.println(mvo.projName+ "9999999999999999999999999999999");
+		
 		
 		session.setAttribute("mem_id", mem_id);
-		session.setAttribute("gr_id", gr_id);
+		session.setAttribute("gr_id", mvo.projName);
 		model.addAttribute("userList", mem_id);
+		
 		
 		@SuppressWarnings("unchecked")
 		HashMap<String, String> chatList = (HashMap<String, String>)servletContext.getAttribute("chatList");
 		if(chatList == null) {
 			chatList = new HashMap<String, String>();
-			chatList.put(mem_id, gr_id);
+			chatList.put(mem_id, mvo.projName);
 			servletContext.setAttribute("chatList", chatList);
 		}else {
-			chatList.put(mem_id, gr_id);
+			chatList.put(mem_id, mvo.projName);
 			servletContext.setAttribute("chatList", chatList);
 		}
 		logger.info("socketOpenGr 소켓화면 이동 2) 리스트값 전달");

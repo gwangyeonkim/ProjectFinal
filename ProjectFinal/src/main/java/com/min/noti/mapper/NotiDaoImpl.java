@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.min.noti.vo.NotiVo;
+import com.min.noti.vo.MemListVo;
 
 @Repository
 public class NotiDaoImpl implements INotiDao {
@@ -50,5 +51,10 @@ public class NotiDaoImpl implements INotiDao {
 	@Override
 	public int notification_count(Map<String, Object> map) {
 		return session.selectOne(NS + "notification_count", map);
+	}
+
+	@Override
+	public MemListVo chatting_groupName(Map<String, Object> map) {
+		return session.selectOne(NS + "chatting_groupName", map);
 	}
 }

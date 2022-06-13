@@ -47,4 +47,11 @@
 		FROM NOTIFICATION n    
 		WHERE NOTI_NOTIFIDED = 'N' AND MEM_ID=#{memId}
 		</select>
+		
+		<!-- chatting -->
+		<select id="chatting_groupName" parameterType="java.util.Map" resultType="MemListVo">
+			SELECT MEM_ID, PROJ_NAME
+			FROM PROJMEMLIST p
+			WHERE MEM_ID = #{memId}
+		</select>
 </mapper>
