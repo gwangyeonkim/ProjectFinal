@@ -55,6 +55,12 @@ h3{
 	color: white;
 	font-weight: bold;
 }
+
+/* 벨추가 */
+.bell{
+	float:right;
+	margin : 0px 10px 5px 0px;
+}
 </style>
 <h3 id="Arlimham"></h3>
 
@@ -73,11 +79,11 @@ h3{
 
 function changeIMG(){
 	if(document.getElementById("bell1")){
-		document.getElementById('Arlimham').innerHTML='알림함<img id="bell0" class="bell" src="./images/bell0.png"  onclick="changeIMG()">	';
+		document.getElementById('Arlimham').innerHTML='알림함<img id="bell0" class="bell" src="./img/bell0.png"  onclick="changeIMG()">	';
 		localStorage.setItem('Arlim', 'no');
 		console.log(localStorage.getItem("Arlim"));
 	}else if(document.getElementById("bell0")){
-		document.getElementById('Arlimham').innerHTML='알림함<img id="bell1" class="bell" src="./images/bell1.png"  onclick="changeIMG()">';
+		document.getElementById('Arlimham').innerHTML='알림함<img id="bell1" class="bell" src="./img/bell1.png"  onclick="changeIMG()">';
 		localStorage.setItem('Arlim', 'yes');
 		console.log(localStorage.getItem("Arlim"));
 	}
@@ -85,9 +91,9 @@ function changeIMG(){
 
 function ArlimCreatePermission(){
 		if(localStorage.getItem("Arlim") == "no"){
-			document.getElementById('Arlimham').innerHTML='알림함<img id="bell0" class="bell" src="./images/bell0.png"  onclick="changeIMG()">	';
+			document.getElementById('Arlimham').innerHTML='알림함<img id="bell0" class="bell" src="./img/bell0.png"  onclick="changeIMG()">	';
 		}else if(localStorage.getItem("Arlim") == "yes"){
-			document.getElementById('Arlimham').innerHTML='알림함<img id="bell1" class="bell" src="./images/bell1.png"  onclick="changeIMG()">';
+			document.getElementById('Arlimham').innerHTML='알림함<img id="bell1" class="bell" src="./img/bell1.png"  onclick="changeIMG()">';
 		}else if(localStorage.getItem("Arlim") == null){
 			localStorage.setItem('Arlim', 'yes');
 			ArlimCreatePermission();
