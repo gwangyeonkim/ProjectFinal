@@ -9,31 +9,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.min.noti.service.INotiService;
 import com.min.noti.vo.NotiVo;
 
 @Controller
+@SessionAttributes("loginVo")
 public class NotiCtrl {
 	
 	@Autowired
 	private INotiService service;
 	
-	@RequestMapping(value= "/regist2.do", method = RequestMethod.GET)
-	public String regist2(Model model) {
-//		service.notification_insert_privacy();
-//		service.notification_insert_team();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("mem_id", "GD006");
-		List<NotiVo> All_lists=service.notification_my_noti(map);
-		ArrayList<NotiVo> lists = new ArrayList<NotiVo>();
-		
+	@RequestMapping(value= "/*.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String regist2(Model model, HttpSession session) {
 		//시간 구하기
 		Calendar cal = Calendar.getInstance();
 		Date nowDate = new Date();
@@ -44,6 +43,18 @@ public class NotiCtrl {
 		System.out.println("@@@@@@@@@@@@@@"+(String) date2);
 		Date currentDate = null;
 		Date notiDate = null;
+		
+		
+//		service.notification_insert_privacy();
+//		service.notification_insert_team();
+		
+		System.out.println(session + "☆★☆★☆★☆★☆★☆★☆★꺄하하하하");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_id", "GD006");
+		List<NotiVo> All_lists=service.notification_my_noti(map);
+		ArrayList<NotiVo> lists = new ArrayList<NotiVo>();
+		
+
 		
 		for (int i = 0; i < All_lists.size(); i++) {	
 			String s = All_lists.get(i).getNotiRegdate();
@@ -63,10 +74,11 @@ public class NotiCtrl {
 		
 		//알림 갯수
 		int count = service.notification_count(map);
+		System.out.println(count + "☆★☆★☆★☆★☆★☆★☆★");
 	
 		model.addAttribute("lists",lists);	
 		model.addAttribute("count",count);
-		return "projectMain_notification";
+		return "header";
 	}
 	
 	@RequestMapping(value = "/notifieded.do", method = RequestMethod.POST)

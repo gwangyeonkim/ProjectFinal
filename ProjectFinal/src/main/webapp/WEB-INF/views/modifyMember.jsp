@@ -39,7 +39,7 @@
         
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" class="email" type="text" name="memEmail" value="${loginVo.memEmail}" title="이메일 주소를 입력해주세요." required/>
+            <input id="email" class="email" type="text" name="memEmail"  title="이메일 주소를 입력해주세요." placeholder="${loginVo.memEmail}" required/>
             <button><span id="checkEmailBtn" class="btn btn-info">인증번호 보내기</span><br/></button><br>
      	 <label for="validEmail">Validation Email</label>
              <input id="validEmail" class="number" type="text" name="sm_email2" title="인증번호 입력" required/> -->
@@ -75,6 +75,13 @@
 </body>
 
 <script type="text/javascript">
+
+
+// 	$("#email",).click(function(){
+// 	   $("#email").val("");   
+// 	});
+
+
 window.onload = function(){
     document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생
