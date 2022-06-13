@@ -180,18 +180,22 @@ public class MemberCtrl {
 	}
 	
 	@RequestMapping(value = "/memberlistAll.do" , method = RequestMethod.GET)
-	public String memberlistAll() {
-		logger.info("MemberCtrl memberlistAll 이동");
-		return "memberlistAll";
-	}
-	
-	@RequestMapping(value = "/memberlistAll.do" , method = RequestMethod.POST)
 	public String memberlistAll(MemberVo vo, Model model) {
 		logger.info("MemberCtrl memberlistAll 이동");
 		List<MemberVo> lists = service.memberlistAll(vo);
+		System.out.println(lists);
 		model.addAttribute("lists", lists);
 		return "memberlistAll";
 	}
+	
+//	@RequestMapping(value = "/memberlistAll.do" , method = RequestMethod.POST)
+//	public String memberlistAll(MemberVo vo, Model model) {
+//		logger.info("MemberCtrl memberlistAll 이동");
+//		List<MemberVo> lists = service.memberlistAll(vo);
+//		System.out.println(lists);
+//		model.addAttribute("lists", lists);
+//		return "memberlistAll";
+//	}
 	
 	
 	
