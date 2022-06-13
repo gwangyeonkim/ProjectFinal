@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,12 @@ public class MemberCtrl {
 //		logger.info("로그인페이지 이동");
 //		return "loginPage";
 //	}
+	
+	 @RequestMapping(value = "/logout.do", method= RequestMethod.GET)
+	   public String logout(HttpSession session ) {
+	      session.invalidate();
+	      return "redirect:/home.do";
+	   }
 	
 	
 	@RequestMapping(value = "/loginPage.do", method = RequestMethod.POST)
@@ -115,6 +122,16 @@ public class MemberCtrl {
 		return service.chkHp(Hp);
 	}
 	
+	@GetMapping(value = "/mamberInfo.do")
+	public String mamberInfo() {
+		
+		return "mamberInfo";
+	}
+	
+	
+
+	
+	
 	@GetMapping(value = "/modifyMember.do")
 	public String modifyMember() {
 		
@@ -161,6 +178,21 @@ public class MemberCtrl {
 		String id = service.findIdmdmber(map);
 		return (id==null)?"":id;
 	}
+	
+	@RequestMapping(value = "/memberlistAll.do" , method = RequestMethod.GET)
+	public String memberlistAll() {
+		logger.info("MemberCtrl memberlistAll 이동");
+		return "memberlistAll";
+	}
+	
+	@RequestMapping(value = "/memberlistAll.do" , method = RequestMethod.POST)
+	public String memberlistAll(MemberVo vo, Model model) {
+		logger.info("MemberCtrl memberlistAll 이동");
+		List<MemberVo> lists = service.memberlistAll(vo);
+		model.addAttribute("lists", lists);
+		return "memberlistAll";
+	}
+	
 	
 	
 }

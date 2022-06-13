@@ -1,5 +1,6 @@
 package com.min.mema.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -75,6 +76,12 @@ public class MemberDaoImpl implements IMemberDao {
 	public String findIdmdmber(Map<String, Object> map) {
 		logger.info("MemberDaoImpl findIdmdmber {}" , map);
 		return sqlSession.selectOne(NS+"findIdmdmber",map);
+	}
+	
+	@Override
+	public List<MemberVo> memberlistAll(MemberVo vo) {
+		logger.info("MemberDaoImpl findIdmdmber {}" , vo);
+		return sqlSession.selectList(NS+"memberlistAll",vo);
 	}
 	 
 	

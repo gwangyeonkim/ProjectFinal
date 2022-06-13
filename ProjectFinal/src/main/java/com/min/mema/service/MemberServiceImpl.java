@@ -1,6 +1,7 @@
 package com.min.mema.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -102,6 +103,11 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public String findIdmdmber(Map<String, Object> map) {
 		return dao.findIdmdmber(map);
+	}
+	
+	@Override
+	public List<MemberVo> memberlistAll(MemberVo vo) {
+		return dao.memberlistAll(vo);
 	}
 	
 	
