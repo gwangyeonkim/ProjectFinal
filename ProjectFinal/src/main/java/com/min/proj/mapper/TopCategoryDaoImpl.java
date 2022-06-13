@@ -32,4 +32,11 @@ public class TopCategoryDaoImpl implements ITopCategoryDao{
 		return sqlSession.delete(NS+"deleteTopCategory",topId);
 	}
 
+
+	@Override
+	public int deleteNullTopCategory(String projName) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(NS+"deleteNullTopCategory",projName);
+	}
+
 }

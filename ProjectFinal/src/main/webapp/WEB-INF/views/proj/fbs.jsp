@@ -116,10 +116,25 @@ function Fbs(){
 		    console.log(jsonArr.topCode);
 		    
 		    
-			if(jsonArr.topName!=null && jsonArr.topCode!=null){
-				console.log('무야야야야얏호');
+		    
+			if(jsonArr.topName!=null && jsonArr.topCode!=null
+					&& jsonArr.fbsName==null && jsonArr.fbsCode==null && jsonArr.fbsContent==null
+					&& jsonArr.fbsImp==null && jsonArr.fbsLevel==null && jsonArr.fbsManager==null){
+				console.log('대분류 작성');
 				  $.ajax({
-	 				url : "./newTopCategory.do",
+	 				url : "./matchTopCategory.do",
+	 				method : "POST",
+	 				data:jsonArr,
+	 				success : function(result){
+	 					console.log('대분류 저장했습니다.');
+	 					}
+	 				});
+			}else if(jsonArr.topName!=null && jsonArr.topCode!=null
+					&& jsonArr.fbsName!=null && jsonArr.fbsCode!=null && jsonArr.fbsContent!=null
+					&& jsonArr.fbsImp!=null && jsonArr.fbsLevel!=null && jsonArr.fbsManager!=null){
+				console.log('대분류 작성');
+				  $.ajax({
+	 				url : "./matchTopCategory.do",
 	 				method : "POST",
 	 				data:jsonArr,
 	 				success : function(result){
@@ -127,8 +142,10 @@ function Fbs(){
 	 					}
 	 				});
 			}
-		    
+			
 	    })
+	    
+	    
 }
 
 	function newRow(){
@@ -153,17 +170,17 @@ function Fbs(){
 	}
 	
 	function finFbs(){
+		$.ajax({
+			url : "./finFbs.do",
+			method : "GET",
+			success : function(result){
+				console.log('작성이 완료지롱');
+				Fbs();
+			}
+		});
      	
     }
 		
-// 		$.ajax({
-// 			url : "./newFbs.do",
-// 			method : "GET",
-// 			success : function(result){
-// 				console.log('작성이 완료지롱');
-// 				console.log(result);
-// 			}
-// 		});
 	
 </script>
 </body>

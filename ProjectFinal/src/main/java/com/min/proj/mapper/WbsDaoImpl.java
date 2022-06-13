@@ -32,4 +32,10 @@ public class WbsDaoImpl implements IWbsDao{
 		return sqlSession.update(NS+"fixWbs",map);
 	}
 
+	@Override
+	public int deleteNullWbs(String projName) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(NS+"deleteNullWbs",projName);
+	}
+
 }
