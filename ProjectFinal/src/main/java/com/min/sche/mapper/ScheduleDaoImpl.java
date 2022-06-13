@@ -1,6 +1,7 @@
 package com.min.sche.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -26,6 +27,30 @@ public class ScheduleDaoImpl implements IScheduleDao {
 		logger.info("일정 목록 출력");
 		List<ScheduleVo> lists = session.selectList(NS+"getAllSchedule");
 		return lists;
+	}
+
+
+	@Override
+	public int pScheduleInsert(Map<String, Object> map) {
+		logger.info("개인 일정 생성");
+		int cnt = session.insert(NS+"pScheduleInsert",map);
+		return cnt;
+	}
+
+
+	@Override
+	public int pScheduleUpdate(Map<String, Object> map) {
+		logger.info("개인 일정 수정");
+		int cnt = session.insert(NS+"pScheduleUpdate",map);
+		return cnt;
+	}
+
+
+	@Override
+	public int pScheduleDelete(Map<String, Object> map) {
+		logger.info("개인 일정 삭제");
+		int cnt = session.insert(NS+"pScheduleDelete",map);
+		return cnt;
 	}
 
 }

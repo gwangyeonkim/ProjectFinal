@@ -11,6 +11,11 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <body>  
 <h1>회원정보 수정</h1>
 	<form action="./modifyMember.do" method="post">
@@ -21,7 +26,7 @@
 		
 		<div class="form-group">
             <label for="password">새로운 비밀번호 입력</label>
-            <input type="Password" placeholder="Enter password" id="password" name="memPw">
+            <input type="Password" placeholder="Enter password" id="password" name="memPw" value="${loginVo.memPw}">
         </div>
         <div class="form-group">
             <label for="password">비밀번호 확인</label>
@@ -35,7 +40,7 @@
             <input id="email" class="email" type="text" name="memEmail" value="${loginVo.memEmail}" title="이메일 주소를 입력해주세요." required/>
             <button><span id="checkEmailBtn" class="btn btn-info">인증번호 보내기</span><br/></button><br>
      	 <label for="validEmail">Validation Email</label>
-             <input id="validEmail" class="number" type="text" name="sm_email2" title="인증번호 입력" disabled required/> -->
+             <input id="validEmail" class="number" type="text" name="sm_email2" title="인증번호 입력" required/> -->
              <span id="validEmailBtn" class="btn btn-info">이메일인증</span> -->
              <span class="point checkEmailComment">이메일 입력후 인증번호 보내기를 해주십시오.</span> -->
              <input type="hidden" id="doubleCheckEmail"/> 
@@ -55,7 +60,7 @@
             <input id="Hp" class="Hp" type="text" name="memPhone"  required/>
             <button><span id="checkHpBtn" class="btn btn-info">인증번호 보내기</span><br/></button><br>
           <label for="validHp">H.P 인증하기</label>
-            <input id="validHp" class="number" type="text" name="sm_Hp2" title="인증번호 입력" disabled required/>
+            <input id="validHp" class="number" type="text" name="sm_Hp2" title="인증번호 입력"  required/>
             <span id="validHpBtn" class="btn btn-info">핸드폰인증</span>
             <span class="point checkHpComment">핸드폰번호 인증번호 보내기를 해주십시오.</span>
             <input type="hidden" id="doubleCheckHp"/>

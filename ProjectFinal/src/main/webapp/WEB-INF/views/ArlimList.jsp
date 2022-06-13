@@ -56,7 +56,7 @@ h3{
 	font-weight: bold;
 }
 </style>
-<h3>알림함</h3>
+<h3 id="Arlimham"></h3>
 
 <div id="arlim_container">
 	 <c:forEach var="post" items="${AllLists}"  varStatus="status">
@@ -70,8 +70,36 @@ h3{
 
 </body>
 <script>
+
+function changeIMG(){
+	if(document.getElementById("bell1")){
+		document.getElementById('Arlimham').innerHTML='알림함<img id="bell0" class="bell" src="./images/bell0.png"  onclick="changeIMG()">	';
+		localStorage.setItem('Arlim', 'no');
+		console.log(localStorage.getItem("Arlim"));
+	}else if(document.getElementById("bell0")){
+		document.getElementById('Arlimham').innerHTML='알림함<img id="bell1" class="bell" src="./images/bell1.png"  onclick="changeIMG()">';
+		localStorage.setItem('Arlim', 'yes');
+		console.log(localStorage.getItem("Arlim"));
+	}
+}
+
+function ArlimCreatePermission(){
+		if(localStorage.getItem("Arlim") == "no"){
+			document.getElementById('Arlimham').innerHTML='알림함<img id="bell0" class="bell" src="./images/bell0.png"  onclick="changeIMG()">	';
+		}else if(localStorage.getItem("Arlim") == "yes"){
+			document.getElementById('Arlimham').innerHTML='알림함<img id="bell1" class="bell" src="./images/bell1.png"  onclick="changeIMG()">';
+		}else if(localStorage.getItem("Arlim") == null){
+			localStorage.setItem('Arlim', 'yes');
+			ArlimCreatePermission();
+		}
+}
+
+
+
 //만약 Y이면 회색
 window.onload = function() {
+	
+	ArlimCreatePermission();
 	var arr = new Array();
 	<c:forEach var="post" items="${AllLists}"   varStatus="status">
 		arr.push({

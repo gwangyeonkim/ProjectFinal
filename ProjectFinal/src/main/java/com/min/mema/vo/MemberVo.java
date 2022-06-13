@@ -14,6 +14,7 @@ public class MemberVo implements Serializable{
 	private String memPhone;
 	private String memEmail;
 	
+
 	public MemberVo() {
 	}
 

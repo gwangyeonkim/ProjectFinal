@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html lang="ko">
-    <head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+   <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
         <script src="js/index.js"></script>
     </head>
     <body>
-
+		<a href="./modifyMember.do"> 회원정보 수정페이지 이동</a>
         <div class="wrapper">
 
             <div class="nav">
@@ -48,13 +49,14 @@
                 </div>
                 <div class="nav-right">
                     <a id="loginInfo">
-                        loginInfo
+                    	loginInfo 
                         <img id="chatIcon" alt="chat" src="img/chat.png"/>
                         <img id="notiIcon" alt="notification" src="img/notification.png"/>
                         <span id="notiNonCheck">&#128308;</span>
                         <!-- 이 notiCount가 미확인 알림 숫자임 -->
                         <span id="notiCount">1</span>
                     </a>
+                    <a href="./modifyMember.do"> ${loginVo.memberId} 님 환영합니다</a>
                     <a class="active" href="#home">logout</a>
                 </div>
             </div>
