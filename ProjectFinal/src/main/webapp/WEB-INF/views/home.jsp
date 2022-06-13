@@ -163,9 +163,9 @@
                                 </label>
                                 <input type="text" class="form-control" value="123" name="memPw" id="psw">
                             </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="" checked="checked">Remember me</label>
-                            </div>
+<!--                             <div class="checkbox"> -->
+<!--                                 <label><input type="checkbox" value="" checked="checked">Remember me</label> -->
+<!--                             </div> -->
                             <button type="submit" class="btn btn-success btn-block">
                                 <span class="glyphicon glyphicon-off"></span>Login
                             </button>
