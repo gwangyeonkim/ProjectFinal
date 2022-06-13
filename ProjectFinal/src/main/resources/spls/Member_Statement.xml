@@ -23,7 +23,7 @@
 	
 	<update id="modifyMember" parameterType="MemVo">
 		UPDATE MEMBERLIST
-		SET MEM_PW=#{memPw}, MEM_ADDR=#{memAddr}, MEM_PHONE=#{memPhone}, MEM_EMAIL=#{memEmail}
+		SET MEM_ADDR=#{memAddr}, MEM_PHONE=#{memPhone}, MEM_EMAIL=#{memEmail}
 		WHERE MEMBER_ID= #{memberId}
 	</update>
 	
@@ -31,6 +31,13 @@
 		SELECT MEMBER_ID 
 			FROM MEMBERLIST
 			WHERE MEM_NAME = #{memName} AND MEM_EMAIL = #{memEmail}
+	</select>
+	
+	
+	<select id="memberlistAll" resultType="MemVo"> 
+		SELECT MEM_ID FROM PROJMEMLIST p 
+		MINUS 
+		SELECT MEMBER_ID FROM MEMBERLIST m
 	</select>
 
 

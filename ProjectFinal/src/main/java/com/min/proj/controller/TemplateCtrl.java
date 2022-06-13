@@ -142,7 +142,6 @@ public class TemplateCtrl {
 						newFbsMap.put("fbsManager", jsonArr.get("fbsManager"));
 
 						fbsService.newFbs(newFbsMap);
-						return "Yammy";
 					}else if(iscTopId == false && !jsonArr.get("midId").trim().equals("")){
 						System.out.println("checkpoint 3");
 								Map<String, String> fixMap = new HashMap<String, String>();
@@ -155,12 +154,11 @@ public class TemplateCtrl {
 								fixMap.put("topId", (String) jsonArr.get("topId"));
 
 								fbsService.fixFbs(fixMap);
-								return "Yammy";
 					}else if(iscTopId == true && jsonArr.get("midId").trim().equals("")){
 						System.out.println("checkpoint 4");
 						Map<String, String> newFbsMap = new HashMap<String, String>();
 						//TODO 3 projName 세션으로
-						newFbsMap.put("projName", jsonArr.get("자두과"));
+						newFbsMap.put("projName", "자두과");
 						newFbsMap.put("topName", jsonArr.get("topName"));
 						newFbsMap.put("fbsName", jsonArr.get("fbsName"));
 						newFbsMap.put("fbsCode", jsonArr.get("fbsCode"));
@@ -168,9 +166,8 @@ public class TemplateCtrl {
 						newFbsMap.put("fbsImp", jsonArr.get("fbsImp"));
 						newFbsMap.put("fbsLevel", jsonArr.get("fbsLevel"));
 						newFbsMap.put("fbsManager", jsonArr.get("fbsManager"));
-						
+
 						fbsService.newFbs(newFbsMap);
-						return "Yammy";
 					}else if(iscTopId == true && !jsonArr.get("midId").trim().equals("")) {
 						System.out.println("checkpoint 5");
 						Map<String, String> fixMap = new HashMap<String, String>();
@@ -183,8 +180,8 @@ public class TemplateCtrl {
 						fixMap.put("midId", jsonArr.get("midId"));
 
 						fbsService.fixFbs(fixMap);
-						return "Yammy";
 					}
+					break;
 				}
 			}
 		
@@ -192,6 +189,21 @@ public class TemplateCtrl {
 			// TODO: handle exception
 		}
 		return "Yammy";
+	}
+	
+	@RequestMapping(value = "/updateTopCategory.do", method = RequestMethod.POST,produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public Boolean updateTopCategory(@RequestParam Map<String, String> jsonArr,HttpSession session) {
+		logger.info("TemplateCtrl updateTopCategory {}",jsonArr);
+		Map<String, String> map = new HashMap<String, String>();
+		// TODO 2. 변경점 1
+//		map.put("projName", (String)session.getAttribute("projName"));
+		map.put("topId", jsonArr.get("topId"));
+		map.put("topCode", jsonArr.get("topCode"));
+		map.put("topName", jsonArr.get("topName"));
+		topService.fixTopCategory(map);
+
+		return true;
 	}
 
 	@RequestMapping(value = "/newFbsRow.do", method = RequestMethod.GET)
