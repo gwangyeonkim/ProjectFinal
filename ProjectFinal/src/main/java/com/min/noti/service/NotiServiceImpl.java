@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.min.noti.mapper.INotiDao;
 import com.min.noti.vo.NotiVo;
+import com.min.noti.vo.MemListVo;
 
 
 
@@ -49,5 +50,10 @@ public class NotiServiceImpl implements INotiService {
 	@Override
 	public int notification_count(Map<String, Object> map) {
 		return dao.notification_count(map);
+	}
+
+	@Override
+	public MemListVo chatting_groupName(Map<String, Object> map) {
+		return dao.chatting_groupName(map);
 	}
 }

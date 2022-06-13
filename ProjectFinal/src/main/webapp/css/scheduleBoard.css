@@ -117,8 +117,6 @@ body {
 
 /* 안에 div 설정임 */
 .content > div {
-    background-color: rgb(221, 221, 221);
-    border-radius: 20px;
     font-size: 20px;
     padding: 8px;
 }
