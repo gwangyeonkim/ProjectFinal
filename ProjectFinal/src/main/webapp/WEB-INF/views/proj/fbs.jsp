@@ -7,8 +7,12 @@
 <!-- <link rel="stylesheet" href="./css/tui-grid.css"> -->
 <!-- <script type="text/javascript" src="./js/tui-grid.js"></script> -->
 <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<%@ include file="../header.jsp" %>
 <title>FBS</title>
 </head>
 <body>
@@ -16,7 +20,49 @@
 <button onclick="Fbs()">조회</button>
 <button onclick="newRow()">행추가</button>
 <button onclick="finFbs()">완료</button>
+<button id="fixBtn">모달열기</button>
+
+
+<div class="modal fade" id="fixModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="padding:35px 50px;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>
+                            수정이력
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="padding:40px 50px;">
+                        <form action="./newFix.do" method="post">
+                            <div class="form-group">
+                                <label for="usrname">
+                                    <span>작성자 이름</span>
+                                </label>
+                                <input type="text" class="form-control" name="fixName">
+                            </div>
+                            <div class="form-group">
+                                <label for="psw">
+                                    작성 이력
+                                </label>
+                                <input type="text" class="form-control" name="fixContent">
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">
+                                작성 완료
+                            </button>
+                        </form>
+                    </div>
+                </div>
+		</div>
+	</div>
+</body>
 <script type="text/javascript">
+$(document).ready(function () {
+    $("#fixBtn").click(function () {
+        $("#fixModal").modal();
+    });
+});
+
 var Grid = tui.Grid;
 var el;
 var options;
@@ -183,5 +229,5 @@ function Fbs(){
 		
 	
 </script>
-</body>
+
 </html>
