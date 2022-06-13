@@ -58,9 +58,9 @@
     		var tomorrow = moment().add("1","d").format('YYYY-MM-DD')
     		console.log(regdate);
     		console.log(tomorrow);
-    		if(regdate == tomorrow && notifided=="N"){
+    		if(regdate == tomorrow && arr[j].notifided=="N" && localStorage.getItem("Arlim") == "yes"){
     			notify();
-    			notifieded(arr[j].notiId);
+//     			notifieded(arr[j].notiId);
     		}
     		
     		
