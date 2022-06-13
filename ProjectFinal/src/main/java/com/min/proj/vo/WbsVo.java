@@ -103,10 +103,11 @@ public class WbsVo {
 	}
 	@Override
 	public String toString() {
-		return "WbsVo [wbsId=" + wbsId + ", midId=" + midId + ", wbsCode=" + wbsCode + ", wbsName=" + wbsName
+		return "[wbsId=" + wbsId + ", midId=" + midId + ", wbsCode=" + wbsCode + ", wbsName=" + wbsName
 				+ ", wbsConent=" + wbsConent + ", wbsManager=" + wbsManager + ", wbsStartDate=" + wbsStartDate
 				+ ", wbsEndDate=" + wbsEndDate + ", wbsFinDate=" + wbsFinDate + ", wbsStep=" + wbsStep + ", wbsDelflag="
-				+ wbsDelflag + ", wbsDate=" + wbsDate + ", topVo=" + topVo + ", fbsVo=" + fbsVo + "]";
+				+ wbsDelflag + ", wbsDate=" + wbsDate + "," + topVo + "," + fbsVo;
+		
 	}
 	
 

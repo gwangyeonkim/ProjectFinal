@@ -35,4 +35,10 @@ public class TopCategoryServiceImpl implements ITopCategoryService{
 		return dao.deleteTopCategory(topId);
 	}
 
+	@Override
+	public int deleteNullTopCategory(String projName) {
+		// TODO Auto-generated method stub
+		return dao.deleteNullTopCategory(projName);
+	}
+
 }

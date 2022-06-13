@@ -2,7 +2,9 @@ package com.min.edu;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +23,7 @@ public class ScheduleTest {
 	@Autowired
 	private IScheduleDao dao;
 	
+	
 	@Autowired
 	private SqlSessionTemplate sqlsession;
 	
@@ -29,9 +32,58 @@ public class ScheduleTest {
 		assertNotNull(sqlsession);
 	}
 	
-	@Test
+//	@Test
 	public void callSchedule() {
 	List<ScheduleVo> lists = sqlsession.selectList("com.min.sche.mapper.ScheduleDaoImpl.getAllSchedule");
 	System.out.println(lists.size());
 	}
+	
+//	@Test
+	public void insertTest() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sId", "s001");
+		map.put("mId", "CH001"); // FK임 
+		map.put("sName", "일정1");
+		map.put("sCont", "내용1");
+		map.put("start", "2022-05-06");
+		map.put("end", "2022-05-07");
+		int cnt = dao.pScheduleInsert(map);
+		System.out.println(cnt);
+	}
+	
+//	@Test
+	public void updateTest() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sId", "s001");
+		map.put("mId", "CH001");
+		map.put("sName", "일정수정1");
+		map.put("sCont", "내용수정1");
+		map.put("start", "2022-06-06");
+		map.put("end", "2022-06-07");
+		int cnt = dao.pScheduleUpdate(map);
+		System.out.println(cnt);
+	}
+	
+//	@Test
+	public void deleteTest() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sId", "s001");
+		map.put("mId", "CH001"); 
+		int cnt = dao.pScheduleDelete(map);
+		System.out.println(cnt);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
