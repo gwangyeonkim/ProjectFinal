@@ -66,7 +66,7 @@ public class TemplateCtrl {
 //		System.out.println((String)session.getAttribute("userId"));
 		// TODO 1. 변경점 1
 //		map.put("memId", (String)session.getAttribute("userId"));
-		map.put("memId", "CH003");
+		map.put("memId", "CH001");
 		List<FbsVo> fVo = fbsService.selectFbs(map);
 //		System.out.println(fVo.toString());
 //		System.out.println(map);
@@ -246,7 +246,7 @@ public class TemplateCtrl {
 //		System.out.println((String)session.getAttribute("userId"));
 		// TODO 1. 변경점 1
 //		map.put("memId", (String)session.getAttribute("userId"));
-		map.put("memId", "CH003");
+		map.put("memId", "CH001");
 		List<WbsVo> wVo = wbsService.selectWbs(map);
 //		System.out.println(fVo.toString());
 //		System.out.println(map);
