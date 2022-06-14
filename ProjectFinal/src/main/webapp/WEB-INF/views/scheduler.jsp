@@ -18,7 +18,7 @@
 <!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 	
-<link rel="stylesheet" href="./css/scheduler.css">
+<!-- <link rel="stylesheet" href="./css/scheduler.css"> -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -47,12 +47,19 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+
+	showCalendar();
+});
+
+function showCalendar(){
 	var prevBtn = document.getElementById('prev'); // 이전 달 버튼
 	var nextBtn = document.getElementById('next'); // 다음 달 버튼
 	var calInfo = document.getElementById('calInfo');// 화면에 현재 날짜 표시
 	var todayBtn = document.getElementById('today'); // 클릭하면 현재 날짜로 이동하는 버튼
 	var yearInfo = document.getElementById('yearInfo');//보고있는 캘린더의 년 값
 	var newBtn = document.getElementById('newSche'); // 일정추가 버튼
+	
+	
 	
 	
 	
@@ -100,6 +107,8 @@ $(document).ready(function() {
 	
 
 		calendar.clear();
+		calInfo.innerText =calendar.getDate().getFullYear()+"년 "+(calendar.getDate().getMonth()+1)+"월";
+		holiday(calendar.getDate().getFullYear());
 		calendar.render();
 		  /* calendar.createSchedules([
 		    {
@@ -148,8 +157,7 @@ $(document).ready(function() {
 			 }
 		}); 
 		
-		calInfo.innerText =calendar.getDate().getFullYear()+"년 "+(calendar.getDate().getMonth()+1)+"월";
-		callHoliday(calendar.getDate().getFullYear());
+		
 		/* callSchedule(); */
 		
 		nextBtn.addEventListener('click', () => {
@@ -157,9 +165,10 @@ $(document).ready(function() {
 			calInfo.innerText =calendar.getDate().getFullYear()+"년 "+(calendar.getDate().getMonth()+1)+"월";
 			var thisYear = calendar.getDate().getFullYear();
 			if(yearInfo.value != calendar.getDate().getFullYear()){
-				yearInfo.value = calendar.getDate().getFullYear();	
+				yearInfo.value = calendar.getDate().getFullYear();
+				checkFalse();
 				calendar.clear();
-				callHoliday(yearInfo.value);
+				holiday(yearInfo.value);
 				/* callSchedule(); */
 			}
 		});
@@ -174,8 +183,9 @@ $(document).ready(function() {
 			var thisYear = calendar.getDate().getFullYear();
 			if(yearInfo.value != calendar.getDate().getFullYear()){
 				yearInfo.value = calendar.getDate().getFullYear();
+				checkFalse();
 				calendar.clear();
-				callHoliday(yearInfo.value);
+				holiday(yearInfo.value);
 				/* callSchedule();   */
 			}
 		});
@@ -183,9 +193,51 @@ $(document).ready(function() {
 			calendar.today();
 			calInfo.innerText =calendar.getDate().getFullYear()+"년 "+(calendar.getDate().getMonth()+1)+"월";
 			calendar.clear();
-			callHoliday(calendar.getDate().getFullYear());
-			/* callSchedule();   */
+			console.log(calendar.getDate().getFullYear());
+			holiday(calendar.getDate().getFullYear());
 		});
+		$("#checkList input").click(function(){
+			if(checkSelect() != null){
+				console.log(checkSelect());
+				$.ajax({
+					url: "./callSchedule.do",
+					type:"POST",
+					data:{
+						list:checkSelect()
+					},
+					success: function(data) {
+						calendar.clear();
+						calendar.createSchedules(data);
+						holiday(calendar.getDate().getFullYear());
+					 },
+					error:function(){
+						alert("잘못된 요청입니다");
+					} 
+				});
+			}else if(checkSelect() == null){ //체크된게없다는뜻
+				calendar.clear();
+				holiday(calendar.getDate().getFullYear());
+			}
+			
+		});
+		
+		function holiday(year){
+			$.ajax({
+				url: "./restDay.do",
+				type: "POST",
+				data:{"year":year},
+				dataType:"json",
+				success: function(data) {
+					calendar.createSchedules(data);
+				},
+				error:function(){
+					alert("잘못된 요청입니다");
+				}
+			});
+		}
+}
+
+	
 		
 
 /* function callSchedule(userList){
@@ -204,22 +256,43 @@ $(document).ready(function() {
 		} 
 	});
 } */
+function callSchedule(nameList){
+	$.ajax({
+		url: "./callSchedule.do",
+		type:"POST",
+		data:{
+			list:nameList
+		},
+		success: function(data) {
+			console.log(data);
+			return data;
+		 },
+		error:function(){
+			alert("잘못된 요청입니다");
+		} 
+	}); 
+}
 
-function callHoliday(year){
+/* function callHoliday(year){
+	var result = "";
 	$.ajax({
 		url: "./restDay.do",
 		type: "POST",
 		data:{"year":year},
 		dataType:"json",
 		success: function(data) {
-                calendar.createSchedules(data);
+            console.log(typeof(data));
+            result = data;
 		},
 		error:function(){
 			alert("잘못된 요청입니다");
 		}
 	});
-}
-});
+	console.log("확인");
+	console.log(result);
+	return result;
+} */
+
 //---------------------------------
 function checkSelect() {
     // 전체 체크박스
@@ -242,23 +315,19 @@ function checkSelect() {
         }
     );
     if(nameList.length !== 0){
-    	console.log(nameList);
-    	$.ajax({
-    		url: "./callSchedule.do",
-    		type:"POST",
-    		data:{
-    			list:nameList
-    		},
-    		success: function(data) {
-    			console.log(data);
-    			/* calendar.createSchedules(data); */
-    		 },
-    		error:function(){
-    			alert("잘못된 요청입니다");
-    		} 
-    	});
+    	/* console.log(nameList); */
+    	return nameList;
+    	
     }
     
+}
+function checkFalse(){
+	var allCheckbox = document.getElementsByName('chkAll');
+	var checkboxes = document.getElementsByName('check');
+	checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+	allCheckbox[0].checked = false;
 }
 //---------------------------------
 function checkAll(checkAll) {
@@ -269,28 +338,25 @@ function checkAll(checkAll) {
         checkbox.checked = checkAll.checked
     })
     
-    if(checkAll.checked){
+    /* if(checkAll.checked){
         checkboxes.forEach(
             function(val){
                 nameList.push(val.value);
             }
-        );
-        console.log(nameList);
-        $.ajax({
+        ); */
+        /* $.ajax({
     		url: "./callSchedule.do",
     		type:"POST",
     		data:{
     			list:nameList
     		},
     		success: function(data) {
-    			console.log(data);
-    			/* calendar.createSchedules(data); */
     		 },
     		error:function(){
     			alert("잘못된 요청입니다");
     		} 
-    	});
-    }
+    	}); 
+    }*/
 }
 
 
@@ -307,10 +373,11 @@ function makeTime(info){
 	return result;
 }
 </script>
+<%@include file="./header.jsp" %>
 <body>
-	<div class="wrapper">
+	
 
-		<div class="nav">
+		<!-- <div class="nav">
 			<a href="#" class="logo">Home</a>
 			<div class="dropdown">
 				<button class="dropbtn">Document</button>
@@ -341,21 +408,23 @@ function makeTime(info){
 				<img id="chatIcon" alt="chat" src="img/chat.png" />
 				<img id="notiIcon" alt="notification" src="img/notification.png" />
 				<span id="notiNonCheck">&#128308;</span>
-					<!-- 이 notiCount가 미확인 알림 숫자임 --> <span id="notiCount">1</span>
+					이 notiCount가 미확인 알림 숫자임 <span id="notiCount">1</span>
 				</a> <a class="active" href="#home">logout</a>
 			</div>
-		</div>
+		</div> -->
+		
+		<div class="wrapper">
 		<div class="content">
 			<!--여기 넣으면 됨-->
 			<div class="item1">
 				<button id="newSche" class="newSche">NEW</button>
 				<hr style="height: 2px; background-color: black;">
 				<div id="checkList" style="text-align: left; padding-top: 10px;">
-					<input type="checkbox" name="chkAll" onclick="checkAll(this)"><b>ALL</b><br>
-					<input type="checkbox" name="check" value="김광연" onclick="checkSelect()"><b>김광연</b><br>
-					<input type="checkbox" name="check" value="김규철" onclick="checkSelect()"><b>김규철</b><br>
-					<input type="checkbox" name="check" value="박정연" onclick="checkSelect()"><b>박정연</b><br>
-					<input type="checkbox" name="check" value="이창훈" onclick="checkSelect()"><b>이창훈</b>
+					<input class="checkName" type="checkbox" name="chkAll" onclick="checkAll(this)"><b>ALL</b><br>
+					<input class="checkName" type="checkbox" name="check" value="김광연" onclick="checkSelect()"><b>김광연</b><br>
+					<input class="checkName" type="checkbox" name="check" value="김규철" onclick="checkSelect()"><b>김규철</b><br>
+					<input class="checkName" type="checkbox" name="check" value="박정연" onclick="checkSelect()"><b>박정연</b><br>
+					<input class="checkName" type="checkbox" name="check" value="이창훈" onclick="checkSelect()"><b>이창훈</b>
 				</div>
 			</div>
 			<div class="item2" style="text-align:center;">
