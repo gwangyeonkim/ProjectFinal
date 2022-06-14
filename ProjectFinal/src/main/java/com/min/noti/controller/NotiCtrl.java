@@ -30,7 +30,7 @@ public class NotiCtrl {
 	@Autowired
 	private INotiService service;
 	
-	@RequestMapping(value= "/*.do", method = RequestMethod.GET)
+	@RequestMapping(value= "/.do", method = RequestMethod.GET)
 	@ResponseBody
 	public String regist2(Model model, HttpSession session) {
 		//시간 구하기
