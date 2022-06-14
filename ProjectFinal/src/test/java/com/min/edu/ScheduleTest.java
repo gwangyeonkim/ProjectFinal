@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.min.sche.mapper.IScheduleDao;
-import com.min.sche.vo.ScheduleVo;
+import com.min.sche.vo.WbsViewVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
@@ -34,7 +34,7 @@ public class ScheduleTest {
 	
 //	@Test
 	public void callSchedule() {
-	List<ScheduleVo> lists = sqlsession.selectList("com.min.sche.mapper.ScheduleDaoImpl.getAllSchedule");
+	List<WbsViewVo> lists = sqlsession.selectList("com.min.sche.mapper.ScheduleDaoImpl.getAllSchedule");
 	System.out.println(lists.size());
 	}
 	
