@@ -43,6 +43,47 @@
 	width: 25px;
 	height: 25px;
 }
+
+.content{
+    display: grid;
+    width: 100%-40px;
+    height:700px;
+    grid-template-columns: 15% 85%;
+    grid-template-rows: 1fr;
+    gap:10px;
+    padding: 20px;
+}
+
+/* 안에 div 설정임 */
+.content > div {
+    background-color: rgb(221, 221, 221);
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 8px;
+}
+
+.item1,.item2{
+    margin: 10px;
+}
+
+.item1{
+    text-align: center;
+}
+
+.newSche {
+    background-color: brown;
+    font-size: 35px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.newSche:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    transition-delay: 0.5;
+    cursor: pointer;
+}
+
 </style>
 <script type="text/javascript">
 
@@ -90,17 +131,23 @@ function showCalendar(){
 		    },
 		    popupDelete: function() {
 		      return '삭제';
-		    }
+		    },
+		    popupStateFree: function() {
+	            return 'A';
+	        },
+	        popupStateBusy: function() {
+	            return 'B';
+	        },
 		  };
 	
 	var calendar = new tui.Calendar('#calendar', {
 		  defaultView: 'month',
 		  template: templates,
 		  useCreationPopup: true,
-		  useDetailPopup: false
+		  useDetailPopup: true
 		});
 	
-	calendar.setCalendarColor('1', {
+	calendar.setCalendarColor('군계일학', { //군계일학 말고 calendarId가 들어가야함
 	    color: '#ffffff',//글자 색
 	    bgColor: '#585858',//배경 색
 	});
@@ -126,13 +173,24 @@ function showCalendar(){
 				if(scheduleData.isPrivate){
 					scheduleData.isPrivate = false; //팀 일정의 경우 isPrivate가 true이기 때문에 개인일정을 isPrivate로 만들어주더라도 false로 바꿔줌
 				}
-				console.log('생성');
-				console.log(scheduleData);
-				console.log(scheduleData.calendarId);//id는 null이라 만들때 seq로 만들어주어야함
-				console.log(scheduleData.title);
-				console.log(scheduleData.location);
-				console.log(makeTime(scheduleData.start));
-				console.log(makeTime(scheduleData.end));
+				var scheduleInfo = {
+					"title" : scheduleData.title,
+					"content" : scheduleData.location,
+					"start" : makeTime(scheduleData.start),
+					"end" : makeTime(scheduleData.end)
+				}
+				$.ajax({
+					url: "./insertSchedule.do",
+					type:"POST",
+					data:scheduleInfo,
+					success: function(data){
+						console.log(data);
+					 },
+					error:function(){
+						alert("잘못된 요청입니다");
+					} 
+				});
+				//추가가 되었다면 다시 렌더링 해주는 작업 필요
 			},
 			'beforeUpdateSchedule':function(scheduleData){// 일정 수정 및 드래그를 하였을 때 발생하는 이벤트
 				console.log(scheduleData.schedule); // 수정 전 기존 일정 정보
@@ -147,8 +205,10 @@ function showCalendar(){
 				 if(scheduleData.schedule.isReadOnly){
 					alert("공휴일은 수정할 수 없습니다!");
 					return false;
+				 }else if(scheduleData.schedule.isPrivate){
+					alert("팀 일정은 PM이 문서수정으로 수정이 가능");
 				 }else{
-					 //일정 목록 모달띄우고 자기일정은 누르면 상세로 자기꺼 아니거나 팀일정이면 readonly
+					 console.log(scheduleData);
 				 }
 				 
 			 },
@@ -235,6 +295,8 @@ function showCalendar(){
 				}
 			});
 		}
+		
+
 }
 
 	
@@ -376,43 +438,6 @@ function makeTime(info){
 <%@include file="./header.jsp" %>
 <body>
 	
-
-		<!-- <div class="nav">
-			<a href="#" class="logo">Home</a>
-			<div class="dropdown">
-				<button class="dropbtn">Document</button>
-				<div class="dropdown-content">
-					<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">Calendar</button>
-				<div class="dropdown-content">
-					<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">Member</button>
-				<div class="dropdown-content">
-					<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-				</div>
-			</div>
-			<div class="dropdown">
-				<button class="dropbtn">Template</button>
-				<div class="dropdown-content">
-					<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-				</div>
-			</div>
-			<div class="nav-right">
-				<a id="loginInfo"> loginInfo
-				<img id="chatIcon" alt="chat" src="img/chat.png" />
-				<img id="notiIcon" alt="notification" src="img/notification.png" />
-				<span id="notiNonCheck">&#128308;</span>
-					이 notiCount가 미확인 알림 숫자임 <span id="notiCount">1</span>
-				</a> <a class="active" href="#home">logout</a>
-			</div>
-		</div> -->
-		
 		<div class="wrapper">
 		<div class="content">
 			<!--여기 넣으면 됨-->
