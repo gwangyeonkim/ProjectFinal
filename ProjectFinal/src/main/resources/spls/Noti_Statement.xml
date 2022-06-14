@@ -3,12 +3,13 @@
 <mapper namespace="com.min.noti.mapper.NotiDaoImpl">
 		<insert id="notification_insert_privacy" parameterType="NotiVo">
 		INSERT INTO NOTIFICATION(NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE)
-		SELECT SCHE_ID, 'privacy', s.MEM_ID , SCHE_CONTENT,'N',SCHE_END
+		SELECT SCHE_ID, 'privacy', s.MEM_ID , SCHE_CONTENT,'N',TO_DATE(SCHE_END , 'yyyy-mm-dd')
 		FROM SCHEDULE s
-		WHERE TO_CHAR(TO_DATE(SCHE_END, 'mm/dd/yyyy'), 'YYYYMMDD') = TO_CHAR(SYSDATE+1,'YYYYMMDD')
+		WHERE TO_CHAR(TO_DATE(SCHE_END, 'yyyy-mm-dd'), 'yyyy-mm-dd') = TO_CHAR(SYSDATE+1,'yyyy-mm-dd')
 		</insert>
 		
 		<insert id="notification_insert_team" parameterType="NotiVo">
+		INSERT INTO NOTIFICATION(NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE)
 		SELECT CONCAT(MEM_ID, WBS_ID), p.PROJ_NAME, p.MEM_ID, WBS_NAME, 'N', TO_DATE(WBS_END_DATE, 'yyyy-mm-dd')
 		FROM PROJMEMLIST p , PROJECT p2 , DOCUMENT d , TOPCATEGORY t , FBS f ,WBS w 
 		WHERE p.PROJ_NAME =p2.PROJ_NAME 
@@ -16,7 +17,7 @@
 		AND d.DOC_ID = t.DOC_ID 
 		AND t.TOP_ID = f.TOP_ID 
 		AND f.MID_ID = w.MID_ID
-		AND TO_CHAR(TO_DATE(WBS_END_DATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') = TO_CHAR(SYSDATE+1,'yyyy-mm-dd');
+		AND TO_CHAR(TO_DATE(WBS_END_DATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') = TO_CHAR(SYSDATE+1,'yyyy-mm-dd')
 		</insert>
 		
 		<select id="notification_my_noti"  parameterType="java.util.Map" resultType="NotiVo">
