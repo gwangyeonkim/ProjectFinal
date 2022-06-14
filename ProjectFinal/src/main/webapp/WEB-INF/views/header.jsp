@@ -18,8 +18,7 @@
 <script src="js/index.js"></script>
 </head>
 <body>
-	<a href="./modifyMember.do"> 회원정보 수정페이지 이동</a>
-	<div class="nav">
+	<div class="navb">
 		<a href="#" class="logo">Home</a>
 		<div class="dropdown">
 			<button class="dropbtn">Document</button>
@@ -45,7 +44,7 @@
 				<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
 			</div>
 		</div>
-		<div class="nav-right">
+		<div class="navb-right">
 			<a id="loginInfo"> ${loginVo.memberId}님 
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
@@ -105,7 +104,7 @@
 								body : arr[j].content +"의 마감이 하루 남았어요!"
 							});
 					notification.onclick = function() {
-						window.location.href = "https://www.naver.com";
+						window.location.href = "https://www.navber.com";
 					};
 				}
 			}, // success
