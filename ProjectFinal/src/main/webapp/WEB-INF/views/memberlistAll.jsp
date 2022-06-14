@@ -29,7 +29,7 @@
 		<tbody>
 			<c:forEach var="mVo" items="${lists}"  varStatus="vs">
 			<tr>
-				<td><a href="./">${mVo.memberId}</a></td>
+				<td><a href="./memberSelect.do?id=${mVo.memberId}">${mVo.memberId}</a></td>
 				<td>${mVo.memName}</td>
 				<td>${mVo.memEmail}</td>
 			</tr>
@@ -40,7 +40,7 @@
 </body>
 
 <script type="text/javascript">
-
+  
 
 
 

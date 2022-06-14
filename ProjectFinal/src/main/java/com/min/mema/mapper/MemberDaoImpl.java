@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.min.mema.vo.MemberVo;
+import com.min.proj.vo.ProjectVo;
 
 
 @Repository
@@ -84,5 +85,24 @@ public class MemberDaoImpl implements IMemberDao {
 		return sqlSession.selectList(NS+"memberlistAll",vo);
 	}
 	 
+	@Override
+	public MemberVo memberSelect(String id) {
+		logger.info("MemberDaoImpl findIdmdmber {}" , id);
+		return sqlSession.selectOne(NS+"memberSelect",id);
+	}
 	
+	@Override
+	public MemberVo findPwmember(MemberVo vo) {
+		return sqlSession.selectOne(NS+"findPwmember",vo);
+	}
+	
+	@Override
+	public int updatePw(MemberVo vo) {
+		return sqlSession.update(NS+"updatePw",vo);
+	}
+	
+	@Override
+	public String inviteMember(MemberVo vo) {
+		return sqlSession.selectOne(NS+"inviteMember",vo);
+	}
 }

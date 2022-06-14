@@ -155,7 +155,7 @@
                                 <label for="usrname">
                                     <span class="glyphicon glyphicon-user"></span>아이디
                                 </label>
-                                <input type="text" class="form-control" value="GD" name="memberId" id="usrname">
+                                <input type="text" class="form-control" value="GD001" name="memberId" id="usrname">
                             </div>
                             <div class="form-group">
                                 <label for="psw">

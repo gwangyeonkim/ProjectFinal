@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.min.mema.vo.MemberVo;
+import com.min.proj.vo.ProjectVo;
 
 public interface IMemberService {
 	
@@ -30,5 +31,14 @@ public interface IMemberService {
 	
 	
 	public List<MemberVo> memberlistAll(MemberVo vo);
+	
+	
+	public MemberVo memberSelect(String id);
+	
+//	public String joinEmail(String email);
+	
+	public String findAndUpdatePw(MemberVo vo); 
   
+	
+	public String inviteMember(MemberVo vo);
 }

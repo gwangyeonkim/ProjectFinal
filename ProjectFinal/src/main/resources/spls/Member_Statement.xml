@@ -42,6 +42,33 @@
         MINUS 
         SELECT MEM_ID FROM PROJMEMLIST p)
 	</select>
+	
+	<select id="memberSelect" parameterType="java.lang.String" resultType="MemVo">
+		SELECT MEMBER_ID , MEM_NAME ,MEM_EMAIL
+		FROM MEMBERLIST
+		WHERE MEMBER_ID= #{memberId}
+	</select>
+	
+	
+	<select id="findPwmember" parameterType="MemVo" resultType="MemVo">
+		SELECT MEMBER_ID , MEM_NAME ,MEM_EMAIL
+		FROM MEMBERLIST
+		WHERE MEMBER_ID= #{memberId} AND MEM_NAME = #{memName}
+	</select>
+	
+	<update id="updatePw"  parameterType="MemVo">
+		UPDATE MEMBERLIST
+		SET MEM_PW=#{memPw}
+		WHERE MEMBER_ID= #{memberId}
+   </update>
+   
+   <select id="inviteMember" parameterType="MemVo" resultType="java.lang.String">
+	SELECT p2.PROJ_TOKEN 
+			FROM PROJECT p2  
+			WHERE  p2.PROJ_NAME IN (SELECT p.PROJ_NAME 
+			FROM PROJMEMLIST p 
+			WHERE p.MEM_ID = #{memberId})
+	   </select>
 
 
 </mapper>

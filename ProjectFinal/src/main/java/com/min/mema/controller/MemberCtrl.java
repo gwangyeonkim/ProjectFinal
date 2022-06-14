@@ -2,6 +2,7 @@ package com.min.mema.controller;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.min.mema.service.IMemberService;
 import com.min.mema.vo.MemberVo;
+import com.min.proj.vo.ProjectVo;
 
 @Controller
 public class MemberCtrl {
@@ -162,22 +165,6 @@ public class MemberCtrl {
 		return (id==null)?"":id;
 	}
 	
-	@RequestMapping(value = "/findPwMember.do", method = RequestMethod.GET)
-	public String findPwMember() {
-		logger.info("MemberCtrl findIdmdmber 이동");
-		return "findPwMember";
-	}
-	
-	@RequestMapping(value = "/findPwMember.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String findPwMember(String memName, String memEmail) {
-		Map<String, Object> map = new HashMap<String, Object>()	;
-		map.put("memName", memName);
-		map.put("memEmail", memEmail);
-		System.out.println(map);
-		String id = service.findIdmdmber(map);
-		return (id==null)?"":id;
-	}
 	
 	@RequestMapping(value = "/memberlistAll.do" , method = RequestMethod.GET)
 	public String memberlistAll(MemberVo vo, Model model) {
@@ -197,6 +184,62 @@ public class MemberCtrl {
 //		return "memberlistAll";
 //	}
 	
+	@RequestMapping(value = "/memberSelect.do" , method = RequestMethod.GET)
+	public String memberSelect(String id, String email, Model model) {
+		logger.info("MemberCtrl memberSelect 상세조회");
+		MemberVo vo = service.memberSelect(id);
+		model.addAttribute("vo", vo);
+//		String pVo = service.joinEmail(email);
+//	    email = service.joinEmail(email);
+//		model.addAttribute("pVo", pVo);
+		return "memberSelect";
+	}
+	
+	
+	@RequestMapping(value = "/findPwMember.do", method = RequestMethod.GET)
+	public String findPwMember() {
+		logger.info("MemberCtrl findIdmdmber 이동");
+		return "findPwMember";
+	}
+	
+	@RequestMapping(value = "/findPwMember.do", method = RequestMethod.POST ,produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String findAndUpdatePw(@RequestBody MemberVo vo) {
+		logger.info("MemberCtrl findAndUpdatePw 전달 값 {}" , vo);
+		return service.findAndUpdatePw(vo);
+	}
+	
+//	@RequestMapping(value = "/joinEmail.do" ,method = RequestMethod.GET)
+//	@ResponseBody
+//	public String joinMail(@RequestParam String email, MemberVo vo, ProjectVo pVo) {
+//		logger.info("MemberCtrl joinMail 이동하기");
+//		System.out.println(email+"!!!!!!!!!!!!!!!!!!!!!!!");
+//		ProjectVo pVo = service.inviteMember(vo);
+//		return service.inviteMember(vo);
+//	}
+	
+//	public String joinMail() {
+//		
+//		return null;
+//	}
+	
+	@RequestMapping(value = "/inviteMember.do" , method = RequestMethod.POST)
+	public String inviteMember(MemberVo vo, HttpServletResponse resp) throws IOException {
+//		ProjectVo pVo = service.inviteMember(vo);
+		resp.setContentType("text/html; charset=UTF-8;");
+		PrintWriter out = resp.getWriter();
+		if (vo != null) {
+			out.print("<script>alert('메일을 보냈습니다.'); location.href='./memberlistAll.do'</script>");
+			out.flush();
+		}
+		
+		
+		System.out.println(vo);
+		return service.inviteMember(vo);
+	}
+	
+	
+
 	
 	
 }

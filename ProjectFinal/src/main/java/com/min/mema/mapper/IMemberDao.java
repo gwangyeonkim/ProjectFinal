@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.min.mema.vo.MemberVo;
+import com.min.proj.vo.ProjectVo;
 
 public interface IMemberDao {
 	
@@ -42,4 +43,12 @@ public interface IMemberDao {
 	
 	public List<MemberVo> memberlistAll(MemberVo vo);
 	
+	public MemberVo memberSelect(String id);
+	
+	public MemberVo findPwmember(MemberVo vo);
+	
+	public int updatePw(MemberVo vo);
+	
+	
+	public String inviteMember(MemberVo vo);
 }
