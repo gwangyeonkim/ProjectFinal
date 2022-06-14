@@ -341,7 +341,9 @@ $(document).ready(function(){
 		$(".input_msg_write").show();
 		$(".write_msg").focus();
 		
-		ws = new WebSocket("ws://c496-211-197-28-137.ngrok.io:8095/ProjectFinal/wsChatGr.do");
+
+		ws = new WebSocket("ws://192.168.7.190:8080/ProjectFinal/wsChatGr.do");
+
 		ws.onopen = function(){
 			console.log("nickName : " + nick);
 			ws.send("#$nick_"+nick);
