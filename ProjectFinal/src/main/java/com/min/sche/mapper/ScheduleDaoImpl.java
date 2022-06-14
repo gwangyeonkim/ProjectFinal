@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.min.sche.vo.ScheduleVo;
+import com.min.sche.vo.WbsViewVo;
 
 @Repository
 public class ScheduleDaoImpl implements IScheduleDao {
@@ -23,9 +23,9 @@ public class ScheduleDaoImpl implements IScheduleDao {
 	
 
 	@Override
-	public List<ScheduleVo> getTeamSchedule(List<String> userList) {
+	public List<WbsViewVo> getTeamSchedule(List<String> userList) {
 		logger.info("해당 인원이 맡은 팀일정 가져오기");
-		List<ScheduleVo> lists = session.selectList(NS+"getTeamSchedule", userList);
+		List<WbsViewVo> lists = session.selectList(NS+"getTeamSchedule", userList);
 		return lists;
 	}
 

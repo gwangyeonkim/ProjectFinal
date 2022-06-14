@@ -9,8 +9,10 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +32,8 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.min.sche.mapper.IScheduleDao;
 import com.min.sche.service.IScheduleService;
-import com.min.sche.vo.ScheduleVo;
+import com.min.sche.vo.WbsViewVo;
+
 
 
 /**
@@ -67,8 +70,8 @@ public class ScheduleCtrl {
 	}
 	
 	@RequestMapping(value="/showTable.do", method=RequestMethod.POST)
-	public List<ScheduleVo> showTable(){
-		List<ScheduleVo> lists = new ArrayList<ScheduleVo>();
+	public List<WbsViewVo> showTable(){
+		List<WbsViewVo> lists = new ArrayList<WbsViewVo>();
 		
 		return lists;
 	}
@@ -181,7 +184,7 @@ public class ScheduleCtrl {
 	@ResponseBody
 	public JSONArray callSchedule(@RequestParam(value="list[]") List<String> nameList) {
 		System.out.println(nameList);
-		List<ScheduleVo> lists = service.getTeamSchedule(nameList);//DB에서 일정목록을 불러옴
+		List<WbsViewVo> lists = service.getTeamSchedule(nameList);//DB에서 일정목록을 불러옴
 		System.out.println("받아온 리스트@@@@@@@@@@@@@@@@@@@@@@@@@");
 		System.out.println(lists);
 		JSONArray arr = new JSONArray();//JSONArray[JSONObject] 형태로 만들어서 보내줌
@@ -200,6 +203,25 @@ public class ScheduleCtrl {
 		}
 		System.out.println(arr.toJSONString());
 		return arr;
+	}
+	
+	@RequestMapping(value="/insertSchedule.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int insertSchedule(
+				String title, String content, String start, String end
+			){
+		logger.info("받아온 값 : {}",title +"/"+ content +"/"+ start +"/"+ end);
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(title + content);
+		map.put("mId", "GD001");//로그인된 회원의 ID
+		map.put("sName", title);
+		map.put("sCont", content);
+		map.put("start", start);
+		map.put("end", end);
+		int cnt = 0;
+		cnt = service.pScheduleInsert(map);
+		System.out.println(map.toString());
+		return cnt;
 	}
 	
 	

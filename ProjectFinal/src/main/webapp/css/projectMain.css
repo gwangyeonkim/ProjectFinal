@@ -1,7 +1,7 @@
 
 /* ----------header-------------- */
 
-.nav {
+.navb {
 	margin:0 auto;
     width: 1370px;
     height: 60px;
@@ -10,7 +10,7 @@
     border-radius: 10px 10px 0 0;
 }
 
-.nav a {
+.navb a {
     float: left;
     color: white;
     text-align: center;
@@ -22,34 +22,34 @@
 
 }
 
-.nav a.logo {
+.navb a.logo {
     font-size: 35px;
     font-weight: bold;
 }
 
-.nav a.active {
+.navb a.active {
     background-color: dodgerblue;
     color: white;
 }
 
-.nav a.active:hover {
+.navb a.active:hover {
     background-color: rgb(30, 255, 236);
     color: black;
     transition: 0.3s;
 }
 
-.nav-right {
+.navb-right {
     float: right;
 }
 
 /* @media screen and (max-width: 500px) {
-    .nav a {
+    .navb a {
         float: none;
         display: block;
         text-align: left;
     }
 
-    .nav-right {
+    .navb-right {
         float: none;
     }
 } */
@@ -57,7 +57,7 @@
 /* -----------body--------------- */
 body {
     background-color: rgb(128, 128, 128);
-    padding: 50px;
+ 	padding: 50px;
     font-family:Arial, Helvetica, sans-serif;
 }
 
@@ -106,46 +106,6 @@ body {
     font-weight: bold;
 }
 
-.content{
-    display: grid;
-    width: 100%-40px;
-    height:700px;
-    grid-template-columns: 15% 85%;
-    grid-template-rows: 1fr;
-    gap:10px;
-    padding: 20px;
-}
-
-/* 안에 div 설정임 */
-.content > div {
-    background-color: rgb(221, 221, 221);
-    border-radius: 20px;
-    font-size: 20px;
-    padding: 8px;
-}
-
-.item1,.item2{
-    margin: 10px;
-}
-
-.item1{
-    text-align: center;
-}
-
-.newSche {
-    background-color: brown;
-    font-size: 35px;
-    font-weight: bold;
-    transition: 0.5s;
-}
-
-.newSche:hover{
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
-    transition-delay: 0.5;
-    cursor: pointer;
-}
-
 .dropdown {
     float: left;
     overflow: hidden;
@@ -163,7 +123,7 @@ body {
     padding:5px;
   }
   
-  .navbar a:hover, .dropdown:hover .dropbtn {
+   .navb a:hover, .dropdown:hover .dropbtn {
   	border-radius: 50%;
     background-color: gray;
   }

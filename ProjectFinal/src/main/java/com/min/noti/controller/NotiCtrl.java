@@ -42,55 +42,7 @@ public class NotiCtrl {
 		this.memId = memId;
 	}
 
-	@RequestMapping(value= "/callHeader.do", method = RequestMethod.GET)
-	@ResponseBody
-	public String regist2(Model model, HttpSession session) {
-		//시간 구하기
-		Calendar cal = Calendar.getInstance();
-		Date nowDate = new Date();
-		cal.setTime(nowDate);
-		cal.add(Calendar.DATE , 1);
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd" );
-		String date2 = formatter.format(cal.getTime());
-		System.out.println("@@@@@@@@@@@@@@"+(String) date2);
-		Date currentDate = null;
-		Date notiDate = null;
-		
-		
-//		service.notification_insert_privacy();
-//		service.notification_insert_team();
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memId", "GD001");
-		List<NotiVo> All_lists=service.notification_my_noti(map);
-		ArrayList<NotiVo> lists = new ArrayList<NotiVo>();
-		
 
-		
-		for (int i = 0; i < All_lists.size(); i++) {	
-			String s = All_lists.get(i).getNotiRegdate();
-						try {
-							currentDate = formatter.parse(date2);
-							notiDate = formatter.parse(s);
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-			int compare = notiDate.compareTo( currentDate );
-			if(compare == 0) {
-				NotiVo nvo = All_lists.get(i);
-				lists.add(nvo);
-			}
-		}
-		System.out.println(lists);
-		
-		//알림 갯수
-		int count = service.notification_count(map);
-		System.out.println(count + "☆★☆★☆★☆★☆★☆★☆★");
-	
-		model.addAttribute("lists",lists);	
-		model.addAttribute("count",count);
-		return "header";
-	}
 	
 	@RequestMapping(value = "/notifieded.do", method = RequestMethod.POST)
 	public Map<String, Object> notifieded(@RequestParam Map<String, Object> map){
@@ -110,7 +62,7 @@ public class NotiCtrl {
 	public String ArlimList(Model model) {
 		String s = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println(getMemId() + "◆◆◆◆◆◆◆◆◆◆");
+		System.out.println(getMemId());
 		map.put("memId", getMemId());
 		List<NotiVo> AllLists=service.notification_my_noti(map);
 		model.addAttribute("AllLists",AllLists);	
@@ -146,9 +98,12 @@ public class NotiCtrl {
 		Date currentDate = null;
 		Date notiDate = null;
 		
-		
-//		service.notification_insert_privacy();
-//		service.notification_insert_team();
+		//노티
+		int noti_privacy = service.notification_insert_privacy();
+		int noti_team = service.notification_insert_team();
+		System.out.println(noti_privacy  + "◆◆◆◆◆◆◆◆◆◆");
+		System.out.println(noti_team  + "◆◆◆◆◆◆◆◆◆◆");
+
 		
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		map2.put("memId", memId);
