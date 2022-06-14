@@ -106,46 +106,6 @@ body {
     font-weight: bold;
 }
 
-.content{
-    display: grid;
-    width: 100%-40px;
-    height:700px;
-    grid-template-columns: 15% 85%;
-    grid-template-rows: 1fr;
-    gap:10px;
-    padding: 20px;
-}
-
-/* 안에 div 설정임 */
-.content > div {
-    background-color: rgb(221, 221, 221);
-    border-radius: 20px;
-    font-size: 20px;
-    padding: 8px;
-}
-
-.item1,.item2{
-    margin: 10px;
-}
-
-.item1{
-    text-align: center;
-}
-
-.newSche {
-    background-color: brown;
-    font-size: 35px;
-    font-weight: bold;
-    transition: 0.5s;
-}
-
-.newSche:hover{
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
-    transition-delay: 0.5;
-    cursor: pointer;
-}
-
 .dropdown {
     float: left;
     overflow: hidden;

@@ -1,70 +1,71 @@
 package com.min.sche.vo;
 
 public class ScheduleVo {
-
-	private String projName;
-	private String wbsCode;
-	private String wbsName;
-	private String wbsConent;
-	private String wbsStartDate;
-	private String wbsEndDate;
-	public String getProjName() {
-		return projName;
+	private String scheId;
+	private String memId;
+	private String scheName;
+	private String scheContent;
+	private String scheStart;
+	private String scheEnd;
+	
+	public String getScheId() {
+		return scheId;
 	}
-	public void setProjName(String projName) {
-		this.projName = projName;
+	public void setScheId(String scheId) {
+		this.scheId = scheId;
 	}
-	public String getWbsCode() {
-		return wbsCode;
+	public String getMemId() {
+		return memId;
 	}
-	public void setWbsCode(String wbsCode) {
-		this.wbsCode = wbsCode;
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
-	public String getWbsName() {
-		return wbsName;
+	public String getScheName() {
+		return scheName;
 	}
-	public void setWbsName(String wbsName) {
-		this.wbsName = wbsName;
+	public void setScheName(String scheName) {
+		this.scheName = scheName;
 	}
-	public String getWbsConent() {
-		return wbsConent;
+	public String getScheContent() {
+		return scheContent;
 	}
-	public void setWbsConent(String wbsConent) {
-		this.wbsConent = wbsConent;
+	public void setScheContent(String scheContent) {
+		this.scheContent = scheContent;
 	}
-	public String getWbsStartDate() {
-		return wbsStartDate;
+	public String getScheStart() {
+		return scheStart;
 	}
-	public void setWbsStartDate(String wbsStartDate) {
-		this.wbsStartDate = wbsStartDate;
+	public void setScheStart(String scheStart) {
+		this.scheStart = scheStart;
 	}
-	public String getWbsEndDate() {
-		return wbsEndDate;
+	public String getScheEnd() {
+		return scheEnd;
 	}
-	public void setWbsEndDate(String wbsEndDate) {
-		this.wbsEndDate = wbsEndDate;
+	public void setScheEnd(String scheEnd) {
+		this.scheEnd = scheEnd;
 	}
 	
 	@Override
 	public String toString() {
-		return "ScheduleVo [projName=" + projName + ", wbsCode=" + wbsCode + ", wbsName=" + wbsName + ", wbsConent="
-				+ wbsConent + ", wbsStartDate=" + wbsStartDate + ", wbsEndDate=" + wbsEndDate + "]";
+		return "ScheduleVo [scheId=" + scheId + ", memId=" + memId + ", scheName=" + scheName + ", scheContent="
+				+ scheContent + ", scheStart=" + scheStart + ", scheEnd=" + scheEnd + "]";
 	}
 	
-	public ScheduleVo(String projName, String wbsCode, String wbsName, String wbsConent, String wbsStartDate,
-			String wbsEndDate) {
+	public ScheduleVo(String scheId, String memId, String scheName, String scheContent, String scheStart,
+			String scheEnd) {
 		super();
-		this.projName = projName;
-		this.wbsCode = wbsCode;
-		this.wbsName = wbsName;
-		this.wbsConent = wbsConent;
-		this.wbsStartDate = wbsStartDate;
-		this.wbsEndDate = wbsEndDate;
+		this.scheId = scheId;
+		this.memId = memId;
+		this.scheName = scheName;
+		this.scheContent = scheContent;
+		this.scheStart = scheStart;
+		this.scheEnd = scheEnd;
 	}
 	
 	public ScheduleVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 }

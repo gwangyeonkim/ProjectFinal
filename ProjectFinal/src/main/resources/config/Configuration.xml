@@ -15,8 +15,8 @@
 		<typeAlias type="com.min.noti.vo.MemListVo" alias="MemListVo"/>
 
 
+		<typeAlias type="com.min.sche.vo.WbsViewVo" alias="WbsViewVo"/>
 		<typeAlias type="com.min.sche.vo.ScheduleVo" alias="ScheduleVo"/>
-
 
 
 		<typeAlias type="com.min.proj.vo.ProjectVo" alias="ProjVo"/>

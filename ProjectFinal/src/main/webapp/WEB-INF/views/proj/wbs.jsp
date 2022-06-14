@@ -107,11 +107,11 @@ function Wbs(){
 	grid.on('dblclick', (ev) => {
 			console.log('after change:', ev);
 			console.log('음 생각되로 되랑');
-			console.log(grid.getRow(1));
+// 			console.log(grid.getRow(1));
 			let jsonArr = grid.getRow(ev.rowKey);
-		    console.log('@@@@@@@');
-		    console.log(jsonArr.topName);
-		    console.log(ev.columnName);
+// 		    console.log('@@@@@@@');
+// 		    console.log(jsonArr.topName);
+// 		    console.log(ev.columnName);
 		    
 		    if(ev.columnName=='fbsName'){
 		    	$.ajax({
@@ -120,41 +120,41 @@ function Wbs(){
 					data:jsonArr,
 					success : function(result){
 						console.log('행추가 완료');
-						console.log(result);
+// 						console.log(result);
 						$.ajax({
 							url : "./selectWbs.do",
 							method : "POST",
 							success : function(result){
-								console.log(result);
-								console.log(result[0]);
-								
+								console.log('셀렉WBS');
+//		 						console.log(result);
+		 						console.log(result[0]);
 								grid.resetData(result);
 							}
 						});
 					}
 				});
 		    }
-		    if(ev.columnName=='topName'){
-		    	$.ajax({
-					url : "./newWbsRow.do",
-					method : "POST",
-					data:jsonArr,
-					success : function(result){
-						console.log('행추가 완료');
-						console.log(result);
-						$.ajax({
-							url : "./selectWbs.do",
-							method : "POST",
-							success : function(result){
-								console.log(result);
-								console.log(result[0]);
+// 		    if(ev.columnName=='topName'){
+// 		    	$.ajax({
+// 					url : "./newWbsRow.do",
+// 					method : "POST",
+// 					data:jsonArr,
+// 					success : function(result){
+// 						console.log('행추가 완료');
+// 						console.log(result);
+// 						$.ajax({
+// 							url : "./selectWbs.do",
+// 							method : "POST",
+// 							success : function(result){
+// 								console.log(result);
+// 								console.log(result[0]);
 								
-								grid.resetData(result);
-							}
-						});
-					}
-				});
-		    }
+// 								grid.resetData(result);
+// 							}
+// 						});
+// 					}
+// 				});
+// 		    }
 	    })
 	    
 	    grid.on('editingFinish', (ev) => {
