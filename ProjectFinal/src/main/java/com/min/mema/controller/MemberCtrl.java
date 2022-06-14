@@ -69,7 +69,7 @@ public class MemberCtrl {
 			session.setAttribute("loginVo", loginVo);
 //			model.addAttribute("loginVo", loginVo);
 		}
-			return "projectMain";
+			return "redirect:/projectMain.do";
 	}
 	
 	

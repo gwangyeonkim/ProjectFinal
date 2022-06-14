@@ -269,7 +269,7 @@ public class TemplateCtrl {
 	@ResponseBody
 	public Boolean newWbsRow(@RequestParam Map<String, String> jsonArr, HttpSession session) {
 		logger.info("TemplateCtrl newWbsRow {}",jsonArr);
-		JSONArray jAry = selectWbs(session);
+		
 		String rowKey = jsonArr.get("midId");
 		System.out.println(jsonArr.get("midId"));
 		System.out.println(jsonArr.get("wbsId"));
@@ -281,8 +281,11 @@ public class TemplateCtrl {
 			map.put("wbsManager", "");
 			map.put("wbsStartDate", "");
 			map.put("wbsEndDate", "");
-		wbsService.newWbs(map);
-
+//			TODO 10. 캐시때문인지 뭔지 모르겠는데. 자꾸 여러번 도는 현상이 나옴. 톰캣클린하고 돌리면 한번씩 정상작동하는데 중간에 여러번 돔.
+			
+//			wbsService.newWbs(map);
+			
+		
 		return true;
 	}
 	

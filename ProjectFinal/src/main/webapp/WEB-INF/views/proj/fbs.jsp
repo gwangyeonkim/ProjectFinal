@@ -30,7 +30,7 @@
                     <div class="modal-header" style="padding:35px 50px;">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4>
-                            수정이력
+                            작성이력
                         </h4>
                     </div>
                     <div class="modal-body" style="padding:40px 50px;">
@@ -216,6 +216,7 @@ function Fbs(){
 	}
 	
 	function finFbs(){
+		$("#fixModal").modal();
 		$.ajax({
 			url : "./finFbs.do",
 			method : "GET",
