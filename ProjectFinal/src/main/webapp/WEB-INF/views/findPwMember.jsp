@@ -18,26 +18,79 @@
 
 <form action="">
 <div class="containser">
-	 <div class="form-group">
+	<div class="form-group">
             <label for="userId">User id</label>
-            <input type="text" placeholder="Enter ID" id="memberId" name="memberId" required>
-<!--             <span class="checkIdComment">ID는 영문소문자 + 숫자로 작성가능하며  6자 이상 16자 이하로 설정해주시기 바랍니다.(공백불가)</span> -->
-            <input type="hidden" id="doubleCheckId" name="checkId"/>  
+            <input type="text" placeholder="Enter ID" id="memberId" name="memName" required>
+        </div>
+
+	 <div class="form-group">
+            <label for="userId">User name</label>
+            <input type="text" placeholder="Enter NAME" id="memName" name="memberId" required>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" class="email" type="text" name="memEmail"  required/>
+            <input id="memEmail" class="email" type="text" name="memEmail"  required/>
             <input type="button" id="checkEmailBtn" class="btn btn-info">임시비밀번호 보내기<br/><br>
-     		 <label for="validEmail">Validation Email</label>
-             <input id="validEmail" class="number" type="text" name="sm_email2" title="인증번호 입력" required/> -->
-             <span id="validEmailBtn" class="btn btn-info">이메일인증</span> -->
-             <span class="point checkEmailComment">임시비밀번호를 입력해주세요</span> -->
-             <input type="hidden" id="doubleCheckEmail"/>
-             <input type="button" value="로그인"> 
         </div>
 	</div>
 </form>
-
-
 </body>
+
+<script type="text/javascript">
+$("#checkEmailBtn").click(function() {
+	// 이메일 정규화 
+	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+	
+	var inputName = $("#memName").val();
+	var inputId = $("#memberId").val();
+	var inputEmail = $("#memEmail").val();
+	console.log(inputEmail);
+	var sendData= {
+		"memName": inputName,
+		"memberId" : inputId,
+		"memEmail" : inputEmail
+	}
+	
+	if(inputEmail != null){
+		
+	$.ajax({
+		 	contentType: "application/json; charset=utf-8",
+			type : "POST",
+			url : "./findPwMember.do",
+			cache : false,
+			dataType : "json",
+			data: JSON.stringify(sendData),
+			success : function(data) {
+			if (data == "error") {
+						console.log(data)
+// 						alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+// 						$("#email").attr("autofocus", true);
+// 						$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
+// 						$(".checkEmailComment").css("color", "red");
+					     } else {
+						alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
+						$("#validEmail").attr("disabled",false);
+						$("#validEmailBtn").css("display","inline-block");
+						$(".checkEmailComment").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
+						$(".checkEmailComment").css("color", "green");
+						code = data;
+						}
+					}
+		});
+	}else {
+		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+			$("#email").attr("autofocus", true);
+			$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
+			$(".checkEmailComment").css("color", "red");
+	}
+});
+
+</script>
+
+
+</script>
+
+
+
 </html>

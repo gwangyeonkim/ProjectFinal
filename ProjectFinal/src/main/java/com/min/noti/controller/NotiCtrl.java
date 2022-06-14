@@ -33,6 +33,7 @@ public class NotiCtrl {
 	@Autowired
 	private INotiService service;
 	
+
 	public String getMemId() {
 		return memId;
 	}
