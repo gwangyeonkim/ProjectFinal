@@ -2,7 +2,9 @@
 /* ----------header-------------- */
 
 .nav {
-    width: 100%-30px;
+	margin:0 auto;
+    width: 1370px;
+    height: 60px;
     background-color: rgb(49, 47, 47);
     padding: 15px;
     border-radius: 10px 10px 0 0;
@@ -62,7 +64,7 @@ body {
 .wrapper {
     margin: 0 auto;
     width: 1400px;
-    min-height: 800px;
+    min-height: 700px;
     background: white;
     border-radius: 10px 10px 10px 10px;
 }
@@ -74,7 +76,7 @@ body {
 
 #chatIcon {
     position: absolute;
-    right: 200px;
+    right: 130px;
     top: 7px;
     width:50px;
     height:50px;
@@ -83,7 +85,7 @@ body {
 
 #notiIcon {
     position: absolute;
-    right: 280px;
+    right: 220px;
     top: 7px;
     width:50px;
     height:50px;
@@ -92,13 +94,13 @@ body {
 
 #notiNonCheck{
     position: absolute;
-    right: 280px;
+    right: 220px;
     top: 1px;
 }
 
 #notiCount{
     position: absolute;
-    right: 289px;
+    right: 229px;
     top: 1px;
     font-size: 18px;
     font-weight: bold;
