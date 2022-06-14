@@ -36,7 +36,7 @@ public class NotiTest {
 		int i = sqlSession.insert("com.min.noti.mapper.NotiDaoImpl.notification_insert_privacy");
 		System.out.println("@@@@@@@@@@@" + i);
 	}
-//	@Test
+	@Test
 	public void notification_insert_team() {
 		int i = sqlSession.insert("com.min.noti.mapper.NotiDaoImpl.notification_insert_team");
 		System.out.println("@@@@@@@@@@@" + i);

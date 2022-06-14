@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,10 +28,20 @@ import com.min.noti.vo.NotiVo;
 @SessionAttributes("loginVo")
 public class NotiCtrl {
 	
+	String memId;
+	
 	@Autowired
 	private INotiService service;
 	
-	@RequestMapping(value= "/*.do", method = RequestMethod.GET)
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+	@RequestMapping(value= "/callHeader.do", method = RequestMethod.GET)
 	@ResponseBody
 	public String regist2(Model model, HttpSession session) {
 		//시간 구하기
@@ -48,9 +59,8 @@ public class NotiCtrl {
 //		service.notification_insert_privacy();
 //		service.notification_insert_team();
 		
-		System.out.println(session + "☆★☆★☆★☆★☆★☆★☆★꺄하하하하");
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("mem_id", "GD006");
+		map.put("memId", "GD001");
 		List<NotiVo> All_lists=service.notification_my_noti(map);
 		ArrayList<NotiVo> lists = new ArrayList<NotiVo>();
 		
@@ -99,7 +109,8 @@ public class NotiCtrl {
 	public String ArlimList(Model model) {
 		String s = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memId", "CH001");
+		System.out.println(getMemId() + "◆◆◆◆◆◆◆◆◆◆");
+		map.put("memId", getMemId());
 		List<NotiVo> AllLists=service.notification_my_noti(map);
 		model.addAttribute("AllLists",AllLists);	
 		return "ArlimList";
@@ -118,5 +129,55 @@ public class NotiCtrl {
 			map2.put("isc","실패");
 		}
 		return map2;
+	}
+	
+	@RequestMapping(value = "/callHeader.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> callHeader(@RequestParam Map<String, Object> map, Model model,  @RequestParam("notiId") String memId){
+		//시간 구하기
+		Calendar cal = Calendar.getInstance();
+		Date nowDate = new Date();
+		cal.setTime(nowDate);
+		cal.add(Calendar.DATE , 1);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd" );
+		String date2 = formatter.format(cal.getTime());
+		System.out.println("@@@@@@@@@@@@@@"+(String) date2);
+		Date currentDate = null;
+		Date notiDate = null;
+		
+		
+//		service.notification_insert_privacy();
+//		service.notification_insert_team();
+		
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("memId", memId);
+		setMemId(memId);
+		
+
+		List<NotiVo> All_lists=service.notification_my_noti(map2);
+		ArrayList<NotiVo> lists = new ArrayList<NotiVo>();
+		
+		for (int i = 0; i < All_lists.size(); i++) {	
+			String s = All_lists.get(i).getNotiRegdate();
+						try {
+							currentDate = formatter.parse(date2);
+							notiDate = formatter.parse(s);
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+			int compare = notiDate.compareTo( currentDate );
+			if(compare == 0) {
+				NotiVo nvo = All_lists.get(i);
+				lists.add(nvo);
+			}
+		}
+		System.out.println(lists);
+		
+		//알림 갯수
+		int count = service.notification_count(map2);
+		Map<String, Object> map3 = new HashMap<String, Object>();
+		map3.put("lists", lists);
+		map3.put("count", count);
+		return map3;
 	}
 }
