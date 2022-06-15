@@ -32,6 +32,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.min.sche.mapper.IScheduleDao;
 import com.min.sche.service.IScheduleService;
+import com.min.sche.vo.ScheduleVo;
 import com.min.sche.vo.WbsViewVo;
 
 
@@ -224,5 +225,30 @@ public class ScheduleCtrl {
 		return cnt;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/showPersonalSchedule.do",method=RequestMethod.POST,produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String showPersonalSchedule(@RequestParam String memberId) {
+		List<ScheduleVo> lists = service.pScheduleShow(memberId);
+		System.out.println("받아온 리스트@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(lists);
+		JSONArray arr = new JSONArray();//JSONArray[JSONObject] 형태로 만들어서 보내줌
+		for (int i = 0; i < lists.size(); i++) {
+			org.json.simple.JSONObject jsonObj = new org.json.simple.JSONObject();
+			jsonObj.put("id", lists.get(i).getScheId());
+			jsonObj.put("calendarId",lists.get(i).getMemId());
+			jsonObj.put("title", lists.get(i).getScheName());
+			jsonObj.put("category", "time");
+			jsonObj.put("start", lists.get(i).getScheStart());
+			jsonObj.put("end", lists.get(i).getScheEnd());
+			jsonObj.put("isAllDay","true");
+			jsonObj.put("isPrivate","false");
+			jsonObj.put("location", lists.get(i).getScheContent());
+			arr.add(jsonObj);
+		}
+		System.out.println(arr.toJSONString());
+		String result = arr.toJSONString();
+		return result;
+	}
 	
 }

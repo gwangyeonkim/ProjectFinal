@@ -156,6 +156,7 @@ function showCalendar(){
 		calendar.clear();
 		calInfo.innerText =calendar.getDate().getFullYear()+"년 "+(calendar.getDate().getMonth()+1)+"월";
 		holiday(calendar.getDate().getFullYear());
+		calendar.createSchedules(getPersonalSchedule());
 		calendar.render();
 		  /* calendar.createSchedules([
 		    {
@@ -184,7 +185,10 @@ function showCalendar(){
 					type:"POST",
 					data:scheduleInfo,
 					success: function(data){
-						console.log(data);
+						if(data==1){ // insert에 성공했다면
+							console.log(getPersonalSchedule());
+							calendar.createSchedules(getPersonalSchedule());
+						}
 					 },
 					error:function(){
 						alert("잘못된 요청입니다");
@@ -215,7 +219,7 @@ function showCalendar(){
 			 'clickMore':function(){
 				 console.log("날짜클릭");
 			 }
-		}); 
+		});
 		
 		
 		/* callSchedule(); */
@@ -266,6 +270,7 @@ function showCalendar(){
 						list:checkSelect()
 					},
 					success: function(data) {
+						console.log(data);
 						calendar.clear();
 						calendar.createSchedules(data);
 						holiday(calendar.getDate().getFullYear());
@@ -334,6 +339,23 @@ function callSchedule(nameList){
 		} 
 	}); 
 }
+function getPersonalSchedule(/* loginId 여기 로그인 정보가 담기고 밑에 data에 들어가야함 */){
+	let obj;
+	$.ajax({
+		url:"./showPersonalSchedule.do",
+		type:"POST",
+		async: false, //결과를 전역변수에 담기 위해 async를 false로 해주어야함
+		data:{memberId : "GD001"}, //여기에 loginInfo의 mem_id가 들어가야함
+		success:function(data){
+			obj = JSON.parse(data);
+		},
+		error:function(){
+			alert("잘못된 요청입니다");
+		}
+	});
+	return obj;
+}
+
 
 /* function callHoliday(year){
 	var result = "";
