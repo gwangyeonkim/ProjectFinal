@@ -18,13 +18,11 @@ pageEncoding="UTF-8"%>
 <script src="js/index.js"></script>
 </head>
 <body>
-	<div class="navb">
+	<a href="./modifyMember.do"> 회원정보 수정페이지 이동</a>
+	<div class="nav">
 		<a href="#" class="logo">Home</a>
 		<div class="dropdown">
-			<button class="dropbtn">Document</button>
-			<div class="dropdown-content">
-				<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-			</div>
+			<button class="dropbtn" onclick="location.href='./drop.do'">Document</button>
 		</div>
 		<div class="dropdown">
 			<button class="dropbtn">Calendar</button>
@@ -33,18 +31,19 @@ pageEncoding="UTF-8"%>
 			</div>
 		</div>
 		<div class="dropdown">
+
+			<button class="dropbtn" onclick="location.href='./moveProj.do'">Member</button>
+
 			<button class="dropbtn">Member</button>
 			<div class="dropdown-content">
 				<a href="./memberlistAll.do">회원조회하기</a> <a href="#">2</a> <a href="#">3</a>
 			</div>
+
 		</div>
 		<div class="dropdown">
-			<button class="dropbtn">Template</button>
-			<div class="dropdown-content">
-				<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
-			</div>
+			<button class="dropbtn" onclick="location.href='./moveFixhistory.do'">Template</button>
 		</div>
-		<div class="navb-right">
+		<div class="nav-right">
 			<a id="loginInfo"> ${loginVo.memberId}님 
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
@@ -104,7 +103,7 @@ pageEncoding="UTF-8"%>
 								body : arr[j].content +"의 마감이 하루 남았어요!"
 							});
 					notification.onclick = function() {
-						window.location.href = "https://www.navber.com";
+						window.location.href = "https://www.naver.com";
 					};
 				}
 			}, // success
