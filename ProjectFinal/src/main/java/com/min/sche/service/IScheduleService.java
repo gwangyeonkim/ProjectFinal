@@ -15,4 +15,7 @@ public interface IScheduleService {
 	public int pScheduleUpdate(Map<String, Object> map);
 	public int pScheduleDelete(Map<String, Object> map);
 	
+	public List<WbsViewVo> callIncomplete(String projName);
+	public List<WbsViewVo> callComplete(String projName);
+	
 }

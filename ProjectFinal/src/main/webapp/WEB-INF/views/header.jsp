@@ -19,14 +19,14 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 	<div class="navb">
-		<a href="#" class="logo">Home</a>
+		<a href="./scheboard.do" class="logo">Home</a>
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./drop.do'">Document</button>
 		</div>
 		<div class="dropdown">
 			<button class="dropbtn">Calendar</button>
 			<div class="dropdown-content">
-				<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
+				<a href="./calendar.do">Scheduler</a> <a href="#">Detail</a>
 			</div>
 		</div>
 		<div class="dropdown">
