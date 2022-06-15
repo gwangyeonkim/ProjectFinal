@@ -60,6 +60,22 @@ public class ScheduleDaoImpl implements IScheduleDao {
 		return cnt;
 	}
 
+	@Override
+	public List<WbsViewVo> callIncomplete(String projName) {
+		// TODO Auto-generated method stub
+		logger.info("미완료 일정 목록 출력");
+		List<WbsViewVo> lists = session.selectList(NS+"callIncomplete", projName);
+		return lists;
+	}
+
+	@Override
+	public List<WbsViewVo> callComplete(String projName) {
+		// TODO Auto-generated method stub
+		logger.info("완료 일정 목록 출력");
+		List<WbsViewVo> lists = session.selectList(NS+"callComplete", projName);
+		return lists;
+	}
+
 
 	
 

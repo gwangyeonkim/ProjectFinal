@@ -3,8 +3,8 @@
 
 .navb {
 	margin:0 auto;
-    width: 1370px;
-    height: 60px;
+    width: 1020px;
+    height: 50px;
     background-color: rgb(49, 47, 47);
     padding: 15px;
     border-radius: 10px 10px 0 0;
@@ -23,7 +23,7 @@
 }
 
 .navb a.logo {
-    font-size: 35px;
+    font-size: 25px;
     font-weight: bold;
 }
 
@@ -63,10 +63,10 @@ body {
 
 .wrapper {
     margin: 0 auto;
-    width: 1400px;
-    min-height: 700px;
+    width: 1050px;
+    height: 700px;
     background: white;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 0px 0px 10px 10px;
 }
 
 
@@ -76,31 +76,31 @@ body {
 
 #chatIcon {
     position: absolute;
-    right: 130px;
-    top: 7px;
-    width:50px;
-    height:50px;
+    right: 170px;
+    top: 10px;
+    width:40px;
+    height:40px;
     cursor: pointer;
 }
 
 #notiIcon {
     position: absolute;
-    right: 220px;
-    top: 7px;
-    width:50px;
-    height:50px;
+    right: 250px;
+    top: 10px;
+    width:40px;
+    height:40px;
     cursor: pointer;
 }
 
 #notiNonCheck{
     position: absolute;
-    right: 220px;
+    right: 246px;
     top: 1px;
 }
 
 #notiCount{
     position: absolute;
-    right: 229px;
+    right: 255px;
     top: 1px;
     font-size: 18px;
     font-weight: bold;
@@ -109,12 +109,12 @@ body {
 .dropdown {
     float: left;
     overflow: hidden;
-    margin-left: 50px;
+    margin-left: 30px;
   }
   
   .dropdown .dropbtn {
     margin-top: 12px;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     color: #f9f9f9;
     background-color: rgba(0,0,0,0);
@@ -154,33 +154,6 @@ body {
     display: block;
   }
 
-#checkList{
-	line-height:40px;
-	padding:20px;
-}
-
-#moveBox{
-	position:relative;
-}
-
-#prev{
-	position:absolute;
-	right:645px;
-	top:4px;
-}
-
-#next{
-	position:absolute;
-	right:438px;
-	top:4px;
-}
-
-#today{
-	position:absolute;
-	right:350px;
-	top:4px;
-	font-size: 24px;
-}
 
 
 
