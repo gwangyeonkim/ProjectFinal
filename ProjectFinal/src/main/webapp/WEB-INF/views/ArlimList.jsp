@@ -132,14 +132,14 @@ window.onload = function() {
 }
 
 function deleteArlim(notiId){
-// 	$.ajax({
-// 		url : "./deleteArlim.do",
-// 		type:"post",
-// 		data: "notiId="+notiId,
-// 		success:function(data){
-// 			alert(data.isc);
-// 		}
-// 	});
+	$.ajax({
+		url : "./deleteArlim.do",
+		type:"post",
+		data: "notiId="+notiId,
+		success:function(data){
+			alert(data.isc);
+		}
+	});
 	var container = document.getElementById("arlim_container");
 	var notiId2 = document.getElementById(notiId);
  	container.removeChild(notiId2);
