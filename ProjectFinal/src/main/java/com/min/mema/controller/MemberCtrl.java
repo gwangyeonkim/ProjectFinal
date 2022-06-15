@@ -185,14 +185,13 @@ public class MemberCtrl {
 //	}
 	
 	@RequestMapping(value = "/memberSelect.do" , method = RequestMethod.GET)
-	public String memberSelect(String id, String email, Model model) {
+	@ResponseBody
+	public MemberVo memberSelect(String id, String email, Model model) {
 		logger.info("MemberCtrl memberSelect 상세조회");
 		MemberVo vo = service.memberSelect(id);
-		model.addAttribute("vo", vo);
-//		String pVo = service.joinEmail(email);
-//	    email = service.joinEmail(email);
-//		model.addAttribute("pVo", pVo);
-		return "memberSelect";
+//		model.addAttribute("vo", vo);
+
+		return vo;
 	}
 	
 	
@@ -227,13 +226,12 @@ public class MemberCtrl {
 	public String inviteMember(MemberVo vo, HttpServletResponse resp) throws IOException {
 //		ProjectVo pVo = service.inviteMember(vo);
 		resp.setContentType("text/html; charset=UTF-8;");
+		System.out.println(vo+"+++++++++++++++++++++++++++");
 		PrintWriter out = resp.getWriter();
 		if (vo != null) {
 			out.print("<script>alert('메일을 보냈습니다.'); location.href='./memberlistAll.do'</script>");
 			out.flush();
 		}
-		
-		
 		System.out.println(vo);
 		return service.inviteMember(vo);
 	}

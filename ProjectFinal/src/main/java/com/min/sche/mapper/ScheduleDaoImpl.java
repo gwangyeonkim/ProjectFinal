@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.min.sche.vo.ScheduleVo;
 import com.min.sche.vo.WbsViewVo;
 
 @Repository
@@ -29,7 +30,13 @@ public class ScheduleDaoImpl implements IScheduleDao {
 		return lists;
 	}
 
-
+	@Override
+	public List<ScheduleVo> pScheduleShow(String mId) {
+		// TODO Auto-generated method stub
+		List<ScheduleVo> lists = session.selectList(NS+"pScheduleShow", mId);
+		return lists;
+	}
+	
 	@Override
 	public int pScheduleInsert(Map<String, Object> map) {
 		logger.info("개인 일정 생성");
@@ -52,6 +59,9 @@ public class ScheduleDaoImpl implements IScheduleDao {
 		int cnt = session.insert(NS+"pScheduleDelete",map);
 		return cnt;
 	}
+
+
+	
 
 
 	

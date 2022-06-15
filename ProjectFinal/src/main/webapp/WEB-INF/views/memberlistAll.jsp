@@ -13,12 +13,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
 </head>
+<%@include file="./header.jsp" %>
 <body>
 
-<h1>회원조회입니다.</h1>
 <%-- ${lists} --%>
-<div class="conatainer" style="margin-left: 15%; width: 50%" >
-<table id="myTable" class="cell-border"> 
+	<div class="wrapper">
+<!-- 	<h1 style="text-align: center;">회원조회입니다.</h1> -->
+	<table id="myTable" class="cell-border"> 
 		<thead>
 			<tr>
 				<td>아이디</td>
@@ -29,7 +30,7 @@
 		<tbody>
 			<c:forEach var="mVo" items="${lists}"  varStatus="vs">
 			<tr>
-				<td><a href="./memberSelect.do?id=${mVo.memberId}">${mVo.memberId}</a></td>
+				<td><a href="#" onclick="memberSelect('${mVo.memberId}')">${mVo.memberId}</a></td>
 				<td>${mVo.memName}</td>
 				<td>${mVo.memEmail}</td>
 			</tr>
@@ -37,11 +38,63 @@
 		</tbody>
 		</table>
 		</div>
+		
+		 <!-- ----------------- 모달 띄우기 ------------------ -->
+		<div class="modal fade" id="loginModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+<!--                         <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                        <h4>
+                            <span class="glyphicon glyphicon-envelope">메일보내기</span>
+                        </h4>
+                    </div>
+                <div class="modal-content">
+                    <div class="modal-header" style="padding:35px 50px;">
+                    <div class="modal-body" style="padding:40px 50px;">
+                      <form action="./inviteMember.do" method="post" role="form">  
+                            <div class="form-group">
+					   			<input type="text" id="email" class="form-control" name="memEmail" readonly="readonly">
+					   			<input type="text" id="id" class="form-control" name="memId" readonly="readonly">
+                                <input type="hidden" class="form-control" name="memberId" value="${loginVo.memberId}">
+                            </div>
+                            <input type="submit" class="btn btn-success btn-block"  value="전송"> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
 </body>
 
-<script type="text/javascript">
-  
 
+
+<script type="text/javascript">
+
+
+
+function memberSelect(id){
+	console.log(id);
+	$.ajax({
+		url : "./memberSelect.do",
+		data : {id:id},
+		type : "get",
+		success:function(data){
+			console.log(data);	
+			$("#email").val(data.memEmail)
+			$("#id").val(data.memName)
+		},
+		error:function(data){
+			alert("?????????????????");
+			console.log("오류다!!"+data.status);	
+		}
+	})
+	  $("#loginModal").modal();
+	  
+	
+}
 
 
 $(document).ready( function () {

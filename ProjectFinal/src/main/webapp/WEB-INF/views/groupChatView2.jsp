@@ -342,7 +342,11 @@ $(document).ready(function(){
 		$(".write_msg").focus();
 		
 
+
 		ws = new WebSocket("ws://localhost:8080/ProjectFinal/wsChatGr.do");
+
+
+
 
 		ws.onopen = function(){
 			console.log("nickName : " + nick);

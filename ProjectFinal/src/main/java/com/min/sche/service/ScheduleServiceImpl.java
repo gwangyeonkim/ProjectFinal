@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.min.sche.mapper.IScheduleDao;
+import com.min.sche.vo.ScheduleVo;
 import com.min.sche.vo.WbsViewVo;
 
 @Service
@@ -19,6 +20,12 @@ public class ScheduleServiceImpl implements IScheduleService {
 	public List<WbsViewVo> getTeamSchedule(List<String> userList) {
 		// TODO Auto-generated method stub
 		return dao.getTeamSchedule(userList);
+	}
+	
+	@Override
+	public List<ScheduleVo> pScheduleShow(String mId) {
+		// TODO Auto-generated method stub
+		return dao.pScheduleShow(mId);
 	}
 
 	@Override
@@ -38,6 +45,8 @@ public class ScheduleServiceImpl implements IScheduleService {
 		// TODO Auto-generated method stub
 		return dao.pScheduleDelete(map);
 	}
+
+	
 
 	
 
