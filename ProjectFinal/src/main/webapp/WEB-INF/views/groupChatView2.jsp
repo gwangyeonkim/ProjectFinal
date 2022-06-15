@@ -342,7 +342,7 @@ $(document).ready(function(){
 		$(".write_msg").focus();
 		
 
-		ws = new WebSocket("ws://192.168.7.190:8080/ProjectFinal/wsChatGr.do");
+		ws = new WebSocket("ws://d894-211-197-28-137.ngrok.io/ProjectFinal/wsChatGr.do");
 
 		ws.onopen = function(){
 			console.log("nickName : " + nick);
