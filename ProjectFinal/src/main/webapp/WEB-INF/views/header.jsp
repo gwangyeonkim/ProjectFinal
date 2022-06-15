@@ -35,7 +35,7 @@
 		<div class="dropdown">
 			<button class="dropbtn">Member</button>
 			<div class="dropdown-content">
-				<a href="#">1</a> <a href="#">2</a> <a href="#">3</a>
+				<a href="./memberlistAll.do">회원조회하기</a> <a href="#">2</a> <a href="#">3</a>
 			</div>
 		</div>
 		<div class="dropdown">
