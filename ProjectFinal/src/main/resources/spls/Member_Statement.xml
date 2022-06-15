@@ -36,11 +36,11 @@
 	
 	<select id="memberlistAll" resultType="MemVo"> 
 		SELECT MEMBER_ID , MEM_NAME ,MEM_EMAIL 
-	FROM MEMBERLIST m 
+		FROM MEMBERLIST m 
 		WHERE MEMBER_ID IN (SELECT MEMBER_ID  
-        FROM MEMBERLIST m
-        MINUS 
-        SELECT MEM_ID FROM PROJMEMLIST p)
+						        FROM MEMBERLIST m
+						        MINUS 
+						        SELECT MEM_ID FROM PROJMEMLIST p)
 	</select>
 	
 	<select id="memberSelect" parameterType="java.lang.String" resultType="MemVo">
