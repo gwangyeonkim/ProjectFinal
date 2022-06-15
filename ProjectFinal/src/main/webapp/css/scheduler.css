@@ -62,8 +62,8 @@ body {
 
 .wrapper {
     margin: 0 auto;
-    width: 1400px;
-    min-height: 800px;
+    min-width: 950px;
+    min-height: 720px;
     background: white;
     border-radius: 10px 10px 10px 10px;
 }
