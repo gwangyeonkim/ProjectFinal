@@ -48,124 +48,61 @@
 <body>
 <div class="home">
             <form>
-                <table id="joinTable">
-                    <tr>
-                        <td colspan="12">
-                            <h2>회원가입</h2>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>아이디</h3>
-                        </td>
-                        <td colspan="5">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="2">
-                            <h3>이름</h3>
-                        </td>
-                        <td colspan="3">
-                            <input type="text" name="" id=""
-                            placeholder="한글 2자 이상">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="12">
-                            <h3>아이디 정규화</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>비밀번호</h3>
-                        </td>
-                        <td colspan="3">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="2">
-                            <h3>비밀번호 확인</h3>
-                        </td>
-                        <td colspan="3">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="2">
-                            <h3>일치여부</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>이메일</h3>
-                        </td>
-                        <td colspan="8">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="2">
-                            <input type="button" value="보내기">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>인증번호 확인</h3>
-                        </td>
-                        <td colspan="4">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="2">
-                            <input type="button" value="확인">
-                        </td>
-                        <td colspan="4">
-                            <h3>인증번호 확인 여부</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>생년월일</h3>
-                        </td>
-                        <td colspan="10">
-                            <input type="text" name="" id="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>주소</h3>
-                        </td>
-                        <td colspan="5">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="5">
-                            <input type="text" name="" id="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>폰번호</h3>
-                        </td>
-                        <td colspan="6">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="4">
-                            <input type="button" value="인증번호 확인">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>폰인증</h3>
-                        </td>
-                        <td colspan="3">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="3">
-                            <input type="button" value="인증번호 확인">
-                        </td>
-                        <td colspan="4">
-                            <h3>인증번호 확인 여부</h3>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="12">
-                            <input type="button" value="회원가입">
-                        </td>
-                    </tr>
-                </table>
+               <div class="textForm">
+        	<div class="form-group">
+            <label for="userId" name="id">아이디</label>
+            <input type="text" placeholder="Enter ID" class="comm" id="memberId" name="memberId" required> <br>
+            <span class="checkIdComment">ID는 영문소문자 + 숫자로 작성가능하며  6자 이상 16자 이하로 설정해주시기 바랍니다.(공백불가)</span>
+            <input type="hidden" class="form-control" id="doubleCheckId" name="checkId"/>  
+        </div>
+        <div class="form-group">
+            <label for="username">이름</label>
+            <input type="text" placeholder="Enter name" class="comm" id="name" name="memName" required> <br>
+            <span class="point checkNameComment">이름은 2자 이상 적어주세요.(한글만)</span>
+            <input type="hidden" id="doubleCheckName"/>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="Password" placeholder="Enter password" class="comm" id="memPw" name="memPw" required>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호 확인</label>
+            <input type="Password" placeholder="Enter password" class="comm" id="validPassword" required>
+            <span class="point checkPwdComment"></span>
+            <input type="hidden" id="doubleCheckPwd"/>
+        </div>
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input id="email" class="comm" type="text" name="memEmail"  required/>
+            <input type="button" id="checkEmailBtn" class="btn" value="인증번호 보내기"><br>
+     		 <label for="validEmail">인증번호 확인</label>
+             <input id="validEmail" class="comm" type="text" name="sm_email2" title="인증번호 입력" required/> 
+             <span id="validEmailBtn" class="btn btn-info">이메일인증</span>
+             <span class="point checkEmailComment">이메일 입력후 인증번호 보내기를 해주십시오.</span> 
+             <input type="hidden" id="doubleCheckEmail"/> 
+        </div>
+        <div class="form-group">
+            <label for="datepicker">생년월일</label>
+            <input type="text" placeholder="Enter birthDay" class="comm" id="datepicker" name="memBirth">
+        </div>
+        
+        <div class="form-group">
+            <label for="username">주소</label>
+            <input type="text" class="comm" id="address_kakao" name="memAddr" readonly />
+            <input type="text" class="comm" name="address_detail" />
+        </div>
+        
+        <div class="form-group">
+              <label for="Hp">H.P</label>
+            <input id="Hp" class="comm" type="text" name="memPhone"  required />
+            <input type="button" id="checkHpBtn" class="btn" value="인증번호 보내기"><br/>
+          <label for="validHp">H.P 인증하기</label>
+            <input id="validHp" class="comm" type="text" name="sm_Hp2" title="인증번호 입력" required/>
+            <span id="validHpBtn" class="btn btn-info">핸드폰인증</span>
+            <span class="point checkHpComment">핸드폰번호 인증번호 보내기를 해주십시오.</span>
+            <input type="hidden" id="doubleCheckHp"/>
+        </div>
+       <input type="submit" value="Sign up" class="btn">
             </form>
         </div>
    </body>

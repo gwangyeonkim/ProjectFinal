@@ -167,12 +167,13 @@ public class MemberCtrl {
 	
 	
 	@RequestMapping(value = "/memberlistAll.do" , method = RequestMethod.GET)
-	public String memberlistAll(MemberVo vo, Model model) {
-		logger.info("MemberCtrl memberlistAll 이동");
+	public String memberlistAll(MemberVo vo,HttpSession session) {
+		logger.info("MemberCtrl memberlistAll 이동 {}",vo);
 		List<MemberVo> lists = service.memberlistAll(vo);
 		System.out.println(lists);
-		model.addAttribute("lists", lists);
-		return "memberlistAll";
+//		model.addAttribute("lists", lists);
+		session.setAttribute("lists", lists);
+		return "redirect:/moveProj.do";
 	}
 	
 //	@RequestMapping(value = "/memberlistAll.do" , method = RequestMethod.POST)

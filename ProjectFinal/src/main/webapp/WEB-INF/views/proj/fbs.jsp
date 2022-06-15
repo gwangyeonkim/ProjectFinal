@@ -14,9 +14,9 @@
 <title>FBS</title>
 <%@ include file="../header.jsp" %>
 <style type="text/css">
-	.nav {
-	width:1400px;
-	height: 80px;
+	.navb {
+	width : 1400px;
+	height: 90px;
 	}
 </style>
 </head>
@@ -238,8 +238,6 @@ function Fbs(){
 		});
      	
     }
-		
-	
 </script>
 
 </html>

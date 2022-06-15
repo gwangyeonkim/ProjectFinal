@@ -18,7 +18,6 @@
 
 <%-- ${lists} --%>
 	<div class="wrapper">
-<!-- 	<h1 style="text-align: center;">회원조회입니다.</h1> -->
 	<table id="myTable" class="cell-border"> 
 		<thead>
 			<tr>
