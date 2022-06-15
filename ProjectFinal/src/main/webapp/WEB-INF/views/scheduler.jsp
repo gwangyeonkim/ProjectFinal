@@ -46,18 +46,16 @@
 
 .content{
     display: grid;
-    width: 100%-40px;
-    height:700px;
+    width: 1000px;
+    height:300px;
     grid-template-columns: 15% 85%;
-    grid-template-rows: 1fr;
-    gap:10px;
-    padding: 20px;
+    gap:20px;
+    padding: 10px;
 }
 
 /* 안에 div 설정임 */
 .content > div {
     background-color: rgb(221, 221, 221);
-    border-radius: 20px;
     font-size: 20px;
     padding: 8px;
 }
@@ -71,8 +69,8 @@
 }
 
 .newSche {
-    background-color: brown;
-    font-size: 35px;
+    background-color: white;
+    font-size: 30px;
     font-weight: bold;
     transition: 0.5s;
 }
@@ -80,8 +78,34 @@
 .newSche:hover{
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
-    transition-delay: 0.5;
     cursor: pointer;
+}
+
+#checkList{
+	line-height:30px;
+}
+
+#moveBox{
+	position:relative;
+}
+
+#prev{
+	position:absolute;
+	right:495px;
+	top:4px;
+}
+
+#next{
+	position:absolute;
+	right:278px;
+	top:4px;
+}
+
+#today{
+	position:absolute;
+	right:190px;
+	top:4px;
+	font-size: 24px;
 }
 
 </style>
@@ -144,9 +168,8 @@ function showCalendar(){
 		  defaultView: 'month',
 		  template: templates,
 		  useCreationPopup: true,
-		  useDetailPopup: true
+		  useDetailPopup: true,
 		});
-	
 	calendar.setCalendarColor('군계일학', { //군계일학 말고 calendarId가 들어가야함
 	    color: '#ffffff',//글자 색
 	    bgColor: '#585858',//배경 색
@@ -486,7 +509,7 @@ function makeTime(info){
 					</button>
 					<button id="today">Today</button>
 				</div>
-				<div id="calendar" style="width: 1000px; height: 600px; display:inline-block;">
+				<div id="calendar" style="width: 100%; height: 600px; display:inline-block;">
 				</div>
 			</div>
 		</div>

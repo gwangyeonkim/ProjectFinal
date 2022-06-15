@@ -252,4 +252,6 @@ public class ScheduleCtrl {
 		return result;
 	}
 	
+	//완성, 미완성 일정 목록 불러오는 메소드
+	
 }

@@ -46,6 +46,18 @@ public class ScheduleServiceImpl implements IScheduleService {
 		return dao.pScheduleDelete(map);
 	}
 
+	@Override
+	public List<WbsViewVo> callIncomplete(String projName) {
+		// TODO Auto-generated method stub
+		return dao.callIncomplete(projName);
+	}
+
+	@Override
+	public List<WbsViewVo> callComplete(String projName) {
+		// TODO Auto-generated method stub
+		return dao.callComplete(projName);
+	}
+
 	
 
 	
