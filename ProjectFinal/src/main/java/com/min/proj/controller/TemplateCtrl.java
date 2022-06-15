@@ -1,12 +1,9 @@
 package com.min.proj.controller;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.json.JsonArray;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -15,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +47,7 @@ public class TemplateCtrl {
 		logger.info("TemplateCtrl selectFbs");
 		Map<String, String> map = new HashMap<String, String>();
 //		System.out.println((String)session.getAttribute("userId"));
+		
 		// TODO 1. 변경점 1
 //		map.put("memId", (String)session.getAttribute("userId"));
 		map.put("memId", "CH001");
@@ -119,7 +116,8 @@ public class TemplateCtrl {
 						topService.deleteTopCategory((String)jsonArr.get("topId"));
 						Map<String, String> newFbsMap = new HashMap<String, String>();
 						//TODO 3 projName 세션으로
-						newFbsMap.put("projName", "자두과");
+//						newFbsMap.put("projName", "자두과");
+						newFbsMap.put("projName", (String)session.getAttribute("projName"));
 						newFbsMap.put("topName", jsonArr.get("topName"));
 						newFbsMap.put("fbsName", jsonArr.get("fbsName"));
 						newFbsMap.put("fbsCode", jsonArr.get("fbsCode"));
@@ -145,7 +143,8 @@ public class TemplateCtrl {
 						System.out.println("checkpoint 4");
 						Map<String, String> newFbsMap = new HashMap<String, String>();
 						//TODO 3 projName 세션으로
-						newFbsMap.put("projName", "자두과");
+//						newFbsMap.put("projName", "자두과");
+						newFbsMap.put("projName", (String)session.getAttribute("projName"));
 						newFbsMap.put("topName", jsonArr.get("topName"));
 						newFbsMap.put("fbsName", jsonArr.get("fbsName"));
 						newFbsMap.put("fbsCode", jsonArr.get("fbsCode"));
@@ -215,6 +214,7 @@ public class TemplateCtrl {
 
 		// TODO 5. 변경점 projName
 		topService.deleteNullTopCategory("자두과");
+//		topService.deleteNullTopCategory((String)session.getAttribute("projName"));
 		
 		return true;
 	}
@@ -266,8 +266,7 @@ public class TemplateCtrl {
 //	wbs이름,wbsContent wbs 내용,wbsManager wbs담당자
 //	,wbsStartDate wbs시작일,wbsFinDate wbs종료일
 	@RequestMapping(value = "/newWbsRow.do", method = RequestMethod.POST)
-	@ResponseBody
-	public Boolean newWbsRow(@RequestParam Map<String, String> jsonArr, HttpSession session) {
+	public String newWbsRow(@RequestParam Map<String, String> jsonArr, HttpSession session) {
 		logger.info("TemplateCtrl newWbsRow {}",jsonArr);
 		
 		String rowKey = jsonArr.get("midId");
@@ -282,11 +281,9 @@ public class TemplateCtrl {
 			map.put("wbsStartDate", "");
 			map.put("wbsEndDate", "");
 //			TODO 10. 캐시때문인지 뭔지 모르겠는데. 자꾸 여러번 도는 현상이 나옴. 톰캣클린하고 돌리면 한번씩 정상작동하는데 중간에 여러번 돔.
+			wbsService.newWbs(map);
 			
-//			wbsService.newWbs(map);
-			
-		
-		return true;
+		return "redirect:/wbs.do";
 	}
 	
 	@RequestMapping(value = "/fixWbs.do", method = RequestMethod.POST)

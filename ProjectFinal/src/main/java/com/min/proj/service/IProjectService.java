@@ -44,7 +44,7 @@ public interface IProjectService {
 	/**
 	 * 프로젝트에 할당 되어 있는 키 값을 확인하는 메소드
 	 * @param memId 사용자 아이디
-	 * @return
+	 * @return ProjectVo
 	 */
 	public ProjectVo chkProjKey(String memId);
 	

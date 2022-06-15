@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.min.mema.vo.MemberVo;
 import com.min.proj.service.IDocumentService;
 import com.min.proj.service.IProjMemListService;
 import com.min.proj.service.IProjectService;
@@ -43,23 +44,30 @@ public class ProjectCtrl {
 	
 	@RequestMapping(value = "/sessionTest.do")
 	@ResponseBody
-	public String sessionTest(HttpSession session) {
+	public MemberVo sessionTest(HttpSession session) {
 		String id= (String)session.getAttribute("userId");
 		String projName= (String)session.getAttribute("projName");
 		String user = (String)session.getAttribute("userId");
 		
-		return projName+user;
+		MemberVo test =(MemberVo) session.getAttribute("loginVo");
+		System.out.println(test.getMemberId());
+		return test;
 	}
 
 	// memId = 로그인세션에 담겨있는 아이디로 변경
 	@RequestMapping(value = "/project.do",method = RequestMethod.GET)
 	public String project(String memId,HttpSession session) {
 		logger.info("ProjectCtrl project {}",memId);
-		session.setAttribute("userId", memId);
-		ProjMemListVo pmVo = projMemService.chkProjMem(memId);
+		//TODO 12. 변경
+//		session.setAttribute("userId", memId);
+		MemberVo test =(MemberVo) session.getAttribute("loginVo");
+		session.setAttribute("userId", test.getMemberId());
+//		ProjMemListVo pmVo = projMemService.chkProjMem(memId);
+		ProjMemListVo pmVo = projMemService.chkProjMem(test.getMemberId());
+		
 		if(pmVo==null) {
 			session.setAttribute("projName","");
-			return "/proj/selectProj";
+			return "redirect:/selectProj.do";
 		}
 		session.setAttribute("projName",pmVo.getProjName());
 		return "/proj/project";
@@ -68,6 +76,7 @@ public class ProjectCtrl {
 	@RequestMapping(value = "/newProj.do",method = RequestMethod.POST)
 	public String newProj(String projName,HttpSession session,HttpServletResponse response,Model model) throws IOException {
 		logger.info("ProjectCtrl newProj {}",projName);
+		response.setContentType("text/html; charset=UTF-8;");
 		int cnt = projService.chkProj(projName);
 		if(cnt==0) {
 			Map<String, String> map = new HashMap<String, String>();
@@ -91,12 +100,14 @@ public class ProjectCtrl {
 			projService.saveRandomKey(map);
 			docService.newDoc(projName);
 			model.addAttribute("projName", projName);
-			return "/proj/project";
+			return "redirect:/project.do";
 			
 		}else {
+			System.out.println("여기 들어옴?");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('중복된 프로젝트 명입니다.'); location.href='./selectProj.do'</script>");
-			return "/proj/selectProj";
+			out.flush();
+			return "redirect:/selectProj.do";
 		}
 		
 	}
@@ -105,18 +116,25 @@ public class ProjectCtrl {
 	public String selectProj() {
 		logger.info("ProjectCtrl selectProj {}");
 
-		return "/proj/project";
+		return "/proj/selectProj";
 	}
 	
 	@RequestMapping(value = "/joinProj.do",method = RequestMethod.POST)
-	public String joinProj(String randomKey,HttpSession session) {
+	public String joinProj(String randomKey,HttpSession session, HttpServletResponse response) throws IOException {
 		logger.info("ProjectCtrl joinProj {}",randomKey);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("memId", (String)session.getAttribute("userId"));
 		map.put("projToken", randomKey);
-		projMemService.joinProj(map);
+		int cnt = projMemService.joinProj(map);
+		if(cnt==1) {
+			System.out.println("!@!@!@!@!@!@!@!@!@!@");
+			return "redirect:/project.do";
+		}else {
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('초대코드가 유효하지 않습니다.'); location.href='./selectProj.do'</script>");
+			return "redirect:/selectProj.do";
+		}
 		
-		return "/proj/project";
 	}
 	
 	@RequestMapping(value = "/exitProj.do",method = RequestMethod.GET)
