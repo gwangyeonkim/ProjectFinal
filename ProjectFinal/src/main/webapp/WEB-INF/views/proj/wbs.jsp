@@ -9,13 +9,22 @@
 <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-<title>FBS</title>
+<title>WBS</title>
+<%@ include file="../header.jsp" %>
 </head>
 <body>
-<div id="grid"></div> 
-<button onclick="Wbs()">조회</button>
-<button onclick="finWbs()">완료</button>
-<h1>행추가는 대분류 혹은 중분류 다블클릭</h1>
+	<div class="wrapper">
+		<div class="content" style="width: 1400px;">
+			<div id="grid" style="width: 890px;">
+				<button onclick="Wbs()">조회</button>
+				<button onclick="finWbs()">완료</button>
+			</div>
+		</div>
+	</div>
+		<button onclick="location.href='./fbs.do'">FBS 이동</button>
+	<button onclick="location.href='./wbs.do'">WBS 이동</button>
+	<button onclick="location.href='./moveFixhistory.do'">작성이력 이동</button>
+	<h1>행추가는 대분류 혹은 중분류 다블클릭</h1>
 <script type="text/javascript">
 var Grid = tui.Grid;
 var el;
@@ -121,40 +130,20 @@ function Wbs(){
 					success : function(result){
 						console.log('행추가 완료');
 // 						console.log(result);
+					}
+				});
+// 								location.href='./wbs.do';
 						$.ajax({
 							url : "./selectWbs.do",
 							method : "POST",
 							success : function(result){
 								console.log('셀렉WBS');
 //		 						console.log(result);
-		 						console.log(result[0]);
+// 		 						console.log(result[0]);
 								grid.resetData(result);
 							}
 						});
-					}
-				});
 		    }
-// 		    if(ev.columnName=='topName'){
-// 		    	$.ajax({
-// 					url : "./newWbsRow.do",
-// 					method : "POST",
-// 					data:jsonArr,
-// 					success : function(result){
-// 						console.log('행추가 완료');
-// 						console.log(result);
-// 						$.ajax({
-// 							url : "./selectWbs.do",
-// 							method : "POST",
-// 							success : function(result){
-// 								console.log(result);
-// 								console.log(result[0]);
-								
-// 								grid.resetData(result);
-// 							}
-// 						});
-// 					}
-// 				});
-// 		    }
 	    })
 	    
 	    grid.on('editingFinish', (ev) => {

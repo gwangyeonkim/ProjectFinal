@@ -6,23 +6,34 @@
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" href="./css/tui-grid.css"> -->
 <!-- <script type="text/javascript" src="./js/tui-grid.js"></script> -->
-<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<%@ include file="../header.jsp" %>
+<link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <title>FBS</title>
+<%@ include file="../header.jsp" %>
+<style type="text/css">
+	.nav {
+	width:1400px;
+	height: 80px;
+	}
+</style>
 </head>
 <body>
-<div id="grid"></div> 
-<button onclick="Fbs()">조회</button>
-<button onclick="newRow()">행추가</button>
-<button onclick="finFbs()">완료</button>
-<button id="fixBtn">모달열기</button>
-
-
+	<div class="wrapper">
+		<div class="content" style="width: 1400px;">
+			<div id="grid" style="width: 890px;">
+				<button onclick="Fbs()">조회</button>
+				<button onclick="newRow()">행추가</button>
+				<button onclick="finFbs()">완료</button>
+			</div>
+		</div>
+	</div>
+	<button onclick="location.href='./fbs.do'">FBS 이동</button>
+	<button onclick="location.href='./wbs.do'">WBS 이동</button>
+	<button onclick="location.href='./moveFixhistory.do'">작성이력 이동</button>
+<!-- <button id="fixBtn">모달열기</button> -->
 <div class="modal fade" id="fixModal" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->

@@ -11,8 +11,16 @@
 </head>
 <%@ include file="../header.jsp" %>
 <body>
-<div id="grid"></div>
+<div class="wrapper">
+<div class="content" style="width: 1400px;">
+<div id="grid" style="width: 890px;">
 <button onclick="selectFixhistory()">조회</button>
+</div>
+</div>
+</div>
+	<button onclick="location.href='./fbs.do'">FBS 이동</button>
+	<button onclick="location.href='./wbs.do'">WBS 이동</button>
+	<button onclick="location.href='./moveFixhistory.do'">작성이력 이동</button>
 </body>
 <script type="text/javascript">
 var Grid = tui.Grid;
