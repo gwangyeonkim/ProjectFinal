@@ -73,7 +73,7 @@ public class NotiCtrl {
 	public Map<String, Object> deleteArlim(@RequestParam Map<String, Object> map){
 		Map<String,Object> map1 = new HashMap<String, Object>();
 		Map<String,Object> map2 = new HashMap<String, Object>();
-		System.out.println("@@@@@@@@@@@"+map.get("notiId"));
+//		System.out.println("@@@@@@@@@@@"+map.get("notiId"));
 		map1.put("notiId", map.get("notiId") );
 		int n = service.notification_delete(map1);
 		if(n>0) {
@@ -94,15 +94,15 @@ public class NotiCtrl {
 		cal.add(Calendar.DATE , 1);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd" );
 		String date2 = formatter.format(cal.getTime());
-		System.out.println("@@@@@@@@@@@@@@"+(String) date2);
+//		System.out.println("@@@@@@@@@@@@@@"+(String) date2);
 		Date currentDate = null;
 		Date notiDate = null;
 		
 		//노티
 		int noti_privacy = service.notification_insert_privacy();
 		int noti_team = service.notification_insert_team();
-		System.out.println(noti_privacy  + "◆◆◆◆◆◆◆◆◆◆");
-		System.out.println(noti_team  + "◆◆◆◆◆◆◆◆◆◆");
+//		System.out.println(noti_privacy  + "◆◆◆◆◆◆◆◆◆◆");
+//		System.out.println(noti_team  + "◆◆◆◆◆◆◆◆◆◆");
 
 		
 		Map<String, Object> map2 = new HashMap<String, Object>();

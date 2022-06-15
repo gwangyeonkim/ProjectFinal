@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./css/scheduleBoard.css">
+<link rel="stylesheet" href="./css/projectMain.css">
 <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
 <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -124,7 +124,7 @@ function showTable(){
 </script>
 		<%@ include file="./header.jsp" %>
 <body>
-	
+	<div class="wrapper">
 		<div class="content">
 			<!--여기 넣으면 됨-->
 			<div id="cont1">
@@ -137,7 +137,7 @@ function showTable(){
 				<div id="barChart"></div>
 			</div>
 		</div>
-
+	</div>
 
 </body>
 </html>

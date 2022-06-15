@@ -53,9 +53,9 @@ public class SocketController  implements ServletConfigAware{
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put ("memId", mem_id);
-		System.out.println(mem_id +"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//		System.out.println(mem_id +"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		MemListVo mvo = service.chatting_groupName(map);
-		System.out.println(mvo.projName+ "9999999999999999999999999999999");
+//		System.out.println(mvo.projName+ "9999999999999999999999999999999");
 		
 		
 		session.setAttribute("mem_id", mem_id);
@@ -93,7 +93,7 @@ public class SocketController  implements ServletConfigAware{
 		 HashMap<String, String> removeSession = chatList;
 		 session.getAttribute("mem_id");
 		 System.out.println("갱신 후 접속 회원 리스트 chatList☆★☆★☆★ : "+ chatList);
-		 System.out.println("session ☆★☆★☆★" +session.getAttribute("mem_id"));
+//		 System.out.println("session ☆★☆★☆★" +session.getAttribute("mem_id"));
 		 servletContext.setAttribute("removeSession", removeSession);
 		 
 	}
