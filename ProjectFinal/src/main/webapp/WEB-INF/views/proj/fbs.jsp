@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div class="wrapper">
-		<div class="content"  style="width: 1400px;">
+		<div class="content" style="width: 1400px;">
 			<div id="grid" style="width: 890px;">
 				<button onclick="Fbs()">조회</button>
 				<button onclick="newRow()">행추가</button>

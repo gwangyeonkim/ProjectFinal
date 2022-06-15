@@ -70,7 +70,7 @@ public class ProjectCtrl {
 			return "redirect:/selectProj.do";
 		}
 		session.setAttribute("projName",pmVo.getProjName());
-		return "/proj/project";
+		return "redirect:/scheboard.do";
 	}
 	
 	@RequestMapping(value = "/newProj.do",method = RequestMethod.POST)

@@ -19,7 +19,7 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 	<a href="./modifyMember.do"> 회원정보 수정페이지 이동</a>
-	<div class="nav">
+	<div class="navb">
 		<a href="#" class="logo">Home</a>
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./drop.do'">Document</button>
@@ -31,19 +31,15 @@ pageEncoding="UTF-8"%>
 			</div>
 		</div>
 		<div class="dropdown">
-
 			<button class="dropbtn" onclick="location.href='./moveProj.do'">Member</button>
-
-			<button class="dropbtn">Member</button>
 			<div class="dropdown-content">
 				<a href="./memberlistAll.do">회원조회하기</a> <a href="#">2</a> <a href="#">3</a>
 			</div>
-
 		</div>
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./moveFixhistory.do'">Template</button>
 		</div>
-		<div class="nav-right">
+		<div class="navb-right">
 			<a id="loginInfo"> ${loginVo.memberId}님 
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
