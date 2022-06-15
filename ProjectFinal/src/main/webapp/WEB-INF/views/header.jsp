@@ -31,7 +31,7 @@ pageEncoding="UTF-8"%>
 			</div>
 		</div>
 		<div class="dropdown">
-			<button class="dropbtn" onclick="location.href='./moveProj.do'">Member</button>
+			<button class="dropbtn" onclick="location.href='./memberlistAll.do'">Member</button>
 			<div class="dropdown-content">
 				<a href="./memberlistAll.do">회원조회하기</a> <a href="#">2</a> <a href="#">3</a>
 			</div>
