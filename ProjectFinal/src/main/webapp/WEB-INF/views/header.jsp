@@ -18,7 +18,6 @@ pageEncoding="UTF-8"%>
 <script src="js/index.js"></script>
 </head>
 <body>
-	<a href="./modifyMember.do"> 회원정보 수정페이지 이동</a>
 	<div class="navb">
 		<a href="./scheboard.do" class="logo">Home</a>
 		<div class="dropdown">

@@ -29,6 +29,7 @@
 var Grid = tui.Grid;
 var el;
 var options;
+var cnt = 0;
 	const grid = new Grid({
 			  el: document.getElementById('grid'),
 			  columns: [
@@ -90,6 +91,7 @@ var options;
 function Wbs(){
 		//GRID 에 데이터를 입력한다.
 		arrData();
+}
 	class CustomTextEditor {
 	      constructor(props) {
 	        const el = document.createElement('input');
@@ -112,7 +114,6 @@ function Wbs(){
 	        this.el.select();
 	      }
 	    }
-	
 	grid.on('dblclick', (ev) => {
 			console.log('after change:', ev);
 			console.log('음 생각되로 되랑');
@@ -121,18 +122,17 @@ function Wbs(){
 // 		    console.log('@@@@@@@');
 // 		    console.log(jsonArr.topName);
 // 		    console.log(ev.columnName);
-		    
+
 		    if(ev.columnName=='fbsName'){
+		    	console.log(cnt);
 		    	$.ajax({
 					url : "./newWbsRow.do",
 					method : "POST",
+					async:false,
 					data:jsonArr,
 					success : function(result){
+						cnt++;
 						console.log('행추가 완료');
-// 						console.log(result);
-					}
-				});
-// 								location.href='./wbs.do';
 						$.ajax({
 							url : "./selectWbs.do",
 							method : "POST",
@@ -143,7 +143,9 @@ function Wbs(){
 								grid.resetData(result);
 							}
 						});
-		    }
+					}
+				});
+	    	}	
 	    })
 	    
 	    grid.on('editingFinish', (ev) => {
@@ -179,9 +181,6 @@ function Wbs(){
 				});
 		    }
 	    })
-	    
-	    
-}
 
 	function finWbs(){
 		$.ajax({
