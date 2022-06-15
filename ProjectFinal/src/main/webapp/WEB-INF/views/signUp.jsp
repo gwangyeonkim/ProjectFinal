@@ -4,40 +4,85 @@
 <head>
 <meta charset="UTF-8">
 
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- date picker ui css -->
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<%@include file="./header.jsp" %>
 <style type="text/css">
+
+
+
+.navb{
+	height: 100px;
+}
+
+.wrapper{
+	width: 1370px;
+}
+
 .home{
-			margin: 0 auto;
-			border: 2px solid black;
-			width:1400px;
-			height: 600px;
+	margin: 0 auto;
+/* 	border: 2px solid black; */
+	width: 1400px;
+	height: 600px;
 		}
+	
 
-		#joinTable{
-			padding-top:50px;
-			margin: 0 auto;
-            text-align: center;
-		}
 
-        #joinTable > tr,td {
-            border: 2px solid black;
-            border-collapse: collapse;
-            width: 200px;
-            height: 50px;
-        }
+table.type02 {
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  margin : 20px 10px;
+}
+table.type02 th {
+  width: 300px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  background: #eee;
+}
+table.type02 td{
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
 
-        input[type=text] { 
-            width: 100%;
-            height: 100%; 
-            font-size: 20px;
-            font-weight: 1000;
-        }
+h3{
+	font-weight: 400px;
+	text-align: center;
+}
+
+h2{
+	font-weight: 300px;
+	margin-top: 20px;
+	text-align: center;
+	font-size: 40px;
+}
+
+.form-control{
+  	width:300px;
+    font-size:20px;
+}
+
 
 
 </style>
@@ -46,30 +91,47 @@
 
 
 
-<%@include file="./header.jsp" %>
+
 <body>
 
 <div class="home">
 	<div class="wrapper">
-    <form action="./singUp.do" method="post" class="joinForm" >
-    <table id="joinTable">
-                    <tr>
-                        <td colspan="12">
+	<div class="container">
+    <form action="./singUp.do" method="post" class="form-inline" >
+    
+<!--     <input type="text" class="form-control" placeholder="Text input"> -->
+<!-- 	  <input type="password" class="form-control" placeholder="password input"> -->
+<!-- 	  <input type="datetime" class="form-control" placeholder="datetime input"> -->
+<!-- 	  <input type="datetime-local" class="form-control" placeholder="datetime-local input"> -->
+<!-- 	  <input type="date" class="form-control" placeholder="date input"> -->
+<!-- 	  <input type="month" class="form-control" placeholder="month input"> -->
+<!-- 	  <input type="time" class="form-control" placeholder="time input"> -->
+<!-- 	  <input type="week" class="form-control" placeholder="week input"> -->
+<!-- 	  <input type="number" class="form-control" placeholder="number input"> -->
+<!-- 	  <input type="url" class="form-control" placeholder="url input"> -->
+<!-- 	  <input type="search" class="form-control" placeholder="search input"> -->
+<!-- 	  <input type="tel" class="form-control" placeholder="tel input"> -->
+<!-- 	  <input type="color" class="form-control" placeholder="color input"> -->
+<!-- 	  <input type="email" class="form-control" placeholder="color input"> -->
+    
                             <h2>회원가입</h2>
-                        </td>
-                    </tr>
+    <table id="type02" class="type02">
+<!--                     <tr> -->
+<!--                         <td colspan="12"> -->
+<!--                         </td> -->
+<!--                     </tr> -->
                     <tr>
-                        <td colspan="2">
-                            <h3>아이디</h3>
-                        </td>
+                        <th colspan="2">
+                            <h3 id="h3">아이디</h3>
+                        </th>
                         <td colspan="5">
-                           <input type="text" placeholder="Enter ID" class="comm" id="memberId" name="memberId" required>
+                           <input type="text" placeholder="Enter ID" class="form-control" id="memberId" name="memberId" required>
                         </td>
-                        <td colspan="2">
-                            <h3>이름</h3>
-                        </td>
+                        <th colspan="2">
+                            <h3 id="h3">이 름</h3>
+                        </th>
                         <td colspan="3">
-                             <input type="text" placeholder="Enter name" class="comm" id="name" name="memName" required> <br>
+                             <input type="text" placeholder="Enter name" class="form-control" id="name" name="memName" required> <br>
                         </td>
                     </tr>
                     <tr>
@@ -78,89 +140,91 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <h3>비밀번호</h3>
-                        </td>
+                        <th colspan="2">
+                            <h3 id="h3">비밀번호</h3>
+                        </th>
                         <td colspan="3">
-                            <input type="Password" placeholder="Enter password" class="comm" id="memPw" name="memPw" required>
+                            <input type="Password" placeholder="Enter password" class="form-control" id="memPw" name="memPw" required>
                         </td>
                         <td colspan="2">
-                            <input type="Password" placeholder="Enter password" class="comm" id="validPassword" required>
+                            <input type="Password" placeholder="Enter password" class="form-control" id="validPassword" required>
                         </td>
-                        <td colspan="3">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="2">
+                        <td colspan="4">
                             <span class="point checkPwdComment"></span>
             				<input type="hidden" id="doubleCheckPwd"/>
                         </td>
+<!--                         <td colspan="2"> -->
+<!--                             <span class="point checkPwdComment"></span> -->
+<!--             				<input type="hidden" id="doubleCheckPwd"/> -->
+<!--                         </td> -->
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <h3>이메일</h3>
-                        </td>
+                        <th colspan="2">
+                            <h3 id="h3">이메일</h3>
+                        </th>
                         <td colspan="8">
-                            <input id="email" class="comm" type="text" name="memEmail"  required/>
+                            <input id="email" class="form-control" type="text" name="memEmail"  required/>
                         </td>
                         <td colspan="2">
-                            <input type="button" id="checkEmailBtn" class="btn" value="인증번호 보내기"><br>
+                            <input type="button" id="checkEmailBtn" class="btn btn-outline-primary btn-lg" value="인증번호 보내기"><br>
                         </td>
                     </tr>
                     <tr>
+                        <th colspan="2">
+                            <h3 id="h3">인증번호 확인</h3>
+                        </th>
+                        <td colspan="4">
+                            <input id="validEmail" class="form-control" type="text" name="sm_email2" title="인증번호 입력" required/>
+                        </td>
                         <td colspan="2">
-                            <h3>인증번호 확인</h3>
+                            <input type="button" value="확인" id="validEmailBtn" class="btn btn-outline-primary btn-lg">
                         </td>
                         <td colspan="4">
-                            <input id="validEmail" class="comm" type="text" name="sm_email2" title="인증번호 입력" required/>
-                        </td>
-                        <td colspan="2">
-                            <input type="button" value="확인">
-                        </td>
-                        <td colspan="4">
-                            <span id="validEmailBtn" class="btn btn-info">이메일인증</span>
+<!--                             <span id="validEmailBtn" class="btn btn-info">이메일인증</span> -->
 				             <span class="point checkEmailComment">이메일 입력후 인증번호 보내기를 해주십시오.</span>
 				             <input type="hidden" id="doubleCheckEmail"/> 
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <h3>생년월일</h3>
-                        </td>
-                        <td colspan="10">
-                            <input type="text" placeholder="Enter birthDay" class="comm" id="datepicker" name="memBirth">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>주소</h3>
-                        </td>
-                        <td colspan="5">
-                            <input type="text" class="comm" id="address_kakao" name="memAddr" readonly />
-                        </td>
-                        <td colspan="5">
-                            <input type="text" class="comm" name="address_detail" />
+                        <th colspan="2">
+                            <h3 id="h3">생년월일</h3>
+                        </th>
+                        <td colspan="9">
+<!--                         <label for="datepicker">생년월일</label> -->
+                            <input type="date" class="form-control" id="datepicker" name="memBirth">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <h3>폰번호</h3>
+                        <th colspan="2">
+                            <h3 id="h3">주소</h3>
+                        </th>
+                        <td colspan="5">
+                            <input type="text" class="form-control" id="address_kakao" name="memAddr" readonly />
                         </td>
+                        <td colspan="5">
+                            <input type="text" class="form-control" name="address_detail" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" rowspan="2">
+                            <h3 id="h3">폰번호</h3>
+                        </th>
                         <td colspan="6">
-                            <input id="Hp" class="comm" type="text" name="memPhone"  required />
+                            <input id="Hp" class="form-control" type="text" name="memPhone"  required />
                         </td>
                         <td colspan="4">
-                            <input type="button" id="checkHpBtn" class="btn" value="인증번호 보내기"><br/>
+                            <input type="button" id="checkHpBtn" class="btn btn-outline-primary btn-lg" value="인증번호 보내기"><br/>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <input id="validHp" class="comm" type="text" name="sm_Hp2" title="인증번호 입력" required/>
+                            <input id="validHp" class="form-control" type="text" name="sm_Hp2" title="인증번호 입력" required/>
                         </td>
-                        <td colspan="3">
-                            <input type="text" name="" id="">
-                        </td>
-                        <td colspan="3">
-                            <span id="validHpBtn" class="btn btn-info">핸드폰인증</span>
+<!--                         <td colspan="3"> -->
+<!--                             <input type="text" name="" id=""> -->
+<!--                         </td> -->
+                        <td colspan="4">
+                            <span id="validHpBtn" class="btn btn-outline-primary btn-lg">핸드폰인증</span><br>
 					        <span class="point checkHpComment">핸드폰번호 인증번호 보내기를 해주십시오.</span>
 					        <input type="hidden" id="doubleCheckHp"/>
                         </td>
@@ -171,13 +235,13 @@
                     </tr>
                     <tr>
                         <td colspan="12">
-                            <input type="submit" value="Sign up" class="btn">
+                            <input type="submit" value="Sign up" class="btn btn-outline-primary btn-lg">
                         </td>
                     </tr>
+    				
                 </table>
-    
-			
     </form>
+	</div>
 	</div>
 </div>
 	
@@ -201,8 +265,6 @@
 //  var chkUserEmail = false;
 //  var chkUserHp = false;
  
-	
-
 	$("#memberId").blur(function() {
 		// 아이디 정규화
 		var regId = /^[a-z]+[a-z0-9]{5,15}$/;
@@ -277,7 +339,8 @@ $("#name").blur(function(){
 			$(".checkPwdComment").text("비밀번호가 일치하지 않습니다.");
 			$(".checkPwdComment").css("color", "red");
 // 			$("#doubleCheckPwd").val("false");
-// 			$("#memPw").focus();
+			$("#memPw").focus();
+			$("#memPw").val("");
 		}
 	});
 
