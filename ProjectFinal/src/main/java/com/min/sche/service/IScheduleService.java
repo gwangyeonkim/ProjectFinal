@@ -3,12 +3,14 @@ package com.min.sche.service;
 import java.util.List;
 import java.util.Map;
 
+import com.min.sche.vo.ScheduleVo;
 import com.min.sche.vo.WbsViewVo;
 
 public interface IScheduleService {
 	
 	public List<WbsViewVo> getTeamSchedule(List<String> userList);
 	
+	public List<ScheduleVo> pScheduleShow(String mId);
 	public int pScheduleInsert(Map<String, Object> map);
 	public int pScheduleUpdate(Map<String, Object> map);
 	public int pScheduleDelete(Map<String, Object> map);

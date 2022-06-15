@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-
-
-
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
@@ -12,6 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" href="./css/projectMain.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
 <!-- notification 추가 script -->
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.min.js"></script>
 
@@ -31,7 +31,14 @@
 			</div>
 		</div>
 		<div class="dropdown">
+
 			<button class="dropbtn" onclick="location.href='./moveProj.do'">Member</button>
+
+			<button class="dropbtn">Member</button>
+			<div class="dropdown-content">
+				<a href="./memberlistAll.do">회원조회하기</a> <a href="#">2</a> <a href="#">3</a>
+			</div>
+
 		</div>
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./moveFixhistory.do'">Template</button>
@@ -64,7 +71,7 @@
 			type : "post",
 			data : "notiId="+id,
 			success : function(result) {
-				console.log(result.lists);
+// 				console.log(result.lists);
 				console.log(result.count);
 				$("#notiCount").append().text(result.count)
 				for (var k in result.lists) {
@@ -85,14 +92,14 @@
 					console.log(tomorrow);
 					if (regdate == tomorrow && arr[j].notifided == "N"&& localStorage.getItem("Arlim") == "yes") {
 						notify();
-						//    			notifieded(arr[j].notiId);
+						   			notifieded(arr[j].notiId);
 					}//for문	
 				}	
 				function notify() {
 					var notification = new Notification(
 							arr[j].content,
 							{
-								icon : 'https://data1.pokemonkorea.co.kr/newdata/pokedex/full/072201.png',
+								icon : './img/gun.PNG',
 								body : arr[j].content +"의 마감이 하루 남았어요!"
 							});
 					notification.onclick = function() {

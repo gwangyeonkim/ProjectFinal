@@ -14,6 +14,11 @@
 			
 	</select>
 	
+	<select id="pScheduleShow" resultType="ScheduleVo" parameterType="String">
+		SELECT SCHE_ID, MEM_ID, SCHE_NAME, SCHE_CONTENT, SCHE_START, SCHE_END
+			FROM SCHEDULE WHERE MEM_ID=#{mId}
+	</select>
+	
 	<insert id="pScheduleInsert" parameterType="java.util.Map">
 		INSERT INTO SCHEDULE
 			(SCHE_ID, MEM_ID, SCHE_NAME, SCHE_CONTENT, SCHE_START, SCHE_END)
