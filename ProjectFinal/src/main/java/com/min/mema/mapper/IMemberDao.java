@@ -38,9 +38,6 @@ public interface IMemberDao {
 	
 	public int modifyMember(MemberVo vo);
 	
-	public int modifyMemberPw(MemberVo vo);
-	
-	
 	public String findIdmdmber(Map<String, Object> map);
 	
 	

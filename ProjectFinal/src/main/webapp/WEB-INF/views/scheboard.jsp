@@ -18,40 +18,81 @@
         width: 1000px;
         height: 300px;
         grid-template-columns: 40% 60%;
-        grid-template-rows: 1fr 1fr ;
-        gap: 20px;
+        grid-template-rows: 350px 350px ;
         padding: 10px;
+        margin-right:10px;
     }
+    
+    #grid1, #grid2{
+    	border : 1px solid black;
+    	margin-top:10px;
+    }
+    .innerCont2, .innerCont4{
+    	margin-left:50px;
+    }
+    
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 60px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0, 0.7); /* Black w/ opacity */
+    
+}
+    
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    text-align:center;
+}
 
-    .innerCont2 {
-    	text-align:center;
-        grid-row: span 2 / span 2;
-        
-    }
-    
-    .innerCont2 > button {
-    	width:250px;
-    	height:30px;
-    	font-size: 18px;
-    	font-weight:1000;
-    	background-color: black;
-    	cursor: pointer;
-    	transition: 0.2s;
-    	color:white;
-    }
-    
-    .innerCont2 > button:hover {
-    	background-color: white;
-    	color:black;
-    }
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold; 
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.clearBtn{
+	background-color: white;
+	color: black;
+	font-size: 20px;
+	font-weight: 1000;
+	cursor:pointer;
+	transition:0.3s;
+}
+
+.clearBtn:hover {
+	background-color: black;
+	color: white;
+}
 
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
 	showPieChart();
 	showBarChart();
-	showTable();
+	showIncomplete();
+	showComplete();
+	
 });
+	
 
 function showPieChart(){
 	const Chart = toastui.Chart;
@@ -101,53 +142,132 @@ function showBarChart(){
 	const chart = Chart.barChart({ el, data, options });
 }
 
-function showTable(url){
-	var Grid = new tui.Grid({
-	el : document.getElementById('grid'),
-	      scrollX: false,
-	      scrollY: true,
-	      columns: [
-	        {
-	          header: 'ID',
-	          name: 'id'
-	        },
-	        {
-	          header: '시작일',
-	          name: 'startdate',
-	          sortable: true,
-	          filter: 'text',
-	          rowSpan: true
-	        },
-	        {
-	          header: '종료일',
-	          name: 'enddate',
-	          sortable: true,
-	          filter: 'text',
-	          rowSpan: true
-	          
-	        }
-	      ]
-	    });
-	
+function showIncomplete(){
+    var grid = new tui.Grid({
+        el: document.getElementById('grid1'),
+        bodyHeight: 200,
+        scrollX: false,
+        scrollY: true,
+        columns: [
+          {
+            header: '기능명',
+            name: 'wbsName',
+          },
+          {
+            header: '담당자',
+            name: 'wbsManager',
+          },
+          {
+            header: '종료일',
+            name: 'wbsEndDate'
+          }
+        ]
+      });
 	$.ajax({
-		url : "showTable.do",
-		method : "POST",
-		success : function(result){
-			console.log(result);
-			grid.resetData(result);
-		}
-	});
+        url : "./callIncomplete.do",
+        method :"POST",
+        data:{"memId":"GD001"}, //로그인 유저 정보 받아와야함
+        dataType : "JSON",
+        success : function(result){
+            grid.resetData(result);
+        } 
+    });
 }
 
-function callScheTable(info){
-	console.log("일정부르기");
-	console.log(info.className);
-	if(info.className == complete){
-		showTable("./callComplete.do");
-	}else if(info.className == inComplete){
-		showTable("./callIncomplete.do");
-	}
+function showComplete(){
+    var grid = new tui.Grid({
+        el: document.getElementById('grid2'),
+        bodyHeight: 200,
+        scrollX: false,
+        scrollY: true,
+        columns: [
+          {
+            header: '기능명',
+            name: 'wbsName',
+          },
+          {
+            header: '담당자',
+            name: 'wbsManager',
+          },
+          {
+            header: '완료일',
+            name: 'wbsFinDate'
+          },
+          {
+              header: '완료취소',
+              name: 'wbsId'
+          }
+        ]
+      });
+	$.ajax({
+        url : "./callComplete.do",
+        method :"POST",
+        data:{"memId":"GD001"}, //로그인 유저 정보 받아와야함
+        dataType : "JSON",
+        success : function(result){
+            grid.resetData(result);
+        } 
+    });
+	var auth = 0;
+	$.ajax({
+        url : "./checkAuth.do",
+        method :"POST",
+        data:{"memId":"GD001"}, //로그인 유저 정보 받아와야함
+        async:false,
+        success : function(result){
+            if(result){
+            	console.log("PM이다");
+            	auth++;
+            }else{
+            	console.log("PM아니다");
+            }
+        } 
+    });
+	
+	
+    grid.on('click', () => {
+    	  console.log(grid.getFocusedCell().rowKey);
+    	  var modal = document.getElementById('myModal');
+    	  var span = document.getElementsByClassName("close")[0];
+    	  var clearBtn = document.getElementsByClassName("clearBtn")[0];
+    	  if(auth==1&&grid.getFocusedCell().columnName=='wbsId'){
+    		console.log("글 복구 시킬지 모달");
+    		
+			modal.style.display = "block";
+
+			span.onclick = function() {
+			modal.style.display = "none";
+				}
+				
+			clearBtn.onclick = function(){
+			console.log("일정완료취소");
+			$.ajax({
+				url:"./incompleteSchedule.do",
+				type:"POST",
+				data:{"wbsId":grid.getFocusedCell().value},
+				success:function(){
+					console.log("일정완료");
+					grid.removeRow(grid.getFocusedCell().rowKey);
+					location.reload();
+				},
+				error:function(){
+					alert("잘못된 요청입니다");
+				} 
+			});
+			modal.style.display = "none";
+			}
+    	  }
+    	});
+	
+	
 }
+
+function deleteaa(){
+	console.log("삭제발생!");
+}
+
+//그냥 따로 테이블 만들고 위치 같게 만든 다음 서로 display : block, none 하자
+
 
 </script>
 		<%@ include file="./header.jsp" %>
@@ -160,16 +280,26 @@ function callScheTable(info){
 				<div id="pieChart"></div>
 			</div>
 			<div class="innerCont2">
-				<button class="complete" style="margin-right:10px;" onclick="callScheTable(this)">완료 일정 조회</button>
-				<button class="inComplete" style="margin-left:10px;" onclick="callScheTable(this)">미완료 일정 조회</button>
-				<div id="grid" style="margin-top:10px;"></div>
+				<b>완료 일정</b>
+				<div id="grid1"></div>
 			</div>
 			<div class="innerCont3">
 				<b>개인별 진척도</b>
 				<div id="barChart"></div>
 			</div>
+			<div class="innerCont4">
+				<b>미완료 일정</b>
+				<div id="grid2"></div>
+			</div>
 		</div>
 	</div>
-
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">x</span>
+    <h2>해당 일정을 다시 복구시키겠습니까?</h2>
+    <button class="clearBtn" onclick="incompleteWbs()">일정완료 취소</button>
+  </div>
+</div>
 </body>
 </html>
