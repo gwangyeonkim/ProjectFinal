@@ -8,6 +8,7 @@ import com.min.sche.vo.WbsViewVo;
 
 public interface IScheduleDao {
 
+	public String getProjectMember(String mId);
 	public List<WbsViewVo> getTeamSchedule(Map<String, Object> map);
 
 	
@@ -27,4 +28,10 @@ public interface IScheduleDao {
 	public List<WbsViewVo> callComplete(String memId);
 	
 	public int checkAuth (String memId);
+	
+	public int getFinCount(String projName);
+	public int getAllCount(String projName);
+	
+	public int memFinCount(Map<String, Object> map);
+	public int memAllCount(Map<String, Object> map);
 }

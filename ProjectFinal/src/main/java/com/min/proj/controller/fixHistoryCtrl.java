@@ -44,17 +44,19 @@ public class fixHistoryCtrl {
 		logger.info("fixHistoryCtrl selectFixhistory {}");
 		Map<String, String> map = new HashMap<String, String>();
 //		TODO 12. 변경점
-//		map.put("memId", session.getAttribute("memId"));
-		map.put("memId", "CH001");
+		map.put("memId", (String)session.getAttribute("memId"));
+//		map.put("memId", "CH001");
 		
 		List<FixHistoryVo> fixVo = 	fixService.selectFixHistory(map);
 		JSONArray jAry = new JSONArray();
-		for (int i = 0; i < fixVo.size(); i++) {
-			JSONObject jObj = new JSONObject();
-			jObj.put("fixContent", fixVo.get(i).getFixContent());
-			jObj.put("fixName", fixVo.get(i).getFixName());
-			
-			jAry.add(i, jObj);
+		if(fixVo!=null) {
+			for (int i = 0; i < fixVo.size(); i++) {
+				JSONObject jObj = new JSONObject();
+				jObj.put("fixContent", fixVo.get(i).getFixContent());
+				jObj.put("fixName", fixVo.get(i).getFixName());
+				
+				jAry.add(i, jObj);
+			}
 		}
 		         
 		return jAry;

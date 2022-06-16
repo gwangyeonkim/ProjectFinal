@@ -181,17 +181,23 @@
 		FBS_IMP=#{fbsImp}, FBS_LEVEL=#{fbsLevel}, FBS_MANAGER=#{fbsManager}
 		WHERE MID_ID=#{midId}
 	</update>
+	
+	<delete id="deleteFbs" parameterType="java.util.Map">
+	DELETE FROM FBS
+	WHERE MID_ID=#{midId}
+	</delete>
+	
 	<!-- WBS -->
 	
 	<insert id="newWbs" parameterType="java.util.Map">
 	INSERT INTO WBS
 	(WBS_ID, MID_ID, WBS_CODE,
 	        WBS_NAME, WBS_CONENT, WBS_MANAGER,
-	                WBS_START_DATE, WBS_END_DATE, WBS_FIN_DATE, 
+	                WBS_START_DATE, WBS_END_DATE,  
 	                        WBS_STEP, WBS_DELFLAG, WBS_DATE)
 	VALUES('WBS'||PROJ_SEQ.NEXTVAL , #{midId}, #{wbsCode},
 	                        #{wbsName}, #{wbsContent}, #{wbsManager},
-	                                #{wbsStartDate}, #{wbsEndDate}, NULL, 
+	                                #{wbsStartDate}, #{wbsEndDate}, 
 	                                        (SELECT NVL(MAX(WBS_STEP),0) 
 	                                            FROM WBS wf
 	                                            WHERE MID_ID=#{midId})+1, 'N', SYSDATE)
@@ -228,7 +234,8 @@
 	                                                       LEFT OUTER JOIN FBS f 
 	                                                       ON b.TOP_ID = f.TOP_ID
 	                                                       LEFT OUTER JOIN WBS w
-	                                                       ON f.MID_ID =w.MID_ID 
+	                                                       ON f.MID_ID =w.MID_ID
+	                                                       WHERE f.MID_ID IS NOT NULL 
 	                                                       ORDER BY TOP_STEP,FBS_STEP,WBS_STEP
 	</select>
 	
@@ -253,6 +260,11 @@
 																			WHERE PROJ_NAME =#{projName})))
 																			AND WBS_CODE IS NULL)
 	</delete>
+	<delete id="deleteWbs" parameterType="java.lang.String">
+	DELETE FROM WBS
+	WHERE WBS_ID=#{wbsId}
+	</delete>
+	
 	
 	<!-- FIXHISTORY -->
 	<insert id="newFix" parameterType="java.util.Map">

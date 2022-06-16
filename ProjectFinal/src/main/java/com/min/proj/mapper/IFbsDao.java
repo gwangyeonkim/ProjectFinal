@@ -27,4 +27,11 @@ public interface IFbsDao {
 	 * @return 1 성공
 	 */
 	public int fixFbs(Map<String, String> map);
+	
+	/**
+	 * FBS를 삭제하는 메소드
+	 * @param map midId 값 입력
+	 * @return
+	 */
+	public int deleteFbs(Map<String, String> map);
 }

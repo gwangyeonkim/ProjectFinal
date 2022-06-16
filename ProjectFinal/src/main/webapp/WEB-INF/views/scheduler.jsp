@@ -595,7 +595,8 @@ function makeTime(info){
 </script>
 <%@include file="./header.jsp" %>
 <body>
-	
+
+
 		<div class="wrapper">
 		<div class="content">
 			<!--여기 넣으면 됨-->
@@ -604,10 +605,14 @@ function makeTime(info){
 				<hr style="height: 2px; background-color: black;">
 				<div id="checkList" style="text-align: left; padding-top: 10px;">
 					<input class="checkName" type="checkbox" name="chkAll" onclick="checkAll(this)"><b>ALL</b><br>
+				<!-- 로그인된 memId로 projectMemList 찾아서 Vo로 리스트 세션 받아와서 인원 찍어주어야함 -->
+				<c:forEach var="name" items="${mLists}" varStatus="status">
+					<input class="checkName" type="checkbox" name="check" value="<c:out value="${name}"/>" onclick="checkSelect()"><b><c:out value="${name}"/></b><br>
+				</c:forEach> <!--   
 					<input class="checkName" type="checkbox" name="check" value="김광연" onclick="checkSelect()"><b>김광연</b><br>
 					<input class="checkName" type="checkbox" name="check" value="김규철" onclick="checkSelect()"><b>김규철</b><br>
 					<input class="checkName" type="checkbox" name="check" value="박정연" onclick="checkSelect()"><b>박정연</b><br>
-					<input class="checkName" type="checkbox" name="check" value="이창훈" onclick="checkSelect()"><b>이창훈</b>
+					<input class="checkName" type="checkbox" name="check" value="이창훈" onclick="checkSelect()"><b>이창훈</b> -->
 				</div>
 			</div>
 			<div class="item2" style="text-align:center;">
