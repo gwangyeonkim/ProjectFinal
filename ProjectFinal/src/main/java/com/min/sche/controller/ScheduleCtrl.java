@@ -16,6 +16,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.json.XML;
@@ -31,6 +32,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.annotation.RequestScope;
 
+import com.min.mema.vo.MemberVo;
+import com.min.proj.service.IProjMemListService;
+import com.min.proj.vo.ProjMemListVo;
 import com.min.sche.mapper.IScheduleDao;
 import com.min.sche.service.IScheduleService;
 import com.min.sche.vo.ScheduleVo;
@@ -50,24 +54,64 @@ public class ScheduleCtrl {
 	@Autowired
 	IScheduleService service;
 	
+	@Autowired
+	IProjMemListService pService;
+	
 	/**
 	 * 처음 접속을 할 때 현재 년도 정보를 가져간다.
 	 */
 	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET,produces = "application/text;charset-UTF-8")
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String projName = (String)session.getAttribute("projName");
 		logger.info("Welcome home! The client locale is {}.", locale);
 		Date today = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY");
 		String year = simpleDateFormat.format(today);
 		model.addAttribute("serverTime", year );
-		
-		
+		List<ProjMemListVo> lists = pService.projMemList(projName);
+		List<String> memberList = new ArrayList<String>();
+		for (int i = 0; i < lists.size(); i++) {
+			memberList.add(service.getProjectMember(lists.get(i).getMemId()));
+		}
+		session.setAttribute("mLists", memberList);
+		System.out.println(memberList);
 		return "scheduler";
 	}
 	
 	@RequestMapping(value="/scheboard.do", method=RequestMethod.GET)
-	public String showChart() {
-		logger.info("차트, 그리드 보기");
+	public String showChart(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession();
+		String projName = (String)session.getAttribute("projName");
+		
+		int allCount = service.getAllCount(projName); //전체 일정의 갯수
+		int perValue = Math.round(100/allCount);//일정 1개완료당 진척도 올라가는량
+		int done = service.getFinCount(projName);//완료한 일정의 갯수
+		model.addAttribute("jinchuck",perValue*done);
+		
+		MemberVo loginVo = (MemberVo) session.getAttribute("loginVo");
+		String manager = loginVo.getMemName();
+		
+		List<ProjMemListVo> lists = pService.projMemList(projName);
+		List<Integer> memFinList = new ArrayList<Integer>();
+		
+		for (int i = 0; i < lists.size(); i++) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("projName",projName);
+			map.put("manager",service.getProjectMember(lists.get(i).getMemId()));
+			int memAll = service.memAllCount(map);
+			int memValue = Math.round(100/memAll);
+			int memFin = service.memFinCount(map);
+			memFinList.add(memValue*memFin);
+		}
+		model.addAttribute("finInfo",memFinList);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("projName",projName);
+		map.put("manager",manager);
+		service.memAllCount(map);
+		service.memFinCount(map);
+		
 		return "scheboard";
 	}
 	

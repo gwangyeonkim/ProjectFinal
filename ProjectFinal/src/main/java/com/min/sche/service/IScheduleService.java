@@ -8,6 +8,7 @@ import com.min.sche.vo.WbsViewVo;
 
 public interface IScheduleService {
 	
+	public String getProjectMember(String mId);
 	public List<WbsViewVo> getTeamSchedule(Map<String, Object> map);
 	
 	public List<ScheduleVo> pScheduleShow(String mId);
@@ -21,4 +22,9 @@ public interface IScheduleService {
 	public List<WbsViewVo> callComplete(String memId);
 	public int checkAuth (String memId);
 	
+	public int getFinCount(String projName);
+	public int getAllCount(String projName);
+	
+	public int memFinCount(Map<String, Object> map);
+	public int memAllCount(Map<String, Object> map);
 }

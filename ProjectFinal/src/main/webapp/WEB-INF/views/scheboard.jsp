@@ -11,6 +11,7 @@
 <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 </head>
+<%@ include file="./header.jsp" %>
 <style type="text/css">
 
 	.content {
@@ -27,6 +28,7 @@
     	border : 1px solid black;
     	margin-top:10px;
     }
+    
     .innerCont2, .innerCont4{
     	margin-left:50px;
     }
@@ -102,10 +104,10 @@ function showPieChart(){
 			  series: [
 			    {
 			      name: '완료',
-			      data: 40,
+			      data: ${jinchuck},
 			    },{
 				  name: '미완료',
-				  data: 100-40,
+				  data: 100-${jinchuck},
 				}
 			    
 			  ]
@@ -127,11 +129,19 @@ function showBarChart(){
 	const Chart = toastui.Chart;
 	const el = document.getElementById('barChart');
 	const data = {
-	  categories: ['1', '2', '3', '4'],
+	  categories: [
+		  <c:forEach var="name" items="${mLists}" varStatus="status">
+		  	"<c:out value="${name}"/>",
+		  </c:forEach>
+		  ],
 	  series: [
 	    {
 	      name: '진행도',
-	      data: [50, 30, 70, 60],
+	      data: [
+	    	  <c:forEach var="name" items="${finInfo}" varStatus="status">
+			  	"<c:out value="${name}"/>",
+			  </c:forEach>
+	    	  ],
 	    }
 	  ]
 	};
@@ -166,7 +176,7 @@ function showIncomplete(){
 	$.ajax({
         url : "./callIncomplete.do",
         method :"POST",
-        data:{"memId":"GD001"}, //로그인 유저 정보 받아와야함
+        data:{"memId":"${loginVo.memberId}"}, //로그인 유저 정보 받아와야함
         dataType : "JSON",
         success : function(result){
             grid.resetData(result);
@@ -202,7 +212,7 @@ function showComplete(){
 	$.ajax({
         url : "./callComplete.do",
         method :"POST",
-        data:{"memId":"GD001"}, //로그인 유저 정보 받아와야함
+        data:{"memId":"${loginVo.memberId}"}, //로그인 유저 정보 받아와야함
         dataType : "JSON",
         success : function(result){
             grid.resetData(result);
@@ -212,7 +222,7 @@ function showComplete(){
 	$.ajax({
         url : "./checkAuth.do",
         method :"POST",
-        data:{"memId":"GD001"}, //로그인 유저 정보 받아와야함
+        data:{"memId":"${loginVo.memberId}"}, //로그인 유저 정보 받아와야함
         async:false,
         success : function(result){
             if(result){
@@ -262,15 +272,10 @@ function showComplete(){
 	
 }
 
-function deleteaa(){
-	console.log("삭제발생!");
-}
-
-//그냥 따로 테이블 만들고 위치 같게 만든 다음 서로 display : block, none 하자
 
 
 </script>
-		<%@ include file="./header.jsp" %>
+		
 <body>
 	<div class="wrapper">
 		<div class="content">
@@ -280,7 +285,7 @@ function deleteaa(){
 				<div id="pieChart"></div>
 			</div>
 			<div class="innerCont2">
-				<b>완료 일정</b>
+				<b>미완료 일정</b>
 				<div id="grid1"></div>
 			</div>
 			<div class="innerCont3">
@@ -288,7 +293,7 @@ function deleteaa(){
 				<div id="barChart"></div>
 			</div>
 			<div class="innerCont4">
-				<b>미완료 일정</b>
+				<b>완료 일정</b>
 				<div id="grid2"></div>
 			</div>
 		</div>
