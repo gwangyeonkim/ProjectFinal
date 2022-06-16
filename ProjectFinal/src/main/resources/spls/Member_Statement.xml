@@ -27,6 +27,10 @@
 		WHERE MEMBER_ID= #{memberId}
 	</update>
 	
+	<update id="modifyMemberPw" parameterType="MemVo">
+   		UPDATE MEMBERLIST SET MEM_PW = #{memPw} WHERE MEMBER_ID = #{memberId}
+   </update>
+	
 	<select id="findIdmdmber" parameterType="java.util.Map" resultType="java.lang.String">
 		SELECT MEMBER_ID 
 			FROM MEMBERLIST
@@ -62,6 +66,8 @@
 		WHERE MEMBER_ID= #{memberId}
    </update>
    
+   
+   
    <select id="inviteMember" parameterType="MemVo" resultType="java.lang.String">
 	SELECT p2.PROJ_TOKEN 
 			FROM PROJECT p2  
@@ -69,6 +75,8 @@
 			FROM PROJMEMLIST p 
 			WHERE p.MEM_ID = #{memberId})
 	   </select>
+
+	
 
 
 </mapper>
