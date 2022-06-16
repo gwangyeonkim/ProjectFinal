@@ -1,5 +1,6 @@
 package com.min.proj.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -230,15 +231,13 @@ public class TemplateCtrl {
 	public JSONArray selectWbs(HttpSession session) {
 		logger.info("TemplateCtrl selectWbs");
 		Map<String, String> map = new HashMap<String, String>();
-//		System.out.println((String)session.getAttribute("userId"));
+		session.setAttribute("cnt", "0");
 		// TODO 1. 변경점 1
 //		map.put("memId", (String)session.getAttribute("userId"));
 		map.put("memId", "CH001");
 		List<WbsVo> wVo = wbsService.selectWbs(map);
-//		System.out.println(fVo.toString());
-//		System.out.println(map);
-
 		JSONArray jAry = new JSONArray();
+		ArrayList<String> Ary = new ArrayList<String>();
 		for (int i = 0; i < wVo.size(); i++) {
 			JSONObject jObj = new JSONObject();
 			jObj.put("topId", wVo.get(i).getTopVo().getTopId());
@@ -253,18 +252,14 @@ public class TemplateCtrl {
 			jObj.put("wbsManager", wVo.get(i).getWbsManager());
 			jObj.put("wbsStartDate", wVo.get(i).getWbsStartDate());
 			jObj.put("wbsEndDate", wVo.get(i).getWbsEndDate());
-			
 //			System.out.println("!!!!!!!" + jObj);
 			jAry.add(i, jObj);
-
 		}
+		session.setAttribute("wbsList",Ary);
 		return jAry;
 	}
 	
 	
-//	midName fbs이름,wbsCode wbs코드,wbsName 
-//	wbs이름,wbsContent wbs 내용,wbsManager wbs담당자
-//	,wbsStartDate wbs시작일,wbsFinDate wbs종료일
 	@RequestMapping(value = "/newWbsRow.do", method = RequestMethod.POST)
 	public String newWbsRow(@RequestParam Map<String, String> jsonArr, HttpSession session) {
 		logger.info("TemplateCtrl newWbsRow {}",jsonArr);
@@ -273,6 +268,8 @@ public class TemplateCtrl {
 		System.out.println(jsonArr.get("midId"));
 		System.out.println(jsonArr.get("wbsId"));
 		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> mapId = new HashMap<String, String>();
+		
 			map.put("midId", jsonArr.get("midId"));
 			map.put("wbsCode", "");
 			map.put("wbsName", "");
@@ -281,7 +278,17 @@ public class TemplateCtrl {
 			map.put("wbsStartDate", "");
 			map.put("wbsEndDate", "");
 //			TODO 10. 캐시때문인지 뭔지 모르겠는데. 자꾸 여러번 도는 현상이 나옴. 톰캣클린하고 돌리면 한번씩 정상작동하는데 중간에 여러번 돔.
-			wbsService.newWbs(map);
+			System.out.println(jsonArr.get("rowKey"));
+			session.setAttribute("cnt", jsonArr.get("rowKey"));
+			do {
+				wbsService.newWbs(map);
+			} while (!session.getAttribute("cnt").equals(jsonArr.get("rowKey")));
+			
+			//TODO 11. 변경점
+			mapId.put("memId", "CH001");
+//			List<WbsVo> wVo = wbsService.selectWbs(mapId);
+//			System.out.println(wVo);
+//				wbsService.newWbs(map);
 			
 		return "redirect:/wbs.do";
 	}
@@ -326,6 +333,18 @@ public class TemplateCtrl {
 		logger.info("TemplateCtrl finWbs {}");
 		//TODO 6. 변경점 프로젝트 이름 세션에서 받을 것
 		wbsService.deleteNullWbs("자두과");
+		
+		session.setAttribute("cnt", "null");
+		return "Yammy";
+	}
+	
+	@RequestMapping(value = "/deleteFbs.do.do",method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteFbs(@RequestParam Map<String, String>jsonArr, HttpSession session) {
+		logger.info("TemplateCtrl deleteFbs {}",jsonArr);
+		System.out.println(jsonArr);
+		
+		
 		return "Yammy";
 	}
 }

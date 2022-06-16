@@ -91,6 +91,12 @@ public class MemberServiceImpl implements IMemberService {
 	}
 	
 	@Override
+	public int modifyMemberPw(MemberVo vo) {
+		return dao.modifyMemberPw(vo);
+	}
+	
+	
+	@Override
 	public String findIdmdmber(Map<String, Object> map) {
 		return dao.findIdmdmber(map);
 	}
