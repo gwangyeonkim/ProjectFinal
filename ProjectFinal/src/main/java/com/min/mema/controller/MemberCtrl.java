@@ -36,11 +36,6 @@ public class MemberCtrl {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberCtrl.class);
 
-//	@RequestMapping(value = "/loginPage.do", method = RequestMethod.GET)
-//	public String loginForm() {
-//		logger.info("로그인페이지 이동");
-//		return "loginPage";
-//	}
 	
 	 @RequestMapping(value = "/logout.do", method= RequestMethod.GET)
 	   public String logout(HttpSession session ) {
@@ -62,12 +57,11 @@ public class MemberCtrl {
 		
 		if (loginVo == null) {
 			System.out.println(loginVo+"++++++++++++++++++");
-			out.print("<script>alert('로그인이 실패하였습니다.'); location.href='./home.do'</script>");
+			out.print("<script>alert('로그인이 정보를 확인해 주세요.'); location.href='./home.do'</script>");
 			out.flush();
 			return "redirect:/home.do";
 		}else {
 			session.setAttribute("loginVo", loginVo);
-//			model.addAttribute("loginVo", loginVo);
 		}
 			return "redirect:/project.do";
 	}
@@ -87,13 +81,18 @@ public class MemberCtrl {
 	}
 	
 	@RequestMapping(value = "/singUp.do", method = RequestMethod.POST)
-	public String maingo(MemberVo vo) {
+	public String maingo(MemberVo vo , HttpServletResponse resp) throws IOException {
 		logger.info("MemberCtrl signUp 받은값 {} :" ,vo);
-		
-		
-		service.signUp(vo);
-//		System.out.println("회원가입 정보"+vo.toString());
-		
+		resp.setContentType("text/html; charset=UTF-8;");
+		PrintWriter out = resp.getWriter();
+		if (vo != null) {
+			service.signUp(vo);
+			out.print("<script>alert('회원가입에 성공하셨습니다.'); location.href='./home.do'</script>");
+			out.flush();
+		}else {
+			out.print("<script>alert('(실패) 회원가입을 다시해주세요.'); location.href='./home.do'</script>");
+			out.flush();
+		}
 		return "home";
 	}
 	
@@ -112,7 +111,6 @@ public class MemberCtrl {
 	@RequestMapping(value = "/checkMail.do" ,method = RequestMethod.GET)
 	@ResponseBody
 	public String checkMail(@RequestParam String email) {
-		
 		return service.chkEmail(email);
 	}
 	
@@ -121,23 +119,16 @@ public class MemberCtrl {
 	@RequestMapping(value = "/checkHp.do", method = RequestMethod.GET)
 	@ResponseBody
 	public String checkPh(@RequestParam String Hp) {
-		
 		return service.chkHp(Hp);
 	}
 	
 	@GetMapping(value = "/mamberInfo.do")
 	public String mamberInfo() {
-		
 		return "mamberInfo";
 	}
 	
-	
-
-	
-	
 	@GetMapping(value = "/modifyMember.do")
 	public String modifyMember() {
-		
 		return "modifyMember";
 	}
 	
@@ -145,7 +136,25 @@ public class MemberCtrl {
 	public String modifyMember(MemberVo vo) {
 		logger.info("MemberCtrl modifyMember {}", vo);
 		service.modifyMember(vo);
-		return "modifyMember";
+		return "redirect:/project.do";
+	}
+	
+	@GetMapping(value = "/modifyMemberPw.do")
+	public String modifyMemberPw() {
+		return "modifyMemberPw";
+	}
+	
+	@RequestMapping(value = "/modifyMemberPw.do" , method = RequestMethod.POST)
+	public String modifyMemberPw(MemberVo vo, HttpServletResponse resp) throws IOException {
+		logger.info("MemberCtrl modifyMember {}", vo);
+		resp.setContentType("text/html; charset=UTF-8;");
+		PrintWriter out = resp.getWriter();
+		if (vo != null) {
+			service.modifyMemberPw(vo);
+			out.print("<script>alert('비밀번호변경!'); location.href='./project.do'</script>");
+			out.flush();
+		}
+		return "redirect:/project.do";
 	}
 	
 	@RequestMapping(value = "/findIdMember.do", method = RequestMethod.GET)
@@ -190,7 +199,6 @@ public class MemberCtrl {
 	public MemberVo memberSelect(String id, String email, Model model) {
 		logger.info("MemberCtrl memberSelect 상세조회");
 		MemberVo vo = service.memberSelect(id);
-//		model.addAttribute("vo", vo);
 
 		return vo;
 	}
@@ -209,29 +217,16 @@ public class MemberCtrl {
 		return service.findAndUpdatePw(vo);
 	}
 	
-//	@RequestMapping(value = "/joinEmail.do" ,method = RequestMethod.GET)
-//	@ResponseBody
-//	public String joinMail(@RequestParam String email, MemberVo vo, ProjectVo pVo) {
-//		logger.info("MemberCtrl joinMail 이동하기");
-//		System.out.println(email+"!!!!!!!!!!!!!!!!!!!!!!!");
-//		ProjectVo pVo = service.inviteMember(vo);
-//		return service.inviteMember(vo);
-//	}
-	
-//	public String joinMail() {
-//		
-//		return null;
-//	}
 	
 	@RequestMapping(value = "/inviteMember.do" , method = RequestMethod.POST)
 	public String inviteMember(MemberVo vo, HttpServletResponse resp) throws IOException {
-//		ProjectVo pVo = service.inviteMember(vo);
 		resp.setContentType("text/html; charset=UTF-8;");
 		System.out.println(vo+"+++++++++++++++++++++++++++");
 		PrintWriter out = resp.getWriter();
 		if (vo != null) {
 			out.print("<script>alert('메일을 보냈습니다.'); location.href='./memberlistAll.do'</script>");
 			out.flush();
+		
 		}
 		System.out.println(vo);
 		return service.inviteMember(vo);
