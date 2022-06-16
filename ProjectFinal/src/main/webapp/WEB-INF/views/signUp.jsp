@@ -9,9 +9,9 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- date picker ui css -->
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-<!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -26,7 +26,7 @@
 }
 
 .wrapper{
-	width: 1370px;
+	width: 1320px;
 }
 
 .home{
@@ -38,7 +38,7 @@
 	
 
 
-table.type02 {
+table .type02 {
   border-collapse: separate;
   border-spacing: 0;
   text-align: left;
@@ -99,21 +99,6 @@ h2{
 	<div class="container">
     <form action="./singUp.do" method="post" class="form-inline" >
     
-<!--     <input type="text" class="form-control" placeholder="Text input"> -->
-<!-- 	  <input type="password" class="form-control" placeholder="password input"> -->
-<!-- 	  <input type="datetime" class="form-control" placeholder="datetime input"> -->
-<!-- 	  <input type="datetime-local" class="form-control" placeholder="datetime-local input"> -->
-<!-- 	  <input type="date" class="form-control" placeholder="date input"> -->
-<!-- 	  <input type="month" class="form-control" placeholder="month input"> -->
-<!-- 	  <input type="time" class="form-control" placeholder="time input"> -->
-<!-- 	  <input type="week" class="form-control" placeholder="week input"> -->
-<!-- 	  <input type="number" class="form-control" placeholder="number input"> -->
-<!-- 	  <input type="url" class="form-control" placeholder="url input"> -->
-<!-- 	  <input type="search" class="form-control" placeholder="search input"> -->
-<!-- 	  <input type="tel" class="form-control" placeholder="tel input"> -->
-<!-- 	  <input type="color" class="form-control" placeholder="color input"> -->
-<!-- 	  <input type="email" class="form-control" placeholder="color input"> -->
-    
                             <h2>회원가입</h2>
     <table id="type02" class="type02">
 <!--                     <tr> -->
@@ -125,13 +110,13 @@ h2{
                             <h3 id="h3">아이디</h3>
                         </th>
                         <td colspan="5">
-                           <input type="text" placeholder="Enter ID" class="form-control" id="memberId" name="memberId" required>
+                           <input type="text" class="form-control" id="memberId" name="memberId" required>
                         </td>
                         <th colspan="2">
                             <h3 id="h3">이 름</h3>
                         </th>
                         <td colspan="3">
-                             <input type="text" placeholder="Enter name" class="form-control" id="name" name="memName" required> <br>
+                             <input type="text" class="form-control" id="name" name="memName" required> <br>
                         </td>
                     </tr>
                     <tr>
@@ -144,10 +129,10 @@ h2{
                             <h3 id="h3">비밀번호</h3>
                         </th>
                         <td colspan="3">
-                            <input type="Password" placeholder="Enter password" class="form-control" id="memPw" name="memPw" required>
+                            <input type="Password" class="form-control" id="memPw" name="memPw" required>
                         </td>
                         <td colspan="2">
-                            <input type="Password" placeholder="Enter password" class="form-control" id="validPassword" required>
+                            <input type="Password"  class="form-control" id="validPassword" required>
                         </td>
                         <td colspan="4">
                             <span class="point checkPwdComment"></span>
@@ -165,7 +150,7 @@ h2{
                         <td colspan="8">
                             <input id="email" class="form-control" type="text" name="memEmail"  required/>
                         </td>
-                        <td colspan="2">
+                        <td colspan="2" style="text-align: center;">
                             <input type="button" id="checkEmailBtn" class="btn btn-outline-primary btn-lg" value="인증번호 보내기"><br>
                         </td>
                     </tr>
@@ -176,8 +161,8 @@ h2{
                         <td colspan="4">
                             <input id="validEmail" class="form-control" type="text" name="sm_email2" title="인증번호 입력" required/>
                         </td>
-                        <td colspan="2">
-                            <input type="button" value="확인" id="validEmailBtn" class="btn btn-outline-primary btn-lg">
+                        <td colspan="2" style="text-align: center;">
+                            <input type="button" value="인증번호 확인" id="validEmailBtn" class="btn btn-outline-primary btn-lg">
                         </td>
                         <td colspan="4">
 <!--                             <span id="validEmailBtn" class="btn btn-info">이메일인증</span> -->
@@ -191,19 +176,19 @@ h2{
                         </th>
                         <td colspan="9">
 <!--                         <label for="datepicker">생년월일</label> -->
-                            <input type="date" class="form-control" id="datepicker" name="memBirth">
+                            <input type="date"  class="form-control" id="datepicker" name="memBirth">
                         </td>
                     </tr>
                     <tr>
                         <th colspan="2">
                             <h3 id="h3">주소</h3>
                         </th>
-                        <td colspan="5">
+                        <td colspan="9">
                             <input type="text" class="form-control" id="address_kakao" name="memAddr" readonly />
                         </td>
-                        <td colspan="5">
-                            <input type="text" class="form-control" name="address_detail" />
-                        </td>
+<!--                         <td colspan="5"> -->
+<!--                             <input type="text" class="form-control" name="memAddr" placeholder="상세주소"/> -->
+<!--                         </td> -->
                     </tr>
                     <tr>
                         <th colspan="2" rowspan="2">
@@ -212,7 +197,7 @@ h2{
                         <td colspan="6">
                             <input id="Hp" class="form-control" type="text" name="memPhone"  required />
                         </td>
-                        <td colspan="4">
+                        <td colspan="4" style="text-align: center;">
                             <input type="button" id="checkHpBtn" class="btn btn-outline-primary btn-lg" value="인증번호 보내기"><br/>
                         </td>
                     </tr>
@@ -220,9 +205,6 @@ h2{
                         <td colspan="2">
                             <input id="validHp" class="form-control" type="text" name="sm_Hp2" title="인증번호 입력" required/>
                         </td>
-<!--                         <td colspan="3"> -->
-<!--                             <input type="text" name="" id=""> -->
-<!--                         </td> -->
                         <td colspan="4">
                             <span id="validHpBtn" class="btn btn-outline-primary btn-lg">핸드폰인증</span><br>
 					        <span class="point checkHpComment">핸드폰번호 인증번호 보내기를 해주십시오.</span>
@@ -234,8 +216,8 @@ h2{
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="12">
-                            <input type="submit" value="Sign up" class="btn btn-outline-primary btn-lg">
+                        <td colspan="12" style="text-align: center;">
+                            <input type="submit" value="회원가입" class="btn btn-outline-primary btn-lg">
                         </td>
                     </tr>
     				
@@ -252,13 +234,9 @@ h2{
 <script type="text/javascript">
 
 
-// function joinform_check(){
-	
- 
-//  $("#memberId").focus();
- 
- 
 
+
+//  $("#memberId").focus();
  
 //  var chkUserId = false;
 //  var chkUserPw = false;
@@ -305,31 +283,36 @@ h2{
 			});
 		}
 	});
-//     $("#userId").focus();  작동안됨..
-
-
 
 $("#name").blur(function(){
-	var regName = /[ㄱ-힣]/;
+	var regName = /[가-힣]{2,7}/;
 	var inputName = $("#name").val();
 	console.log(inputName);
 	console.log(inputName.length)
-	console.log(regName.test(inputName) && inputName.length < 2 || inputName.trim() == ""); //수정필요
-	if(!regName.test(inputName) ){
+// 	console.log(regName.test(inputName) && !inputName.length <= 2 || inputName.trim() == ""); //수정필요
+	console.log(!inputName.trim() == "");
+	if(!regName.test(inputName || !inputName.trim() == "") ){
 		console.log($("#name").val());
-// 		alert("공백불가");
 		$("#name").val("");
-// 		$("#name").focus();
+// 		alert("이름은 공백 및 영어로 작성이 불가합니다");
+		$("#name").focus();
 // 		return false;
 	}
 });
 
-	//비밀번호 확인 정규화적용해야함
 	$("#validPassword").blur(function() {
-// 		비밀번호 정규화 8 ~ 16 영문 숫자 
+	var password = $("#memPw").val();
+	console.log(password);
+//		비밀번호 정규화 8 ~ 16 영문 숫자
 	var regPw = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
-	console.log(regPw.test($("#memPw")))
-		if ($("#validPassword").val() == $("#memPw").val()) {
+	console.log(regPw.test(password));
+		if(regPw.test(password)){
+			$(".checkPwdComment").text("비밀번호는 영문 소문자 포함 8~16만 가능합니다(공백불가)");
+			$(".checkPwdComment").css("color", "red");
+			$("#memPw").focus();
+			$("#validPassword").val("");
+			$("#memPw").val("");
+		}else if ($("#validPassword").val() == $("#memPw").val()) {
 			$(".checkPwdComment").text("비밀번호가 일치합니다.");
 			$(".checkPwdComment").css("color", "green");
 // 			$("#doubleCheckPwd").val("true");
@@ -373,10 +356,12 @@ $("#name").blur(function(){
 					}
 		});
 	}else {
-		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
-			$("#email").attr("autofocus", true);
+// 		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+// 			$("#email").attr("autofocus", true);
 			$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
 			$(".checkEmailComment").css("color", "red");
+			$("#email").focus();
+			$("#email").val("");
 	}
 });
 
@@ -395,6 +380,8 @@ $("#name").blur(function(){
 			$(".checkEmailComment").css("color", "red");
 			$("#doubleCheckEmail").val("false");
 			$("#validEmail").attr("autofocus", true);
+			$("#validEmail").focus();
+			$("#validEmail").val("");
 		}
 	});
 
@@ -433,6 +420,8 @@ $("#name").blur(function(){
 			$("#Hp").attr("autofocus", true);
 			$(".checkHpComment").text("유효한 핸드폰번호를 입력해주세요.");
 			$(".checkHpComment").css("color", "red");
+			$("#Hp").focus();
+			$("#Hp").val("");
 		}
 		
 	});
@@ -451,15 +440,11 @@ $("#name").blur(function(){
 			$(".checkHpComment").css("color", "red");
 			$("#doubleCheckHp").val("false");
 			$("#validHp").attr("autofocus", true);
+			$("#validHp").focus();
+			$("#validHp").val("");
 		}
 	});
 	
-// 	$("#join_form").click(function () {
-// 	  	$("form").submit();
-// 	  });
-	
-// }
-
 	window.onload = function() {
 		document
 		.getElementById("address_kakao")
@@ -469,37 +454,12 @@ $("#name").blur(function(){
 		{
 		oncomplete : function(data) { //선택시 입력값 세팅
 		document.getElementById("address_kakao").value = data.address; // 주소 넣기
-		document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
 				}
 		}).open();
 	});
 	}
 	
-	$(function() {
-		//input을 datepicker로 선언
-		$("#datepicker").datepicker(
-		{dateFormat : 'yy-mm-dd' //달력 날짜 형태
-		,showOtherMonths : true //빈 공간에 현재월의 앞뒤월의 날짜를 표시  
-		,showMonthAfterYear : true // 월- 년 순서가아닌 년도 - 월 순서
-		,changeYear : true //option값 년 선택 가능
-		,changeMonth : true //option값  월 선택 가능                
-		,showOn : "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-		,buttonImage : "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-		,buttonImageOnly : true //버튼 이미지만 깔끔하게 보이게함
-		,buttonText : "선택" //버튼 호버 텍스트              
-		,yearSuffix : "년" //달력의 년도 부분 뒤 텍스트
-		,monthNamesShort : [ '1월', '2월', '3월', '4월', '5월','6월', '7월', '8월', '9월', '10월', '11월', '12월' ] //달력의 월 부분 텍스트
-		,monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월' ] //달력의 월 부분 Tooltip
-		,dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ] //달력의 요일 텍스트
-		,dayNames : [ '일요일', '월요일', '화요일', '수요일', '목요일','금요일', '토요일' ] //달력의 요일 Tooltip
-		//            ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-		,maxDate : "0D" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-		,yearRange : "1960:2022"
-		});
-
-		//초기값을 오늘 날짜로 설정해줘야 합니다.
-		$('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
-	});
+	
 
 </script>
 

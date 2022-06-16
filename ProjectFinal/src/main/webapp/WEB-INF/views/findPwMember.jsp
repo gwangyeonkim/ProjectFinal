@@ -6,34 +6,64 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+  #container{
+  	margin-top: 50px;
+  }
+  
+  #btn {
+  	padding-top: 20px;
+  	margin-left: 200px;
+  }
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</style>
 </head>
 <body>
-
-
-<form action="">
-<div class="containser">
-	<div class="form-group">
-            <label for="userId">User id</label>
-            <input type="text" placeholder="Enter ID" id="memberId" name="memName" required>
-        </div>
-
-	 <div class="form-group">
-            <label for="userId">User name</label>
-            <input type="text" placeholder="Enter NAME" id="memName" name="memberId" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input id="memEmail" class="email" type="text" name="memEmail"  required/>
-            <input type="button" id="checkEmailBtn" class="btn btn-info">임시비밀번호 보내기<br/><br>
-        </div>
-	</div>
+<form action="./findPwMember.do" method="post">
+<div id="container" class="form-horizontal">
+			<label class="control-label col-sm-2"> ID: </label>
+			<div id="name" class="col-sm-10">
+ 				<input type="text" class="form-control"  id="memberId" name="memberId" required>
+			</div>
+			<label class="control-label col-sm-2"> 이름 : </label>
+			<div id="email" class="col-sm-10">
+				<input type="text" class="form-control"id="memName" name="memName" required>
+			</div>
+			<label class="control-label col-sm-2"> Email : </label>
+			<div id="email" class="col-sm-10">
+				 <input id="memEmail" class="form-control" type="text" name="memEmail"  required/>
+			</div>
+		
+			<div class="form-group" id="btn">        
+		     <div class="col-sm-offset-2 col-sm-10">
+			 <input type="button" id="checkEmailBtn" class="btn btn-info" value="임시비밀번호 보내기">
+		      </div>
+		    </div>
+</div>
 </form>
+
+<!-- <form action=""> -->
+<!-- <div class="containser"> -->
+<!-- 	<div class="form-group"> -->
+<!--             <label for="userId">User id</label> -->
+<!--             <input type="text" placeholder="Enter ID" id="memberId" name="memberId" required> -->
+<!--         </div> -->
+
+<!-- 	 <div class="form-group"> -->
+<!--             <label for="userId">User name</label> -->
+<!--             <input type="text" placeholder="Enter NAME" id="memName" name="memName" required> -->
+<!--         </div> -->
+<!--         <div class="form-group"> -->
+<!--             <label for="email">Email</label> -->
+<!--             <input id="memEmail" class="email" type="text" name="memEmail"  required/> -->
+<!--             <input type="button" id="checkEmailBtn" class="btn btn-info">임시비밀번호 보내기<br/><br> -->
+<!--         </div> -->
+<!-- 	</div> -->
+<!-- </form> -->
 </body>
 
 <script type="text/javascript">
@@ -45,15 +75,14 @@ $("#checkEmailBtn").click(function() {
 	var inputName = $("#memName").val();
 	var inputId = $("#memberId").val();
 	var inputEmail = $("#memEmail").val();
+	
 	console.log(inputEmail);
 	var sendData= {
 		"memName": inputName,
 		"memberId" : inputId,
 		"memEmail" : inputEmail
 	}
-	
 	if(inputEmail != null){
-		
 	$.ajax({
 		 	contentType: "application/json; charset=utf-8",
 			type : "POST",
@@ -80,7 +109,7 @@ $("#checkEmailBtn").click(function() {
 		});
 	}else {
 		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
-			$("#email").attr("autofocus", true);
+			$("#memEmail").attr("autofocus", true);
 			$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
 			$(".checkEmailComment").css("color", "red");
 	}
@@ -89,7 +118,6 @@ $("#checkEmailBtn").click(function() {
 </script>
 
 
-</script>
 
 
 
