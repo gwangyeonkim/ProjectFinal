@@ -59,7 +59,7 @@
     color: #aaa;
     float: right;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: bold; 
 }
 
 .close:hover,

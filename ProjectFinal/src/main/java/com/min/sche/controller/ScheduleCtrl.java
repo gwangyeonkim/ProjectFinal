@@ -43,7 +43,7 @@ import com.min.sche.vo.WbsViewVo;
  */
 
 @Controller
-public class ScheduleCtrl {
+public class ScheduleCtrl { 
 	
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleCtrl.class);
 	

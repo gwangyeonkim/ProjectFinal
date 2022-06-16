@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
 	<a href="./modifyMember.do"> 회원정보 수정페이지 이동</a>
 	<div class="navb">
 		<a href="./scheboard.do" class="logo">Home</a>
-		<div class="dropdown">
+		<div class="dropdown"> 
 			<button class="dropbtn" onclick="location.href='./drop.do'">Document</button>
 		</div>
 		<div class="dropdown">

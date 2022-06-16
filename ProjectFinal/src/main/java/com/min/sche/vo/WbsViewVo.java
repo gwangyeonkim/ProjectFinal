@@ -10,7 +10,7 @@ public class WbsViewVo {
 	private String wbsStartDate;
 	private String wbsEndDate;
 	private String wbsFinDate;
-	private String wbsManager;
+	private String wbsManager; 
 	
 	public String getProjName() {
 		return projName;

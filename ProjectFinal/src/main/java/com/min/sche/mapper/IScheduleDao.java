@@ -11,7 +11,7 @@ public interface IScheduleDao {
 	public List<WbsViewVo> getTeamSchedule(Map<String, Object> map);
 
 	
-	public List<ScheduleVo> pScheduleShow(String mId);
+	public List<ScheduleVo> pScheduleShow(String mId); 
 
 	public int pScheduleInsert(Map<String, Object> map);
 

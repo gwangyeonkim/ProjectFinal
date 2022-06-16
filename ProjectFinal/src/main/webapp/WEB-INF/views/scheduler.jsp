@@ -21,7 +21,7 @@
 <!-- <link rel="stylesheet" href="./css/scheduler.css"> -->
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
+ 
 <script
 	src="https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js"></script>
 	

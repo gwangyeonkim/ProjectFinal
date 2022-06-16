@@ -16,7 +16,7 @@ public interface IScheduleService {
 	public int pScheduleDelete(Map<String, Object> map);
 	
 	public int completeSchedule(String wbsId);
-	public int incompleteSchedule(String wbsId);
+	public int incompleteSchedule(String wbsId); 
 	public List<WbsViewVo> callIncomplete(String memId);
 	public List<WbsViewVo> callComplete(String memId);
 	public int checkAuth (String memId);

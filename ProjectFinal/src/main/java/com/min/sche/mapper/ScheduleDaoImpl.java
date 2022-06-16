@@ -20,7 +20,7 @@ public class ScheduleDaoImpl implements IScheduleDao {
 	private static final String NS = "com.min.sche.mapper.ScheduleDaoImpl.";
 	
 	@Autowired
-	private SqlSessionTemplate session;
+	private SqlSessionTemplate session; 
 	
 
 	@Override
