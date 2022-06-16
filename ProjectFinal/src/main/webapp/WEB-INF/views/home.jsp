@@ -171,8 +171,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <input type="button" value="아이디 찾기" onclick="findId()">
-                        <input type="button" value="비밀번호 찾기" onclick="findPw()">
+                        <input type="button" class="btn btn-outline-primary btn-lg" value="아이디 찾기" onclick="findId()">
+                        <input type="button" class="btn btn-outline-primary btn-lg" value="비밀번호 찾기" onclick="findPw()">
                     </div>
                 </div>
             </div>

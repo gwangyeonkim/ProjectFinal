@@ -34,9 +34,7 @@
 						파일 업로드시에 폴더안에 있어야 업로드가 완료 됩니다.<br>
 					</h3>
 				</div>
-			</div>
-			<div class="area2" style="width: 400px; margin-left: 600px; text-align: center;">
-				<div id="grid" style="width: 300px; margin-left: 50px;"></div>
+				<div id="grid" style="width: 450px;position: relative;left: 800px;bottom: 500px;""></div>
 				<button onclick="location.href='./dropBaseDown.do'">다운로드</button>
 			</div>
 		</div>

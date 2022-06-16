@@ -27,6 +27,8 @@ public interface IMemberService {
 	
 	public int modifyMember(MemberVo vo);
 	
+	public int modifyMemberPw(MemberVo vo);
+	
 	public String findIdmdmber(Map<String, Object> map);
 	
 	
@@ -35,7 +37,6 @@ public interface IMemberService {
 	
 	public MemberVo memberSelect(String id);
 	
-//	public String joinEmail(String email);
 	
 	public String findAndUpdatePw(MemberVo vo); 
   
