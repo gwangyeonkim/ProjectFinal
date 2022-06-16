@@ -18,7 +18,6 @@ pageEncoding="UTF-8"%>
 <script src="js/index.js"></script>
 </head>
 <body>
-	<a href="./modifyMember.do"> 회원정보 수정페이지 이동</a>
 	<div class="navb">
 		<a href="./scheboard.do" class="logo">Home</a>
 		<div class="dropdown"> 
@@ -37,14 +36,16 @@ pageEncoding="UTF-8"%>
 			<button class="dropbtn" onclick="location.href='./moveFixhistory.do'">Template</button>
 		</div>
 		<div class="navb-right">
-			<a id="loginInfo"> ${loginVo.memberId}님
+
+			<a href="./modifyMember.do" id="loginInfo"> ${loginVo.memberId}님
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
 				<span id="notiNonCheck">&#128308;</span>
 				 <!-- 이 notiCount가 미확인 알림 숫자임 -->
 				<span id="notiCount">${count}</span> 
+			 </a> 
+
 				<a class="active" href="./logout.do">logout</a>
-			</a>
 		</div>
 	</div>
 </body>
