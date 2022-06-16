@@ -25,10 +25,7 @@ pageEncoding="UTF-8"%>
 			<button class="dropbtn" onclick="location.href='./drop.do'">Document</button>
 		</div>
 		<div class="dropdown">
-			<button class="dropbtn">Calendar</button>
-			<div class="dropdown-content">
-				<a href="./calendar.do">Scheduler</a> <a href="#">Detail</a>
-			</div>
+			<button class="dropbtn" onclick="location.href='./calendar.do'">Calendar</button>
 		</div>
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./memberlistAll.do'">Member</button>
@@ -40,7 +37,7 @@ pageEncoding="UTF-8"%>
 			<button class="dropbtn" onclick="location.href='./moveFixhistory.do'">Template</button>
 		</div>
 		<div class="navb-right">
-			<a id="loginInfo"> ${loginVo.memberId}님 
+			<a id="loginInfo"> ${loginVo.memberId}님
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
 				<span id="notiNonCheck">&#128308;</span>

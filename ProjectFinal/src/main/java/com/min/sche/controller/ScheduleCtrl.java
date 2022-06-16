@@ -71,9 +71,18 @@ public class ScheduleCtrl {
 		return "scheboard";
 	}
 	
-	@RequestMapping(value="/showTable.do", method=RequestMethod.POST)
-	public List<WbsViewVo> showTable(){
-		List<WbsViewVo> lists = new ArrayList<WbsViewVo>();
+	@RequestMapping(value="/callComplete.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<WbsViewVo> callComplete(@RequestParam String memId){
+		List<WbsViewVo> lists = service.callComplete(memId);
+		
+		return lists;
+	}
+	
+	@RequestMapping(value="/callIncomplete.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<WbsViewVo> callIncomplete(@RequestParam String memId){
+		List<WbsViewVo> lists = service.callIncomplete(memId);
 		
 		return lists;
 	}
@@ -186,13 +195,16 @@ public class ScheduleCtrl {
 	@ResponseBody
 	public JSONArray callSchedule(@RequestParam(value="list[]") List<String> nameList) {
 		System.out.println(nameList);
-		List<WbsViewVo> lists = service.getTeamSchedule(nameList);//DB에서 일정목록을 불러옴
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userList", nameList);
+		map.put("memId", "GD001"); //접속한 사용자 아이디
+		List<WbsViewVo> lists = service.getTeamSchedule(map);//DB에서 일정목록을 불러옴
 		System.out.println("받아온 리스트@@@@@@@@@@@@@@@@@@@@@@@@@");
 		System.out.println(lists);
 		JSONArray arr = new JSONArray();//JSONArray[JSONObject] 형태로 만들어서 보내줌
 		for (int i = 0; i < lists.size(); i++) {
 			org.json.simple.JSONObject jsonObj = new org.json.simple.JSONObject();
-			jsonObj.put("id", lists.get(i).getWbsCode());
+			jsonObj.put("id", lists.get(i).getWbsId());
 			jsonObj.put("calendarId",lists.get(i).getProjName());
 			jsonObj.put("title", lists.get(i).getWbsName());
 			jsonObj.put("category", "time");
@@ -200,6 +212,7 @@ public class ScheduleCtrl {
 			jsonObj.put("end", lists.get(i).getWbsEndDate());
 			jsonObj.put("isAllDay","true");
 			jsonObj.put("isPrivate","true");
+			jsonObj.put("isReadOnly", "true");
 			jsonObj.put("location", lists.get(i).getWbsConent());
 			arr.add(jsonObj);
 		}
@@ -209,7 +222,7 @@ public class ScheduleCtrl {
 	
 	@RequestMapping(value="/insertSchedule.do", method=RequestMethod.POST)
 	@ResponseBody
-	public int insertSchedule(
+	public int insertSchedule(@RequestParam
 				String title, String content, String start, String end
 			){
 		logger.info("받아온 값 : {}",title +"/"+ content +"/"+ start +"/"+ end);
@@ -244,6 +257,8 @@ public class ScheduleCtrl {
 			jsonObj.put("end", lists.get(i).getScheEnd());
 			jsonObj.put("isAllDay","true");
 			jsonObj.put("isPrivate","false");
+			jsonObj.put("color","white");
+			jsonObj.put("bgColor","green");
 			jsonObj.put("location", lists.get(i).getScheContent());
 			arr.add(jsonObj);
 		}
@@ -252,6 +267,67 @@ public class ScheduleCtrl {
 		return result;
 	}
 	
-	//완성, 미완성 일정 목록 불러오는 메소드
+	@RequestMapping(value="/deleteSchedule.do", method = RequestMethod.GET)
+	@ResponseBody
+	public int deleteSchedule(@RequestParam String sId, String mId) {
+		logger.info("개인 일정 삭제 화면에서 넘겨받은 값{}",sId+mId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sId", sId);
+		map.put("mId", mId);
+		int cnt = service.pScheduleDelete(map);
+		System.out.println(cnt);
+		return cnt;
+	}
 	
+	@RequestMapping(value="/updateSchedule.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteSchedule(@RequestParam
+			String sId, String mId, String sName, String sCont, String start, String end) {
+		logger.info("개인 일정 업데이트 화면에서 넘겨받은 값{}",sId+"/"+mId+"/"+sName+"/"+sCont+"/"+start+"/"+end);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("sId", sId);
+		map.put("mId", mId);
+		map.put("sName", sName);
+		map.put("sCont", sCont);
+		map.put("start", start);
+		map.put("end", end);
+		int cnt = service.pScheduleUpdate(map);
+		System.out.println(cnt);
+		return cnt;
+	}
+	
+	@RequestMapping(value="/completeSchedule.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int completeSchedule(@RequestParam
+			String wbsId) {
+		logger.info("일정 완료 화면에서 넘겨받은 값{}",wbsId);
+		int cnt = service.completeSchedule(wbsId);
+		System.out.println(cnt);
+		return cnt;
+	}
+	
+	@RequestMapping(value="/incompleteSchedule.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int incompleteSchedule(@RequestParam
+			String wbsId) {
+		logger.info("일정 완료 화면에서 넘겨받은 값{}",wbsId);
+		int cnt = service.incompleteSchedule(wbsId);
+		System.out.println(cnt);
+		return cnt;
+	}
+
+	@RequestMapping(value="/checkAuth.do", method=RequestMethod.POST)
+	@ResponseBody
+	public boolean checkAuth(@RequestParam String memId) {
+		boolean isc = false;
+		logger.info("PM 유무 체크 받은 값 {}",memId);
+		int cnt = service.checkAuth(memId);
+		if(cnt==1){
+			isc = true;
+		}else {
+			isc = false;
+		}
+		return isc;
+	}
+
 }

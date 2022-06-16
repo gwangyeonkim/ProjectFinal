@@ -8,14 +8,17 @@ import com.min.sche.vo.WbsViewVo;
 
 public interface IScheduleService {
 	
-	public List<WbsViewVo> getTeamSchedule(List<String> userList);
+	public List<WbsViewVo> getTeamSchedule(Map<String, Object> map);
 	
 	public List<ScheduleVo> pScheduleShow(String mId);
 	public int pScheduleInsert(Map<String, Object> map);
 	public int pScheduleUpdate(Map<String, Object> map);
 	public int pScheduleDelete(Map<String, Object> map);
 	
-	public List<WbsViewVo> callIncomplete(String projName);
-	public List<WbsViewVo> callComplete(String projName);
+	public int completeSchedule(String wbsId);
+	public int incompleteSchedule(String wbsId);
+	public List<WbsViewVo> callIncomplete(String memId);
+	public List<WbsViewVo> callComplete(String memId);
+	public int checkAuth (String memId);
 	
 }

@@ -24,9 +24,9 @@ public class ScheduleDaoImpl implements IScheduleDao {
 	
 
 	@Override
-	public List<WbsViewVo> getTeamSchedule(List<String> userList) {
+	public List<WbsViewVo> getTeamSchedule(Map<String, Object> map) {
 		logger.info("해당 인원이 맡은 팀일정 가져오기");
-		List<WbsViewVo> lists = session.selectList(NS+"getTeamSchedule", userList);
+		List<WbsViewVo> lists = session.selectList(NS+"getTeamSchedule", map);
 		return lists;
 	}
 
@@ -61,19 +61,40 @@ public class ScheduleDaoImpl implements IScheduleDao {
 	}
 
 	@Override
-	public List<WbsViewVo> callIncomplete(String projName) {
+	public List<WbsViewVo> callIncomplete(String memId) {
 		// TODO Auto-generated method stub
 		logger.info("미완료 일정 목록 출력");
-		List<WbsViewVo> lists = session.selectList(NS+"callIncomplete", projName);
+		List<WbsViewVo> lists = session.selectList(NS+"callIncomplete", memId);
 		return lists;
 	}
 
 	@Override
-	public List<WbsViewVo> callComplete(String projName) {
+	public List<WbsViewVo> callComplete(String memId) {
 		// TODO Auto-generated method stub
 		logger.info("완료 일정 목록 출력");
-		List<WbsViewVo> lists = session.selectList(NS+"callComplete", projName);
+		List<WbsViewVo> lists = session.selectList(NS+"callComplete", memId);
 		return lists;
+	}
+
+	@Override
+	public int completeSchedule(String wbsId) {
+		logger.info("일정 완료");
+		int cnt = session.insert(NS+"completeSchedule",wbsId);
+		return cnt;
+	}
+	
+	@Override
+	public int incompleteSchedule(String wbsId) {
+		logger.info("일정 완료");
+		int cnt = session.insert(NS+"incompleteSchedule",wbsId);
+		return cnt;
+	}
+
+	@Override
+	public int checkAuth(String memId) {
+		logger.info("권한 체크");
+		int cnt = session.selectOne(NS+"checkAuth",memId);
+		return cnt;
 	}
 
 

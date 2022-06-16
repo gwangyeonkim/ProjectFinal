@@ -108,11 +108,61 @@
 	font-size: 24px;
 }
 
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0, 0.7); /* Black w/ opacity */
+    
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    text-align:center;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.clearBtn{
+	background-color: white;
+	color: black;
+	font-size: 20px;
+	font-weight: 1000;
+	cursor:pointer;
+	transition:0.3s;
+}
+
+.clearBtn:hover {
+	background-color: black;
+	color: white;
+}
 </style>
 <script type="text/javascript">
 
 $(document).ready(function() {
-
 	showCalendar();
 });
 
@@ -208,8 +258,8 @@ function showCalendar(){
 					type:"POST",
 					data:scheduleInfo,
 					success: function(data){
-						if(data==1){ // insert에 성공했다면
-							console.log(getPersonalSchedule());
+						if(data==1){ // insert에 성공했다면 
+							console.log(getPersonalSchedule());1
 							calendar.createSchedules(getPersonalSchedule());
 						}
 					 },
@@ -222,26 +272,85 @@ function showCalendar(){
 			'beforeUpdateSchedule':function(scheduleData){// 일정 수정 및 드래그를 하였을 때 발생하는 이벤트
 				console.log(scheduleData.schedule); // 수정 전 기존 일정 정보
 				console.log(scheduleData.changes);//변경사항
-				console.log("업데이트 발생");
+				if(scheduleData.changes != null){
+					let info = {
+							"sId" : scheduleData.schedule.id,
+							"mId" : scheduleData.schedule.calendarId,
+							"sName" : scheduleData.schedule.title,
+							"sCont" : scheduleData.schedule.location,
+							"start" : makeTime(scheduleData.schedule.start),
+							"end" : makeTime(scheduleData.schedule.end)
+						}
+					$.ajax({
+						url:"./updateSchedule.do",
+						type:"POST",
+						data:info,
+						success:function(data){
+							console.log("업데이트성공");
+							console.log(data);
+						},
+						error:function(){
+							alert("잘못된 요청입니다");
+						} 
+					});
+				calendar.updateSchedule(scheduleData.schedule.id, scheduleData.schedule.calendarId, {
+				    title: scheduleData.changes.title,
+				    location : scheduleData.changes.location,
+				    start: scheduleData.changes.start,
+				    end: scheduleData.changes.end
+				},false);
+				}
+				console.log(makeTime(scheduleData.schedule.start));
+				console.log(makeTime(scheduleData.schedule.end));
 			},
 			'beforeDeleteSchedule':function(scheduleData){//삭제할때 발생하는 이벤트
 				console.log(scheduleData.schedule) // 삭제할 일정 정보
 				console.log("삭제");
-			 },
-			 'clickSchedule':function(scheduleData){
-				 if(scheduleData.schedule.isReadOnly){
-					alert("공휴일은 수정할 수 없습니다!");
-					return false;
-				 }else if(scheduleData.schedule.isPrivate){
-					alert("팀 일정은 PM이 문서수정으로 수정이 가능");
-				 }else{
-					 console.log(scheduleData);
-				 }
-				 
-			 },
-			 'clickMore':function(){
-				 console.log("날짜클릭");
-			 }
+				$.ajax({
+					url: "./deleteSchedule.do?sId="+scheduleData.schedule.id+"&&mId=GD001",//mid 현재 접속자 아이디 넣어야함
+					type: "GET",
+					success: function(data) {
+						console.log("삭제성공");
+						console.log(data);
+					},
+					error:function(){
+						alert("잘못된 요청입니다");
+					}
+				});
+				calendar.deleteSchedule(scheduleData.schedule.id, scheduleData.schedule.calendarId, false);
+			},
+			'clickSchedule':function(scheduleData){
+				console.log(scheduleData.schedule);
+				if(scheduleData.schedule.isPrivate == "true"){
+					var modal = document.getElementById('myModal');
+					var span = document.getElementsByClassName("close")[0];
+					var clearBtn = document.getElementsByClassName("clearBtn")[0];
+					modal.style.display = "block";
+
+					span.onclick = function() {
+					    modal.style.display = "none";
+					}
+					
+					clearBtn.onclick = function(){
+						console.log("일정완료");
+						$.ajax({
+							url:"./completeSchedule.do",
+							type:"POST",
+							data:{"wbsId":scheduleData.schedule.id},
+							success:function(){
+								console.log("일정완료");
+								calendar.deleteSchedule(scheduleData.schedule.id, scheduleData.schedule.calendarId, false);
+							},
+							error:function(){
+								alert("잘못된 요청입니다");
+							} 
+						});
+						modal.style.display = "none";
+					}
+					
+					
+				}
+			}
 		});
 		
 		
@@ -297,6 +406,7 @@ function showCalendar(){
 						calendar.clear();
 						calendar.createSchedules(data);
 						holiday(calendar.getDate().getFullYear());
+						calendar.createSchedules(getPersonalSchedule());
 					 },
 					error:function(){
 						alert("잘못된 요청입니다");
@@ -305,6 +415,7 @@ function showCalendar(){
 			}else if(checkSelect() == null){ //체크된게없다는뜻
 				calendar.clear();
 				holiday(calendar.getDate().getFullYear());
+				calendar.createSchedules(getPersonalSchedule());
 			}
 			
 		});
@@ -323,10 +434,7 @@ function showCalendar(){
 				}
 			});
 		}
-		
-
 }
-
 	
 		
 
@@ -476,9 +584,14 @@ function makeTime(info){
 		month = '0'+month;
 	}
 	var day = String(info.getDate());
+	if(day.length==1){
+		day = '0'+day;
+	}
 	var result = year+'-'+month+'-'+day;
 	return result;
 }
+
+
 </script>
 <%@include file="./header.jsp" %>
 <body>
@@ -516,5 +629,16 @@ function makeTime(info){
 	</div>
 
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">x</span>
+    <h2>해당 일정을 완료하시겠습니까?</h2>
+    <button class="clearBtn" onclick="completeWbs()">일정완료</button>
+  </div>
+
+</div>
 </body>
 </html>

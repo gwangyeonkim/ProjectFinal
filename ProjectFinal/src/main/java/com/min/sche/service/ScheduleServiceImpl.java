@@ -17,9 +17,9 @@ public class ScheduleServiceImpl implements IScheduleService {
 	private IScheduleDao dao;
 	
 	@Override
-	public List<WbsViewVo> getTeamSchedule(List<String> userList) {
+	public List<WbsViewVo> getTeamSchedule(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return dao.getTeamSchedule(userList);
+		return dao.getTeamSchedule(map);
 	}
 	
 	@Override
@@ -47,15 +47,33 @@ public class ScheduleServiceImpl implements IScheduleService {
 	}
 
 	@Override
-	public List<WbsViewVo> callIncomplete(String projName) {
+	public List<WbsViewVo> callIncomplete(String memId) {
 		// TODO Auto-generated method stub
-		return dao.callIncomplete(projName);
+		return dao.callIncomplete(memId);
 	}
 
 	@Override
-	public List<WbsViewVo> callComplete(String projName) {
+	public List<WbsViewVo> callComplete(String memId) {
 		// TODO Auto-generated method stub
-		return dao.callComplete(projName);
+		return dao.callComplete(memId);
+	}
+
+	@Override
+	public int completeSchedule(String wbsId) {
+		// TODO Auto-generated method stub
+		return dao.completeSchedule(wbsId);
+	}
+	
+	@Override
+	public int incompleteSchedule(String wbsId) {
+		// TODO Auto-generated method stub
+		return dao.incompleteSchedule(wbsId);
+	}
+
+	@Override
+	public int checkAuth(String memId) {
+		// TODO Auto-generated method stub
+		return dao.checkAuth(memId);
 	}
 
 	
