@@ -97,6 +97,36 @@ public class ScheduleDaoImpl implements IScheduleDao {
 		return cnt;
 	}
 
+	@Override
+	public String getProjectMember(String mId) {
+		logger.info("프로젝트 멤버 리스트 출력");
+		return session.selectOne(NS+"getProjectMember", mId);
+	}
+
+	@Override
+	public int getFinCount(String projName) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NS+"getFinCount",projName);
+	}
+
+	@Override
+	public int getAllCount(String projName) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NS+"getAllCount",projName);
+	}
+
+	@Override
+	public int memFinCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NS+"memFinCount",map);
+	}
+
+	@Override
+	public int memAllCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return session.selectOne(NS+"memAllCount",map);
+	}
+
 
 	
 
