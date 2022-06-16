@@ -53,7 +53,7 @@ public class ProjectCtrl {
 		System.out.println(test.getMemberId());
 		return test;
 	}
-
+  
 	// memId = 로그인세션에 담겨있는 아이디로 변경
 	@RequestMapping(value = "/project.do",method = RequestMethod.GET)
 	public String project(String memId,HttpSession session) {

@@ -26,6 +26,11 @@
 			<div id="grid" style="width: 890px;">
 				<button onclick="Fbs()">조회</button>
 				<button onclick="newRow()">행추가</button>
+				<div>
+					<form action="./deleteFbs.do" method="post">
+						<button type="submit">삭제</button>
+					</form>
+				</div>
 				<button onclick="finFbs()">완료</button>
 			</div>
 		</div>
@@ -79,12 +84,12 @@ var el;
 var options;
 	const grid = new Grid({
 			  el: document.getElementById('grid'),
+			  rowHeaders: ['rowNum'],
 			  columns: [
 				 	 {
 					    header: '대분류',
 					    name: 'topName',
 					    editor: 'text'
-					    
 					  },
 					  {
 						header:'대분류 코드',
@@ -124,6 +129,9 @@ var options;
 					}
 			]
 		});
+	
+	
+	
 	var arrData = function (){
 		
 			$.ajax({
@@ -140,6 +148,7 @@ var options;
 function Fbs(){
 		//GRID 에 데이터를 입력한다.
 		arrData();
+}
 	class CustomTextEditor {
 	      constructor(props) {
 	        const el = document.createElement('input');
@@ -203,7 +212,6 @@ function Fbs(){
 	    })
 	    
 	    
-}
 
 	function newRow(){
 		$.ajax({
@@ -236,8 +244,23 @@ function Fbs(){
 				Fbs();
 			}
 		});
-     	
     }
+	
+	function deleteFbs(){
+		let jsonArr = arrData();
+		
+		$.ajax({
+			url : "./deleteFbs.do.do",
+			method : "POST",
+			data:jsonArr,
+			success : function(result){
+				console.log(result);
+				console.log(result[0]);
+				
+				grid.resetData(result);
+			}
+		});
+	}
 </script>
 
 </html>
