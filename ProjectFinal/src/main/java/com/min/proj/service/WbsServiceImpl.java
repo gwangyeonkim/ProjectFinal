@@ -43,4 +43,10 @@ public class WbsServiceImpl implements IWbsService{
 		return dao.deleteNullWbs(projName);
 	}
 
+	@Override
+	public int deleteWbs(Map<String, String> map) {
+		logger.info("WbsServiceImpl deleteWbs {}",map);
+		return dao.deleteWbs(map);
+	}
+
 }

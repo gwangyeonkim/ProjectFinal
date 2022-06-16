@@ -35,4 +35,11 @@ public class FbsDaoImpl implements IFbsDao{
 		return sqlSession.update(NS+"fixFbs",map);
 	}
 
+
+	@Override
+	public int deleteFbs(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(NS+"deleteFbs",map);
+	}
+
 }

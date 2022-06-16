@@ -35,4 +35,11 @@ public interface IWbsService {
 	 */
 	public int deleteNullWbs(String projName);
 	
+	/**
+	 * WBS 삭제하는 메소드
+	 * @param map wbsId 
+	 * @return
+	 */
+	public int deleteWbs(Map<String, String> map);
+	
 }

@@ -47,14 +47,11 @@ public class TemplateCtrl {
 	public JSONArray selectFbs(HttpSession session) {
 		logger.info("TemplateCtrl selectFbs");
 		Map<String, String> map = new HashMap<String, String>();
-//		System.out.println((String)session.getAttribute("userId"));
 		
 		// TODO 1. 변경점 1
-//		map.put("memId", (String)session.getAttribute("userId"));
-		map.put("memId", "CH001");
+		map.put("memId", (String)session.getAttribute("userId"));
+//		map.put("memId", "CH001");
 		List<FbsVo> fVo = fbsService.selectFbs(map);
-//		System.out.println(fVo.toString());
-//		System.out.println(map);
 
 		JSONArray jAry = new JSONArray();
 		for (int i = 0; i < fVo.size(); i++) {
@@ -199,8 +196,8 @@ public class TemplateCtrl {
 		logger.info("TemplateCtrl newFbsRow {}");
 		Map<String, String> map = new HashMap<String, String>();
 		// TODO 2. 변경점 1
-//		map.put("projName", (String)session.getAttribute("projName"));
-		map.put("projName", "자두과");
+		map.put("projName", (String)session.getAttribute("projName"));
+//		map.put("projName", "자두과");
 		map.put("topCode", "");
 		map.put("topName", "");
 		topService.newTopCategory(map);
@@ -214,8 +211,8 @@ public class TemplateCtrl {
 		logger.info("TemplateCtrl finFbs {}");
 
 		// TODO 5. 변경점 projName
-		topService.deleteNullTopCategory("자두과");
-//		topService.deleteNullTopCategory((String)session.getAttribute("projName"));
+//		topService.deleteNullTopCategory("자두과");
+		topService.deleteNullTopCategory((String)session.getAttribute("projName"));
 		
 		return true;
 	}
@@ -231,10 +228,9 @@ public class TemplateCtrl {
 	public JSONArray selectWbs(HttpSession session) {
 		logger.info("TemplateCtrl selectWbs");
 		Map<String, String> map = new HashMap<String, String>();
-		session.setAttribute("cnt", "0");
 		// TODO 1. 변경점 1
-//		map.put("memId", (String)session.getAttribute("userId"));
-		map.put("memId", "CH001");
+		map.put("memId", (String)session.getAttribute("userId"));
+//		map.put("memId", "CH001");
 		List<WbsVo> wVo = wbsService.selectWbs(map);
 		JSONArray jAry = new JSONArray();
 		ArrayList<String> Ary = new ArrayList<String>();
@@ -268,7 +264,6 @@ public class TemplateCtrl {
 		System.out.println(jsonArr.get("midId"));
 		System.out.println(jsonArr.get("wbsId"));
 		Map<String, String> map = new HashMap<String, String>();
-		Map<String, String> mapId = new HashMap<String, String>();
 		
 			map.put("midId", jsonArr.get("midId"));
 			map.put("wbsCode", "");
@@ -277,18 +272,10 @@ public class TemplateCtrl {
 			map.put("wbsManager", "");
 			map.put("wbsStartDate", "");
 			map.put("wbsEndDate", "");
-//			TODO 10. 캐시때문인지 뭔지 모르겠는데. 자꾸 여러번 도는 현상이 나옴. 톰캣클린하고 돌리면 한번씩 정상작동하는데 중간에 여러번 돔.
 			System.out.println(jsonArr.get("rowKey"));
-			session.setAttribute("cnt", jsonArr.get("rowKey"));
-			do {
-				wbsService.newWbs(map);
-			} while (!session.getAttribute("cnt").equals(jsonArr.get("rowKey")));
 			
 			//TODO 11. 변경점
-			mapId.put("memId", "CH001");
-//			List<WbsVo> wVo = wbsService.selectWbs(mapId);
-//			System.out.println(wVo);
-//				wbsService.newWbs(map);
+			wbsService.newWbs(map);
 			
 		return "redirect:/wbs.do";
 	}
@@ -332,19 +319,55 @@ public class TemplateCtrl {
 	public String finWbs(HttpSession session) {
 		logger.info("TemplateCtrl finWbs {}");
 		//TODO 6. 변경점 프로젝트 이름 세션에서 받을 것
-		wbsService.deleteNullWbs("자두과");
+		wbsService.deleteNullWbs((String)session.getAttribute("projName"));
+//		wbsService.deleteNullWbs("자두과");
+		
 		
 		session.setAttribute("cnt", "null");
 		return "Yammy";
 	}
 	
-	@RequestMapping(value = "/deleteFbs.do.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteFbs.do",method = RequestMethod.POST)
 	@ResponseBody
-	public String deleteFbs(@RequestParam Map<String, String>jsonArr, HttpSession session) {
-		logger.info("TemplateCtrl deleteFbs {}",jsonArr);
-		System.out.println(jsonArr);
+	public String deleteFbs(HttpSession session, @RequestParam Map<String, Object> map) {
+		logger.info("TemplateCtrl deleteFbs {}",map);
+		System.out.println("앙아아아아아아아아아아"+map);
+		JSONArray jAry = selectFbs(session);
+		int n = Integer.parseInt((String)map.get("deleteNum"));
+		System.out.println(n);
+		System.out.println(n-1);
+		JSONObject jObj = (JSONObject) jAry.get(n-1);
+		System.out.println("@@@@@@@@@@@");
+		System.out.println(jObj.toString());
 		
-		
+		Map<String, String> deleteMap = new HashMap<String, String>();
+		deleteMap.put("midId", (String)jObj.get("midId"));
+		if (map.get("category").equals("1")) {
+			fbsService.deleteFbs(deleteMap);
+			System.out.println("카테고리 1번에 들어옴");
+		}else {
+			topService.deleteTopCategory((String)jObj.get("topId"));
+			System.out.println("카테고리 2번에 들어옴");
+		}
 		return "Yammy";
 	}
+	@RequestMapping(value = "/deleteWbs.do",method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteWbs(HttpSession session, @RequestParam Map<String, Object> map) {
+		logger.info("TemplateCtrl deleteWbs {}",map);
+		System.out.println("앙아아아아아아아아아아"+map);
+		JSONArray jAry = selectWbs(session);
+		int n = Integer.parseInt((String)map.get("deleteNum"));
+		System.out.println(n);
+		System.out.println(n-1);
+		JSONObject jObj = (JSONObject) jAry.get(n-1);
+		System.out.println("@@@@@@@@@@@");
+		System.out.println(jObj.toString());
+
+		Map<String, String> deleteMap = new HashMap<String, String>();
+		deleteMap.put("wbsId", (String)jObj.get("wbsId"));
+		wbsService.deleteWbs(deleteMap);
+		return "Yammy";
+	}
+	
 }

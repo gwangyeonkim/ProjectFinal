@@ -102,7 +102,7 @@ pageEncoding="UTF-8"%>
 				}
 			}, // success
 			error : function(data) {
-				alert("fail");
+// 				alert("fail");
 				console.log(data);
 			} // error
 		});

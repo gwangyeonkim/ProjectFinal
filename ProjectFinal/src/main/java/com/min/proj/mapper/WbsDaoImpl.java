@@ -38,4 +38,10 @@ public class WbsDaoImpl implements IWbsDao{
 		return sqlSession.delete(NS+"deleteNullWbs",projName);
 	}
 
+	@Override
+	public int deleteWbs(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(NS+"deleteWbs",map);
+	}
+
 }
