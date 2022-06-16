@@ -39,14 +39,13 @@ pageEncoding="UTF-8"%>
 			<button class="dropbtn" onclick="location.href='./moveFixhistory.do'">Template</button>
 		</div>
 		<div class="navb-right">
-			<a id="loginInfo"> ${loginVo.memberId}님 
+			<a href="./modifyMember.do" id="loginInfo"> ${loginVo.memberId}님 </a> 
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
 				<span id="notiNonCheck">&#128308;</span>
 				 <!-- 이 notiCount가 미확인 알림 숫자임 -->
 				<span id="notiCount">${count}</span> 
 				<a class="active" href="./logout.do">logout</a>
-			</a>
 		</div>
 	</div>
 </body>
