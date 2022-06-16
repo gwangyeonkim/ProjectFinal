@@ -27,15 +27,21 @@ public class FbsServiceImpl implements IFbsService{
 
 	@Override
 	public int newFbs(Map<String, String> map) {
-		logger.info("FbsServiceImpl selectFbs {}",map);
+		logger.info("FbsServiceImpl newFbs {}",map);
 		return dao.newFbs(map);
 	}
 
 	@Override
 	public int fixFbs(Map<String, String> map) {
-		logger.info("FbsServiceImpl selectFbs {}",map);
+		logger.info("FbsServiceImpl fixFbs {}",map);
 		return dao.fixFbs(map);
 		
+	}
+
+	@Override
+	public int deleteFbs(Map<String, String> map) {
+		logger.info("FbsServiceImpl deleteFbs {}",map);
+		return dao.deleteFbs(map);
 	}
 
 }

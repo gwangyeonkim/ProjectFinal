@@ -5,25 +5,38 @@
 <head>
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" href="./css/tui-grid.css"> -->
-<!-- <script type="text/javascript" src="./js/tui-grid.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <title>WBS</title>
 <%@ include file="../header.jsp" %>
+<style type="text/css">
+.navb{
+    width: 1050px;
+    height: 80px;
+}
+</style>
 </head>
 <body>
 	<div class="wrapper">
-		<div class="content" style="width: 1400px;">
-			<div id="grid" style="width: 890px;">
-				<button onclick="Wbs()">조회</button>
-				<button onclick="finWbs()">완료</button>
+	<div style="margin-bottom: 30px; margin-top: 0px;padding-top: 20px;margin-left: 30px;">
+	<button onclick="location.href='./fbs.do'" class="btn btn-primary">FBS 이동</button>
+	<button onclick="location.href='./wbs.do'" class="btn btn-primary">WBS 이동</button>
+	<button onclick="location.href='./moveFixhistory.do'" class="btn btn-primary">작성이력 이동</button>
+	</div>
+		<div class="content" style="position:relative;" >
+			<div id="grid" style="width: 890px;margin-left: 10px;">
+		<div style="position: absolute; right:10px;">
+				<button onclick="Wbs()" class="btn btn-primary">조회</button>
+				<button onclick="finWbs()" class="btn btn-primary">정리</button><br><br><br><br>
+				<input type="text" id="deleteNum" class="form-control" style="width: 100px; margin-right: 30px;" placeholder="Need No."><br>
+				<button onclick="deleteWbs()" class="btn btn-primary">삭제</button>
+			</div>
 			</div>
 		</div>
 	</div>
-		<button onclick="location.href='./fbs.do'">FBS 이동</button>
-	<button onclick="location.href='./wbs.do'">WBS 이동</button>
-	<button onclick="location.href='./moveFixhistory.do'">작성이력 이동</button>
 	<h1>행추가는 대분류 혹은 중분류 다블클릭</h1>
 <script type="text/javascript">
 var Grid = tui.Grid;
@@ -32,6 +45,7 @@ var options;
 var cnt = 0;
 	const grid = new Grid({
 			  el: document.getElementById('grid'),
+			  rowHeaders: ['rowNum'],
 			  columns: [
 				 	 {
 					    header: '대분류',
@@ -191,8 +205,27 @@ function Wbs(){
 				Wbs();
 			}
 		});
-     	
     }
+	
+	function deleteWbs(){
+		console.log('딜리트 WBS 동작띠');
+		let deleteNum =	document.getElementById('deleteNum').value;
+		
+		$.ajax({
+			url : "./deleteWbs.do",
+			method : "POST",
+			data:{"deleteNum":deleteNum},
+			success : function(result){
+				$.ajax({
+					url : "./selectWbs.do",
+					method : "POST",
+					success : function(result){
+						grid.resetData(result);
+					}
+				});
+			}
+		});
+	}
 		
 	
 </script>
