@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.min.sche.mapper.ScheduleDaoImpl">
 
+	<select id="getProjectMember" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT MEM_NAME FROM MEMBERLIST 
+			WHERE MEMBER_ID = #{mId} 
+	</select>
+
 	<select id="getTeamSchedule" resultType="WbsViewVo" parameterType="java.util.Map">
 	
 		SELECT PROJ_NAME, WBS_ID, WBS_NAME, WBS_CONENT, WBS_START_DATE, WBS_END_DATE, WBS_MANAGER, WBS_FIN_DATE
@@ -56,6 +61,26 @@
 	
 	<select id="checkAuth" parameterType="String" resultType="Integer">
 		SELECT COUNT(PROJ_PM) FROM PROJMEMLIST WHERE MEM_ID =#{memId}
+	</select>
+	
+	<select id="getFinCount" parameterType="String" resultType="Integer">
+		SELECT COUNT(WBS_NAME) FROM WBS_VIEW
+			WHERE PROJ_NAME = #{projName} AND WBS_FIN_DATE != ' '
+	</select>
+	
+	<select id="getAllCount" parameterType="String" resultType="Integer">
+		SELECT COUNT(WBS_NAME) FROM WBS_VIEW
+			WHERE PROJ_NAME = #{projName}
+	</select>
+	
+	<select id="memFinCount" parameterType="java.util.Map" resultType="Integer">
+		SELECT COUNT(WBS_NAME) FROM WBS_VIEW
+			WHERE PROJ_NAME = #{projName} AND WBS_MANAGER = #{manager} AND WBS_FIN_DATE != ' '
+	</select>
+	
+	<select id="memAllCount" parameterType="java.util.Map" resultType="Integer">
+		SELECT COUNT(WBS_NAME) FROM WBS_VIEW
+			WHERE PROJ_NAME = #{projName} AND WBS_MANAGER = #{manager}
 	</select>
 
 </mapper>

@@ -14,30 +14,36 @@
 <title>FBS</title>
 <%@ include file="../header.jsp" %>
 <style type="text/css">
-	.navb {
-	width : 1400px;
-	height: 90px;
-	}
+.navb{
+    width: 1050px;
+    height: 80px;
+}
 </style>
 </head>
 <body>
 	<div class="wrapper">
-		<div class="content" style="width: 1400px;">
-			<div id="grid" style="width: 890px;">
-				<button onclick="Fbs()">조회</button>
-				<button onclick="newRow()">행추가</button>
-				<div>
-					<form action="./deleteFbs.do" method="post">
-						<button type="submit">삭제</button>
-					</form>
+	<div style="margin-bottom: 30px; margin-top: 0px;padding-top: 20px;margin-left: 30px;">
+	<button onclick="location.href='./fbs.do'" class="btn btn-primary">FBS 이동</button>
+	<button onclick="location.href='./wbs.do'" class="btn btn-primary">WBS 이동</button>
+	<button onclick="location.href='./moveFixhistory.do'" class="btn btn-primary">작성이력 이동</button>
+	</div>
+		<div class="content" style="position:relative;">
+			<div id="grid"style="width: 890px;margin-left: 10px;">
+				<div  style="position: absolute; right:10px;">
+				<button onclick="Fbs()" class="btn btn-primary">조회</button>
+				<button onclick="newRow()" class="btn btn-primary">행추가</button><br>
+				<button onclick="cleanRow()" class="btn btn-primary" style="width: 127px; margin-top: 5px;">행정리</button>
+				<br><br><br><br><br><br>
+						<input type="text" id="category" value="1"  class="form-control" 
+											style="width: 100px; margin-right: 30px;" placeholder="Need No."><br>
+						<input type="text" id="deleteNum"  class="form-control"
+											style="width: 100px; margin-right: 30px;" placeholder="Need No."><br>
+						<button onclick="deleteFbs()" class="btn btn-primary">삭제</button>
+						<button onclick="finFbs()"  class="btn btn-primary">완료</button>
 				</div>
-				<button onclick="finFbs()">완료</button>
 			</div>
 		</div>
 	</div>
-	<button onclick="location.href='./fbs.do'">FBS 이동</button>
-	<button onclick="location.href='./wbs.do'">WBS 이동</button>
-	<button onclick="location.href='./moveFixhistory.do'">작성이력 이동</button>
 <!-- <button id="fixBtn">모달열기</button> -->
 <div class="modal fade" id="fixModal" role="dialog">
             <div class="modal-dialog">
@@ -235,7 +241,6 @@ function Fbs(){
 	}
 	
 	function finFbs(){
-		$("#fixModal").modal();
 		$.ajax({
 			url : "./finFbs.do",
 			method : "GET",
@@ -244,20 +249,39 @@ function Fbs(){
 				Fbs();
 			}
 		});
+		$("#fixModal").modal();
     }
+	function cleanRow(){
+		$.ajax({
+			url : "./finFbs.do",
+			method : "GET",
+			success : function(result){
+				console.log('작성이 완료지롱');
+				Fbs();
+			}
+		});
+	}
 	
 	function deleteFbs(){
+		console.log('딜리트작동');
 		let jsonArr = arrData();
+		let deleteNum =	document.getElementById('deleteNum').value;
+		let category =	document.getElementById('category').value;
 		
+		
+		console.log(deleteNum);
 		$.ajax({
-			url : "./deleteFbs.do.do",
+			url : "./deleteFbs.do",
 			method : "POST",
-			data:jsonArr,
+			data:{"deleteNum":deleteNum,"category":category},
 			success : function(result){
-				console.log(result);
-				console.log(result[0]);
-				
-				grid.resetData(result);
+				$.ajax({
+					url : "./selectFbs.do",
+					method : "POST",
+					success : function(result){
+						grid.resetData(result);
+					}
+				});
 			}
 		});
 	}

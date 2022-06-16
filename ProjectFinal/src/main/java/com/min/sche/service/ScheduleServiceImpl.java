@@ -76,6 +76,36 @@ public class ScheduleServiceImpl implements IScheduleService {
 		return dao.checkAuth(memId);
 	}
 
+	@Override
+	public String getProjectMember(String mId) {
+		// TODO Auto-generated method stub
+		return dao.getProjectMember(mId);
+	}
+
+	@Override
+	public int getFinCount(String projName) {
+		// TODO Auto-generated method stub
+		return dao.getFinCount(projName);
+	}
+
+	@Override
+	public int getAllCount(String projName) {
+		// TODO Auto-generated method stub
+		return dao.getAllCount(projName);
+	}
+
+	@Override
+	public int memFinCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.memFinCount(map);
+	}
+
+	@Override
+	public int memAllCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return dao.memAllCount(map);
+	}
+
 	
 
 	
