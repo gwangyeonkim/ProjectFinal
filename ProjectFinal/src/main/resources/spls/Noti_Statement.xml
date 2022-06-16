@@ -3,10 +3,11 @@
 <mapper namespace="com.min.noti.mapper.NotiDaoImpl">
 		<insert id="notification_insert_privacy" parameterType="NotiVo">
 		INSERT INTO NOTIFICATION(NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE)
-		SELECT SCHE_ID, 'privacy', s.MEM_ID , SCHE_CONTENT,'N',TO_DATE(SCHE_END , 'yyyy-mm-dd')
+		SELECT SCHE_ID, '개인일정', s.MEM_ID , SCHE_CONTENT,'N',TO_DATE(SCHE_END , 'yyyy-mm-dd')
 		FROM SCHEDULE s
 		WHERE TO_CHAR(TO_DATE(SCHE_END, 'yyyy-mm-dd'), 'yyyy-mm-dd') = TO_CHAR(SYSDATE+1,'yyyy-mm-dd')
 		</insert>
+		
 		
 		<insert id="notification_insert_team" parameterType="NotiVo">
 		INSERT INTO NOTIFICATION(NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE)
