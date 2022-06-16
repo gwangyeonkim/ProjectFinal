@@ -20,7 +20,13 @@
 	padding-left: 20%;
 }
 
+
 </style>
+<script>
+function closeW(){
+	window.close();
+}
+</script>
 </head>
 <body>
 
@@ -31,7 +37,7 @@
 	<input type="text" class="form-control" id="pw" name="memPw" placeholder="새 비밀번호 입력하기" required>
 	<input type="text" class="form-control" id="cPw" placeholder="비밀번호 확인" required>
 	<div id="btn">
-	 <input type="submit" value="비밀번호 변경"  class="btn btn-outline-secondary btn-lg">
+	 <input type="submit" value="비밀번호 변경"  class="btn btn-outline-secondary btn-lg" onclick="closeW()">
 	 </div>
 	</form>
 </div>
