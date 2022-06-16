@@ -20,14 +20,11 @@ pageEncoding="UTF-8"%>
 <body>
 	<div class="navb">
 		<a href="./scheboard.do" class="logo">Home</a>
-		<div class="dropdown">
+		<div class="dropdown"> 
 			<button class="dropbtn" onclick="location.href='./drop.do'">Document</button>
 		</div>
 		<div class="dropdown">
-			<button class="dropbtn">Calendar</button>
-			<div class="dropdown-content">
-				<a href="./calendar.do">Scheduler</a> <a href="#">Detail</a>
-			</div>
+			<button class="dropbtn" onclick="location.href='./calendar.do'">Calendar</button>
 		</div>
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./memberlistAll.do'">Member</button>
@@ -39,12 +36,15 @@ pageEncoding="UTF-8"%>
 			<button class="dropbtn" onclick="location.href='./moveFixhistory.do'">Template</button>
 		</div>
 		<div class="navb-right">
-			<a href="./modifyMember.do" id="loginInfo"> ${loginVo.memberId}님 </a> 
+
+			<a href="./modifyMember.do" id="loginInfo"> ${loginVo.memberId}님
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
 				<span id="notiNonCheck">&#128308;</span>
 				 <!-- 이 notiCount가 미확인 알림 숫자임 -->
 				<span id="notiCount">${count}</span> 
+			 </a> 
+
 				<a class="active" href="./logout.do">logout</a>
 		</div>
 	</div>
