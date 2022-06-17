@@ -81,8 +81,6 @@ public class NotiCtrl {
 		logger.info("notification_my_noti : {}", AllLists);
 		model.addAttribute("AllLists",AllLists);	
 
-		
-		
 		return "ArlimList";
 	}
 	
@@ -122,9 +120,8 @@ public class NotiCtrl {
 		setMemId(memId);
 	
 
-//		service.notification_delete_All();
-//		service.notification_insert_privacy();
-//		service.notification_insert_team();	
+		service.notification_insert_privacy();
+		service.notification_insert_team();	
 		
 		List<NotiVo> All_lists=service.notification_my_noti(map2);
 		ArrayList<NotiVo> lists = new ArrayList<NotiVo>();
@@ -143,7 +140,7 @@ public class NotiCtrl {
 				lists.add(nvo);
 			}
 		}
-		System.out.println("으에에에에에ㅔㅇ에에에ㅔ에에에에ㅔㅇㅇ" +All_lists);
+		System.out.println(All_lists);
 		
 		logger.info("");
 		int count = service.notification_count(map2);

@@ -343,13 +343,13 @@ $(document).ready(function(){
 		
 
 
-		ws = new WebSocket("ws://localhost:8080/ProjectFinal/wsChatGr.do");
+		ws = new WebSocket("ws://132.145.80.131:8088/ProjectFinal/wsChatGr.do");
 
 
 
 
 		ws.onopen = function(){
-			console.log("nickName : " + nick);
+			console.log("nickName : " + nick);	
 			ws.send("#$nick_"+nick);
 		};
 		

@@ -85,8 +85,8 @@ pageEncoding="UTF-8"%>
 // 					console.log(regdate);
 // 					console.log(tomorrow);
 					if (regdate == tomorrow && arr[j].notifided == "N"&& localStorage.getItem("Arlim") == "yes") {
-// 						notify();
-// 			   			notifieded(arr[j].notiId);
+						notify();
+			   			notifieded(arr[j].notiId);
 					}//for문	
 				}	
 				function notify() {
