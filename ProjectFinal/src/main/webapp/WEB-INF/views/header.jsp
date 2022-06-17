@@ -75,7 +75,7 @@ function offEv(){
 		</div>
 		</c:if>
 		<div class="navb-right">
-			<b id="loginInfo">${loginVo.memberId}님
+			<b id="loginInfo">${loginVo.memName} 님
 				<img id="personIcon" alt="person" src="img/person.png" onclick="location.href='./modifyMember.do'">
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
@@ -140,7 +140,7 @@ function offEv(){
 				}
 			}, // success
 			error : function(data) {
-				alert("fail");
+// 				alert("fail");
 
 				console.log(data);
 
