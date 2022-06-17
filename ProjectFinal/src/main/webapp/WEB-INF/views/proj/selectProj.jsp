@@ -7,29 +7,24 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>프로젝트 선택</title>
 </head>
+<%@include file ="../header.jsp"%>
 <style>
-.area {
-	width: 400px;
-	height: 300px;
-	margin-top: 160px;
-	margin-left:  100px;
-	
+.navb{
+    width: 1050px;
+    height: 80px;
 }
 </style>
-<%@include file ="../header.jsp"%>
 <body>
 	<div class="wrapper">
-		<div class="content" style="width: 1400px;">
-		<div class="area1">
-			<br><br><br><br><br><br><br><br><br><br><br><br>
-				<button onclick="newProj()">프로젝트 생성</button>
-				<button onclick="joinProj()">프로젝트 참여</button>
-		</div>
-		<div class="area1" style="width: 1100px;text-align: center;">
-		<br><br><br><br><br><br><br><br><br><br><br><br>
-			<h1>현재 참여중인 프로젝트가 없습니다.</h1>
+		<div class="content" style="position: absolute;">
+			<div style="position: absolute;top: 500px;left: 400px;width: 250px;">
+				<button onclick="newProj()" class="btn btn-primary">프로젝트 생성</button>
+				<button onclick="joinProj()" class="btn btn-primary">프로젝트 참여</button>
+			</div>
+		<div style="position: absolute;top: 250px;left: 250px;">
+			<h1 style="width: 650px;">현재 참여중인 프로젝트가 없습니다.</h1>
 			</div>
 		</div>
 	</div>

@@ -14,30 +14,53 @@
 <title>projMem</title>
 </head>
 <%@ include file="../header.jsp" %>
+<style>
+.navb{
+    width: 1050px;
+    height: 80px;
+}
+</style>
 <body>
-	<div class="wrapper" style="height: 700px; width: 1370px;">
-		<div class="content">
+<input id="iscPm" value="${iscPm }">
+	<div class="wrapper" >
+		<div class="content" style="position: absolute;">
 			<div class="area1" style="width:280px; height: 680px; background-color: white;">
 			<div class="inArea" style="height: 120px; width:280px;text-align: center;position: relative;top: 10px;left: 10px;">
 			<h3>프로젝트 초대 키</h3>			
 			${projToken}
 			</div><br>
-			<div class="inArea" style="height: 500px; width:280px; text-align: center; position: relative;top: 10px;left: 10px;">
-			<h3>프로젝트 멤버</h3>
-			<c:forEach var="i" begin="0" end="${fn:length(projMemList)-1}" step="1">
-			${projMemList.get(i).memId}<br><br>
-			</c:forEach>			
-			</div>
-				<div class="inArea" style="height: 600px;text-align: center;position: relative;left: 320px;bottom: 600px;">
+				<div class="inArea"
+					style="height: 500px; width: 280px; text-align: center; position: relative; top: 10px; left: 10px;">
+					<h3>프로젝트 멤버</h3>
+					<c:forEach var="i" begin="0" end="${fn:length(projMemList)-1}"
+						step="1">
+			${projMemList.get(i).memId}<br>
+						<br>
+					</c:forEach>
+					<div class="inArea" style="position: relative; left: 800px; width: 186px; top: 100px; bottom: 50px;">
+						<button onclick="exitProj()" class="btn btn-primary">탈퇴</button>
+					</div>
+					<div class="inArea" style="position: relative; left: 800px; width: 186px; top: 120px;">
+						<button onclick="deleteProj()" class="btn btn-primary">삭제</button>
+					</div>
+				</div>
+				<div class="inArea"style="height: 166px;text-align: center;position: relative;left: 320px;bottom: 650\;bottom: 650px;bottom: 150px;width: 466px;">
 					<h3>PM 변경란</h3>
-					<form action="#" method="get">
+					<form action="./changPm.do" method="get">
 						<input type="text" >
-						${loginVo.memberId }
+						<input type="text"  value="${userId }"><br>
+						<c:if test="${iscPm=='Y'}">
+							<button type="submit" class="btn btn-primary">변경</button>
+						</c:if>
+						<c:if test="${iscPm=='N'}">
+							<h3>PM만이 가능합니다.</h3>
+						</c:if>
 					</form>
 				</div>
+				
 			</div>
 			</div>
-			<table id="myTable" class="cell-border" style="width: 450px;"> 
+			<table id="myTable" class="cell-border" style="width: 600px;margin-left: 370px;"> 
 		<thead>
 			<tr>
 				<td>아이디</td>
@@ -143,12 +166,31 @@ $(document).ready( function () {
     
     });
 } );
+
+function  exitProj(){
+	let iscPm = document.getElementById('iscPm').value;
+	console.log(iscPm);
+	if(iscPm=='Y'){
+		alert('PM은 탈퇴가 불가능합니다');
+		return false;
+	}
+	alert('탈퇴가 완료되었습니다');
+	console.log('false 이후');
+	location.href='./moveFixhistory.do';
+}
+function  deleteProj(){
+	let iscPm = document.getElementById('iscPm').value;
+	console.log(iscPm);
+	if(iscPm=='N'){
+		alert('PM만 삭제가 가능합니다');
+		return false;
+	}
+	alert('삭제가 완료되었습니다');
+	console.log('false 이후');
+	location.href='./deleteProj.do';
+}
 </script>
 <style>
-.navb {
-	width : 1400px;
-	height: 90px;
-}
 .inArea{
 	background-color: rgb(221, 221, 221);
     border-radius: 20px;
@@ -167,11 +209,6 @@ $(document).ready( function () {
 }
 .dataTables_wrapper {
     position: relative;
-    padding-left : 800px;
-    clear: both;
-    width : 700px;
-    bottom: 600px;
-/*     left: 600px; */
 }
 </style>
 </html>
