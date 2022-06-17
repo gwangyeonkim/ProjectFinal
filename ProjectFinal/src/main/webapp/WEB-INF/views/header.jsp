@@ -37,15 +37,15 @@ pageEncoding="UTF-8"%>
 		</div>
 		<div class="navb-right">
 
-			<a href="./modifyMember.do" id="loginInfo"> ${loginVo.memberId}님
+			<b id="loginInfo">${loginVo.memberId}님
+				<img id="personIcon" alt="person" src="img/person.png" onclick="location.href='./modifyMember.do'">
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
 				<img id="notiIcon" alt="notification" src="img/notification.png" onclick="arlimList()"/>
 				<span id="notiNonCheck">&#128308;</span>
 				 <!-- 이 notiCount가 미확인 알림 숫자임 -->
 				<span id="notiCount">${count}</span> 
-			 </a> 
-
-				<a class="active" href="./logout.do">logout</a>
+			</b> 
+			<button class="logout" onclick="location.href='./logout.do'">logout</button>
 		</div>
 	</div>
 </body>
@@ -102,7 +102,7 @@ pageEncoding="UTF-8"%>
 				}
 			}, // success
 			error : function(data) {
-// 				alert("fail");
+				alert("fail");
 				console.log(data);
 			} // error
 		});

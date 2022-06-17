@@ -91,10 +91,10 @@ public class ScheduleDaoImpl implements IScheduleDao {
 	}
 
 	@Override
-	public int checkAuth(String memId) {
+	public String checkAuth(String memId) {
 		logger.info("권한 체크");
-		int cnt = session.selectOne(NS+"checkAuth",memId);
-		return cnt;
+		String auth = session.selectOne(NS+"checkAuth",memId);
+		return auth;
 	}
 
 	@Override
