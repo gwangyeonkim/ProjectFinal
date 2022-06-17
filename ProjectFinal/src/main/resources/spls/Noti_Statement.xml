@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.min.noti.mapper.NotiDaoImpl">
-		<insert id="notification_insert_privacy" parameterType="NotiVo">
-		INSERT INTO NOTIFICATION(NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE)
-		SELECT SCHE_ID, '개인일정', s.MEM_ID , SCHE_NAME,'N',TO_DATE(SCHE_END , 'yyyy-mm-dd')
-		FROM SCHEDULE s
-		</insert>
+		<update id="notification_insert_privacy" parameterType="NotiVo">
+		MERGE INTO NOTIFICATION 
+		USING SCHEDULE
+		ON (NOTIFICATION.NOTI_ID = SCHEDULE.SCHE_ID)
+		WHEN NOT MATCHED THEN
+		           INSERT (NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE, NOTI_DELFLAG)
+	 VALUES(SCHE_ID, '개인일정', SCHEDULE.MEM_ID , SCHE_NAME,'N',TO_DATE(SCHE_END , 'yyyy-mm-dd'), 'N')
+		</update>
 		
 		
-		<insert id="notification_insert_team" parameterType="NotiVo">
-		INSERT INTO NOTIFICATION(NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE)
-		SELECT CONCAT(MEM_ID, WBS_ID), p.PROJ_NAME, p.MEM_ID, WBS_NAME, 'N', TO_DATE(WBS_END_DATE, 'yyyy-mm-dd')
-		FROM PROJMEMLIST p , PROJECT p2 , DOCUMENT d , TOPCATEGORY t , FBS f ,WBS w 
-		WHERE p.PROJ_NAME =p2.PROJ_NAME 
-		AND p2.PROJ_NAME = d.PROJ_NAME 
-		AND d.DOC_ID = t.DOC_ID 
-		AND t.TOP_ID = f.TOP_ID 
-		AND f.MID_ID = w.MID_ID
-		</insert>
+		<update id="notification_insert_team" parameterType="NotiVo">
+			MERGE INTO NOTIFICATION 
+			USING (
+				SELECT CONCAT(MEM_ID, WBS_ID) "AA", p.PROJ_NAME "BB", p.MEM_ID "CC", WBS_NAME "DD", 'N', TO_DATE(WBS_END_DATE, 'yyyy-mm-dd') "EE"
+				FROM PROJMEMLIST p , PROJECT p2 , DOCUMENT d , TOPCATEGORY t , FBS f ,WBS w 
+				WHERE p.PROJ_NAME =p2.PROJ_NAME 
+				AND p2.PROJ_NAME = d.PROJ_NAME 
+				AND d.DOC_ID = t.DOC_ID 
+				AND t.TOP_ID = f.TOP_ID 
+				AND f.MID_ID = w.MID_ID
+				)
+			ON (NOTIFICATION.NOTI_ID = "AA")
+			WHEN NOT MATCHED THEN 
+ 			 INSERT (NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE, NOTI_DELFLAG)
+			 VALUES("AA", "BB", "CC", "DD", 'N', "EE",'N')
+		</update>
 		
 		<select id="notification_my_noti"  parameterType="java.util.Map" resultType="NotiVo">
-		SELECT NOTI_ID, PROJ_NAME, MEM_ID , NOTI_CONTENT , NOTI_NOTIFIDED, NOTI_REGDATE
+		SELECT NOTI_ID, PROJ_NAME, MEM_ID , NOTI_CONTENT , NOTI_NOTIFIDED, NOTI_REGDATE, NOTI_DELFLAG
 		FROM NOTIFICATION n
 		WHERE MEM_ID = #{memId}
+		AND NOTI_DELFLAG='N'
 		ORDER BY NOTI_REGDATE
 		</select>
 		
 		<select id="notification_noti_confirm" parameterType="java.util.Map" resultType="NotiVo">
-		SELECT PROJ_NAME, MEM_ID , NOTI_CONTENT , NOTI_NOTIFIDED, NOTI_REGDATE
+		SELECT PROJ_NAME, MEM_ID , NOTI_CONTENT , NOTI_NOTIFIDED, NOTI_REGDATE, NOTI_DELFLAG
 		FROM NOTIFICATION n 
 		WHERE NOTI_NOTIFIDED = 'N'
 		</select>
@@ -38,7 +48,7 @@
 		
 			
 		<update id="notification_delete" parameterType="NotiVo">
-		DELETE FROM NOTIFICATION WHERE NOTI_ID =#{notiId}
+		UPDATE NOTIFICATION SET NOTI_DELFLAG = 'Y'  WHERE NOTI_ID =#{notiId}
 		</update>
 		
 		<select id="notification_count"  parameterType="java.util.Map" resultType="Integer">
