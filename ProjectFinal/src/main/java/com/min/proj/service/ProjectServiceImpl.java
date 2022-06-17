@@ -54,4 +54,10 @@ public class ProjectServiceImpl implements IProjectService{
 		return dao.chkProjKey(memId);
 	}
 
+	@Override
+	public int deleteProj(String projName) {
+		// TODO Auto-generated method stub
+		return dao.deleteProj(projName);
+	}
+
 }

@@ -66,10 +66,10 @@ pageEncoding="UTF-8"%>
 			data : "notiId="+id,
 			success : function(result) {
 // 				console.log(result.lists);
-				console.log(result.count);
+// 				console.log(result.count);
 				$("#notiCount").append().text(result.count)
 				for (var k in result.lists) {
-					console.log(result.lists[k].notiContent);
+// 					console.log(result.lists[k].notiContent);
 					arr.push({
 						projectName :result.lists[k].projName, 
 						content : result.lists[k].notiContent,
@@ -77,16 +77,16 @@ pageEncoding="UTF-8"%>
 						regdate :result.lists[k].notiRegdate ,
 						notiId :result.lists[k].notiId 
 					});
-					console.log(arr[k]);
+// 					console.log(arr[k]);
 				}//for문
 				for (var j = 0; j < arr.length; j++) {
 					var regdate = moment(arr[j].regdate).format('YYYY-MM-DD')
 					var tomorrow = moment().add("1", "d").format('YYYY-MM-DD')
-					console.log(regdate);
-					console.log(tomorrow);
+// 					console.log(regdate);
+// 					console.log(tomorrow);
 					if (regdate == tomorrow && arr[j].notifided == "N"&& localStorage.getItem("Arlim") == "yes") {
-						notify();
-						   			notifieded(arr[j].notiId);
+// 						notify();
+// 			   			notifieded(arr[j].notiId);
 					}//for문	
 				}	
 				function notify() {
@@ -103,7 +103,11 @@ pageEncoding="UTF-8"%>
 			}, // success
 			error : function(data) {
 				alert("fail");
+
 				console.log(data);
+
+// 				console.log(data);;
+
 			} // error
 		});
 	}//callHeader

@@ -38,12 +38,7 @@ import com.min.sche.vo.ScheduleVo;
 public class NotiCtrl {
 	
 	String memId;
-	
-	@Autowired
-	private ScheduleCtrl ScheduleCtrl;
-	
-	@Autowired
-	IScheduleService service2;
+
 	
 	@Autowired
 	private INotiService service;
@@ -85,6 +80,9 @@ public class NotiCtrl {
 		List<NotiVo> AllLists=service.notification_my_noti(map);
 		logger.info("notification_my_noti : {}", AllLists);
 		model.addAttribute("AllLists",AllLists);	
+
+		
+		
 		return "ArlimList";
 	}
 	
@@ -116,18 +114,18 @@ public class NotiCtrl {
 		String date2 = formatter.format(cal.getTime());
 		Date currentDate = null;
 		Date notiDate = null;
-		
-//		if( cal.getTime().getHours() == 0 && cal.getTime().getMinutes() == 0) {
-//			 service.notification_insert_privacy();
-//			 service.notification_insert_team();
-//			System.out.println("☆★☆★☆★☆★☆★☆★☆★");
-//		}
-//		
+			
 		
 		Map<String, Object> map2 = new HashMap<String, Object>();
+		Map<String, Object> map3 = new HashMap<String, Object>();
 		map2.put("memId", memId);
 		setMemId(memId);
 	
+
+//		service.notification_delete_All();
+//		service.notification_insert_privacy();
+//		service.notification_insert_team();	
+		
 		List<NotiVo> All_lists=service.notification_my_noti(map2);
 		ArrayList<NotiVo> lists = new ArrayList<NotiVo>();
 		
@@ -145,13 +143,13 @@ public class NotiCtrl {
 				lists.add(nvo);
 			}
 		}
-		System.out.println(lists);
+		System.out.println("으에에에에에ㅔㅇ에에에ㅔ에에에에ㅔㅇㅇ" +All_lists);
 		
 		logger.info("");
 		int count = service.notification_count(map2);
-		Map<String, Object> map3 = new HashMap<String, Object>();
-		map3.put("lists", lists);
+		map3.put("lists", All_lists);
 		map3.put("count", count);
+
 		return map3;
 	}
 	
