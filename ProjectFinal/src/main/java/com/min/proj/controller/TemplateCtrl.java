@@ -91,9 +91,8 @@ public class TemplateCtrl {
 //		System.out.println(jAry.get(0));
 
 //		System.out.println(jObj.get("topName"));
-		System.out.println(jAry.size());
+		System.out.println("jArySize !!!!!"+jAry.size());
 
-		try {
 			for (int i = 0; i < jAry.size(); i++) {
 				JSONObject jsonObj = (JSONObject) jAry.get(i);
 				boolean isc = (jsonObj.get("topName").equals(jsonArr.get("topName"))) ? true : false;
@@ -169,9 +168,6 @@ public class TemplateCtrl {
 				}
 			}
 		
-		} catch (NullPointerException e) {
-			// TODO: handle exception
-		}
 		return "Yammy";
 	}
 	

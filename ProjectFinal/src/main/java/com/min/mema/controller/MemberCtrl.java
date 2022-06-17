@@ -133,9 +133,10 @@ public class MemberCtrl {
 	}
 	
 	@RequestMapping(value = "/modifyMember.do" , method = RequestMethod.POST)
-	public String modifyMember(MemberVo vo) {
+	public String modifyMember(MemberVo vo, HttpSession session) {
 		logger.info("MemberCtrl modifyMember {}", vo);
 		service.modifyMember(vo);
+		session.setAttribute("loginVo", vo);
 		return "redirect:/project.do";
 	}
 	
@@ -151,10 +152,10 @@ public class MemberCtrl {
 		PrintWriter out = resp.getWriter();
 		if (vo != null) {
 			service.modifyMemberPw(vo);
-			out.print("<script>alert('비밀번호변경!'); location.href='./project.do'</script>");
+			out.print("<script>alert('비밀번호변경!'); window.close();</script>");
 			out.flush();
 		}
-		return "redirect:/project.do";
+		return "/proj/project";
 	}
 	
 	@RequestMapping(value = "/findIdMember.do", method = RequestMethod.GET)
