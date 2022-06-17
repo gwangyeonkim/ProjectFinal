@@ -30,7 +30,7 @@ import com.dropbox.core.v2.team.GroupsGetInfoError;
 @Controller
 public class DropboxCtrl {
 
-	private static final String ACCESS_TOKEN = "sl.BJZrh388-PVUhL4vMRZlos_xWwrqRR6DdYYtfx8t5nz1Rj-JgBlUL6-rRFYd1Nu24Nnbsp0NYSkmbKX4BSI1MaVkcygl4ykttdLuBdSLXUqmeDAOlBmCMFvDAbdDY3Ln6lfcDaLBlny6";		
+	private static final String ACCESS_TOKEN = "sl.BJqJ2fZnvn3JsuovPwp0fJAnBIcaYxCzjEE47rESox8Diywf4k2OoRakK8gUbilIEJSxTc4KiV1NnxCNiZsam2kuLKCpMiQ8N4kD-O7SK-2uS_Wu8_3v6MlAilvfsyLqi73VbTXMu8dF";		
 	private static final  DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
 	private static final DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
 
