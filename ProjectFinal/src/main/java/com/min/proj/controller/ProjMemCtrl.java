@@ -1,5 +1,7 @@
 package com.min.proj.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import com.min.mema.controller.MemberCtrl;
 import com.min.mema.vo.MemberVo;
 import com.min.proj.service.IProjMemListService;
 import com.min.proj.service.IProjectService;
+import com.min.proj.vo.ProjMemListVo;
 import com.min.proj.vo.ProjectVo;
 
 @Controller
@@ -30,7 +33,16 @@ public class ProjMemCtrl {
 	@RequestMapping(value = "/moveProj.do",method = RequestMethod.GET)
 	public String moveProj(HttpSession session, Model model, MemberVo vo) {
 		logger.info("ProjMemCtrl moveProj");
-		ProjectVo pVo =  projServcie.chkProjKey("CH001");
+		ProjectVo pVo =  projServcie.chkProjKey((String)session.getAttribute("userId"));
+		List<ProjMemListVo> list = projMemService.projMemList(pVo.getProjName());
+		System.out.println("@@@@@@@@@여기다앗");
+		System.out.println(list);
+		for (int i = 0; i < list.size()-1; i++) {
+			ProjMemListVo pmVo =list.get(i);
+			if(pmVo.getMemId().equals((String)session.getAttribute("userId"))){
+				session.setAttribute("iscPm", pmVo.getProjPm());
+			};
+		}
 		model.addAttribute("projToken", pVo.getProjToken());
 		model.addAttribute("projMemList", projMemService.projMemList(pVo.getProjName()));
 //		MemberCtrl mCtrl = new MemberCtrl();

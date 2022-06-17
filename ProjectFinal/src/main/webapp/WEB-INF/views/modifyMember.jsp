@@ -26,7 +26,7 @@
 }
 
 .wrapper{
-	width: 1320px;
+	width: 1020px;
 }
 
 .home{

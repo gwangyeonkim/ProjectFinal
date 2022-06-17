@@ -20,7 +20,7 @@ public interface IScheduleService {
 	public int incompleteSchedule(String wbsId); 
 	public List<WbsViewVo> callIncomplete(String memId);
 	public List<WbsViewVo> callComplete(String memId);
-	public int checkAuth (String memId);
+	public String checkAuth (String memId);
 	
 	public int getFinCount(String projName);
 	public int getAllCount(String projName);

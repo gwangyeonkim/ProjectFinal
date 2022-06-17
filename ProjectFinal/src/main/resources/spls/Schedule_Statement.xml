@@ -59,8 +59,8 @@
 			WHERE SCHE_ID=#{sId} AND MEM_ID=#{mId}
 	</delete>
 	
-	<select id="checkAuth" parameterType="String" resultType="Integer">
-		SELECT COUNT(PROJ_PM) FROM PROJMEMLIST WHERE MEM_ID =#{memId}
+	<select id="checkAuth" parameterType="String" resultType="String">
+		SELECT PROJ_PM FROM PROJMEMLIST WHERE MEM_ID =#{memId}
 	</select>
 	
 	<select id="getFinCount" parameterType="String" resultType="Integer">
