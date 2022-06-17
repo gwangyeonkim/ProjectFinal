@@ -192,19 +192,20 @@ function Fbs(){
 			if(jsonArr.topName!=null && jsonArr.topCode!=null
 					&& jsonArr.fbsName==null && jsonArr.fbsCode==null && jsonArr.fbsContent==null
 					&& jsonArr.fbsImp==null && jsonArr.fbsLevel==null && jsonArr.fbsManager==null){
-				console.log('대분류 작성');
+				console.log('대분류 작성1');
 				  $.ajax({
-	 				url : "./matchTopCategory.do",
+	 				url : "./updateTopCategory.do",
 	 				method : "POST",
 	 				data:jsonArr,
 	 				success : function(result){
+	 					console.log(result)
 	 					console.log('대분류 저장했습니다.');
 	 					}
 	 				});
 			}else if(jsonArr.topName!=null && jsonArr.topCode!=null
 					&& jsonArr.fbsName!=null && jsonArr.fbsCode!=null && jsonArr.fbsContent!=null
 					&& jsonArr.fbsImp!=null && jsonArr.fbsLevel!=null && jsonArr.fbsManager!=null){
-				console.log('대분류 작성');
+				console.log('대분류 작성2');
 				  $.ajax({
 	 				url : "./matchTopCategory.do",
 	 				method : "POST",

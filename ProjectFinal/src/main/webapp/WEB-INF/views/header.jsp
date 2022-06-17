@@ -14,29 +14,67 @@ pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
 <!-- notification 추가 script -->
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.min.js"></script>
-
 <script src="js/index.js"></script>
 </head>
+<script type="text/javascript">
+function offEv(){
+	alert('프로젝트에 소속되어야 사용 가능한 기능입니다.');
+}
+
+</script>
 <body>
 	<div class="navb">
-		<a href="./scheboard.do" class="logo">Home</a>
+		<c:if test="${projName==''}">
+			<a onclick="offEv()" class="logo">Home</a>
+		</c:if>
+		<c:if test="${projName!=''}">
+			<a href="./scheboard.do" class="logo">Home</a>
+		</c:if>
+		
+		<c:if test="${projName==''}">
+		<div class="dropdown"> 
+			<button class="dropbtn" onclick="offEv()">Document</button>
+		</div>
+		</c:if>
+		<c:if test="${projName!=''}">
 		<div class="dropdown"> 
 			<button class="dropbtn" onclick="location.href='./drop.do'">Document</button>
 		</div>
+		</c:if>
+		
+		<c:if test="${projName==''}">
+		<div class="dropdown">
+			<button class="dropbtn" onclick="offEv()">Calendar</button>
+		</div>
+		</c:if>
+		<c:if test="${projName!=''}">
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./calendar.do'">Calendar</button>
 		</div>
+		</c:if>
+		
+		<c:if test="${projName==''}">
+		<div class="dropdown">
+			<button class="dropbtn" onclick="offEv()">Member</button>
+		</div>
+		</c:if>
+		<c:if test="${projName!=''}">
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./memberlistAll.do'">Member</button>
-			<div class="dropdown-content">
-				<a href="./memberlistAll.do">회원조회하기</a> <a href="#">2</a> <a href="#">3</a>
-			</div>
 		</div>
+		</c:if>
+		
+		<c:if test="${projName==''}">
+		<div class="dropdown">
+			<button class="dropbtn" onclick="offEv()">Template</button>
+		</div>
+		</c:if>
+		<c:if test="${projName!=''}">
 		<div class="dropdown">
 			<button class="dropbtn" onclick="location.href='./moveFixhistory.do'">Template</button>
 		</div>
+		</c:if>
 		<div class="navb-right">
-
 			<b id="loginInfo">${loginVo.memberId}님
 				<img id="personIcon" alt="person" src="img/person.png" onclick="location.href='./modifyMember.do'">
 				<img id="chatIcon" alt="chat" src="img/chat.png" onclick="goSocket('${loginVo.memberId }')" /> 
