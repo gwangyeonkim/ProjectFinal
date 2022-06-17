@@ -36,7 +36,7 @@
 			<label class="control-label col-sm-2"> Email : </label>
 			<div id="email" class="col-sm-10">
 				 <input id="memEmail" class="form-control" type="text" name="memEmail"  required/>
-			</div>
+			</div>   
 		
 			<div class="form-group" id="btn">        
 		     <div class="col-sm-offset-2 col-sm-10">
