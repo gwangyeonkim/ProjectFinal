@@ -21,7 +21,7 @@
 }
 </style>
 <body>
-<input id="iscPm" value="${iscPm }">
+<input id="iscPm" value="${iscPm }" style="display: none;">
 	<div class="wrapper" >
 		<div class="content" style="position: absolute;">
 			<div class="area1" style="width:280px; height: 680px; background-color: white;">
@@ -37,10 +37,10 @@
 			${projMemList.get(i).memId}<br>
 						<br>
 					</c:forEach>
-					<div class="inArea" style="position: relative; left: 800px; width: 186px; top: 100px; bottom: 50px;">
+					<div class="inArea" style="position: relative;left: 800px;width: 186px;top: 250px;bottom: 50px;">
 						<button onclick="exitProj()" class="btn btn-primary">탈퇴</button>
 					</div>
-					<div class="inArea" style="position: relative; left: 800px; width: 186px; top: 120px;">
+					<div class="inArea" style="position: relative;left: 800px;width: 186px;top: 270px;">
 						<button onclick="deleteProj()" class="btn btn-primary">삭제</button>
 					</div>
 				</div>
@@ -159,8 +159,8 @@ $(document).ready( function () {
         info: false, // 정보 표시 숨기기
         paging:true, // 페이징 기능 숨기기
 //         order: [ [ 3, "asc" ], [ 1, "desc"] ], //초기표기시 정렬, 만약 정렬을 안하겠다 => order: []
-    columnDefs: [{ targets: 1, width: 100 }] //열의 넓이 조절 
-//       lengthMenu: [ 10, 20, 30, 40, 50 ], //표시건수 
+  	  columnDefs: [{ targets: 1, width: 100 }], //열의 넓이 조절 
+      lengthMenu: [ 10 ] //표시건수 
 //       displayLength: 50, //기본표시건수 설정
 //         pagingType: "simple_numbers" // 페이징 타입 설정 : simple, simple_numbers, full_numbers 등
     
@@ -207,8 +207,16 @@ function  deleteProj(){
    position: relative;
     width: 300px; 
 }
-.dataTables_wrapper {
+.dataTables_wrapper{
     position: relative;
+}
+#myTable_filter{
+    position: relative;
+	right: 230px;
+}
+#myTable_paginate{
+	top: 150px;
+	right: 300px;
 }
 </style>
 </html>

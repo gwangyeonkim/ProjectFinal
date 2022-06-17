@@ -221,10 +221,6 @@ function showCalendar(){
 		  useCreationPopup: true,
 		  useDetailPopup: true,
 		});
-	calendar.setCalendarColor('군계일학', { //군계일학 말고 calendarId가 들어가야함
-	    color: '#ffffff',//글자 색
-	    bgColor: '#585858',//배경 색
-	});
 	
 
 		calendar.clear();
