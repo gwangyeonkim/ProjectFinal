@@ -38,6 +38,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 	
 </head>
+<%@include file="./header.jsp" %>
 <style type="text/css">
 #arrowImg {
 	width: 25px;
@@ -307,7 +308,7 @@ function showCalendar(){
 				console.log(scheduleData.schedule) // 삭제할 일정 정보
 				console.log("삭제");
 				$.ajax({
-					url: "./deleteSchedule.do?sId="+scheduleData.schedule.id+"&&mId=GD001",//mid 현재 접속자 아이디 넣어야함
+					url: "./deleteSchedule.do?sId="+scheduleData.schedule.id+"&&mId=${loginVo.memberId}",//mid 현재 접속자 아이디 넣어야함
 					type: "GET",
 					success: function(data) {
 						console.log("삭제성공");
@@ -333,19 +334,27 @@ function showCalendar(){
 					
 					clearBtn.onclick = function(){
 						console.log("일정완료");
-						$.ajax({
-							url:"./completeSchedule.do",
-							type:"POST",
-							data:{"wbsId":scheduleData.schedule.id},
-							success:function(){
-								console.log("일정완료");
-								calendar.deleteSchedule(scheduleData.schedule.id, scheduleData.schedule.calendarId, false);
-							},
-							error:function(){
-								alert("잘못된 요청입니다");
-							} 
-						});
-						modal.style.display = "none";
+						console.log(scheduleData.schedule.body);
+						console.log("${loginVo.memName}");
+						if(scheduleData.schedule.body == "${loginVo.memName}"){
+							$.ajax({
+								url:"./completeSchedule.do",
+								type:"POST",
+								data:{"wbsId":scheduleData.schedule.id},
+								success:function(){
+									console.log("일정완료");
+									calendar.deleteSchedule(scheduleData.schedule.id, scheduleData.schedule.calendarId, false);
+								},
+								error:function(){
+									alert("잘못된 요청입니다");
+								} 
+							});
+							modal.style.display = "none";
+						}else{
+							alert("자신의 기능한 완료가 가능합니다.");
+							return false;
+						}
+						
 					}
 					
 					
@@ -476,7 +485,7 @@ function getPersonalSchedule(/* loginId 여기 로그인 정보가 담기고 밑
 		url:"./showPersonalSchedule.do",
 		type:"POST",
 		async: false, //결과를 전역변수에 담기 위해 async를 false로 해주어야함
-		data:{memberId : "GD001"}, //여기에 loginInfo의 mem_id가 들어가야함
+		data:{memberId : "${loginVo.memberId}"}, //여기에 loginInfo의 mem_id가 들어가야함
 		success:function(data){
 			obj = JSON.parse(data);
 		},
@@ -593,7 +602,7 @@ function makeTime(info){
 
 
 </script>
-<%@include file="./header.jsp" %>
+
 <body>
 
 
@@ -641,7 +650,7 @@ function makeTime(info){
   <div class="modal-content">
     <span class="close">x</span>
     <h2>해당 일정을 완료하시겠습니까?</h2>
-    <button class="clearBtn" onclick="completeWbs()">일정완료</button>
+    <button class="clearBtn">일정완료</button>
   </div>
 
 </div>
