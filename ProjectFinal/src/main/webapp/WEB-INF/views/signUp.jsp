@@ -19,7 +19,15 @@
 <%@include file="./header.jsp" %>
 <style type="text/css">
 
-
+tbody, td, tfoot, th, thead, tr {
+    FONT-WEIGHT: 100;
+    border-color: inherit;
+    border-style: solid;
+    border-width: 2.5;
+}
+tbody{
+    height: 505px;
+}
 
 .navb{
 	height: 100px;
@@ -49,8 +57,8 @@ table .type02 {
 }
 
 
-table.type02 td{
-  width: 350px;
+table .type02 td{
+  width: 200px;
   padding: 10px;
   vertical-align: top;
   border-right: 1px solid #ccc;
