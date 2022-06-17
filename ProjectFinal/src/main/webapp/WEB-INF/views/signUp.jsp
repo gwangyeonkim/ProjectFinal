@@ -26,7 +26,7 @@
 }
 
 .wrapper{
-	width: 1320px;
+	width: 1020px;
 }
 
 .home{
@@ -47,17 +47,8 @@ table .type02 {
   border-left: 1px solid #ccc;
   margin : 20px 10px;
 }
-table.type02 th {
-  width: 300px;
-  padding: 10px;
-  font-weight: bold;
-  vertical-align: top;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  border-top: 1px solid #fff;
-  border-left: 1px solid #fff;
-  background: #eee;
-}
+
+
 table.type02 td{
   width: 350px;
   padding: 10px;
@@ -79,7 +70,7 @@ h2{
 }
 
 .form-control{
-  	width:300px;
+  	width:200px;
     font-size:20px;
 }
 
@@ -87,14 +78,13 @@ h2{
 
 </style>
 <title>Insert title here</title>
+
 </head>
 
 
 
 
-<body>
-
-<div class="home">
+<body><div class="home">
 	<div class="wrapper">
 	<div class="container">
     <form action="./singUp.do" method="post" class="form-inline" >
@@ -124,7 +114,7 @@ h2{
                             <span class="checkIdComment">ID는 영문소문자 + 숫자로 작성가능하며  6자 이상 16자 이하로 설정해주시기 바랍니다.(공백불가)</span>
                         </td>
                     </tr>
-                    <tr>
+                     <tr>
                         <th colspan="2">
                             <h3 id="h3">비밀번호</h3>
                         </th>
@@ -223,6 +213,7 @@ h2{
     				
                 </table>
     </form>
+
 	</div>
 	</div>
 </div>
