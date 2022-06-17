@@ -27,7 +27,7 @@
 	<button onclick="location.href='./moveFixhistory.do'" class="btn btn-primary">작성이력 이동</button>
 	</div>
 		<div class="content" style="position:relative;" >
-			<div id="grid" style="width: 890px;margin-left: 10px;">
+			<div id="grid" style="width: 890px;margin-left: 10px; height:400px;">
 		<div style="position: absolute; right:10px;">
 				<button onclick="Wbs()" class="btn btn-primary">조회</button>
 				<button onclick="finWbs()" class="btn btn-primary">정리</button><br><br><br><br>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</div>
-	<h1>행추가는 대분류 혹은 중분류 다블클릭</h1>
+	<!-- <h1>행추가는 대분류 혹은 중분류 다블클릭</h1> -->
 <script type="text/javascript">
 var Grid = tui.Grid;
 var el;
@@ -46,6 +46,7 @@ var cnt = 0;
 	const grid = new Grid({
 			  el: document.getElementById('grid'),
 			  rowHeaders: ['rowNum'],
+			  scrollY : true,
 			  columns: [
 				 	 {
 					    header: '대분류',
