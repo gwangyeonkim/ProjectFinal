@@ -3,9 +3,8 @@
 <mapper namespace="com.min.noti.mapper.NotiDaoImpl">
 		<insert id="notification_insert_privacy" parameterType="NotiVo">
 		INSERT INTO NOTIFICATION(NOTI_ID, PROJ_NAME,NOTIFICATION.MEM_ID, NOTI_CONTENT, NOTI_NOTIFIDED ,NOTI_REGDATE)
-		SELECT SCHE_ID, '개인일정', s.MEM_ID , SCHE_CONTENT,'N',TO_DATE(SCHE_END , 'yyyy-mm-dd')
+		SELECT SCHE_ID, '개인일정', s.MEM_ID , SCHE_NAME,'N',TO_DATE(SCHE_END , 'yyyy-mm-dd')
 		FROM SCHEDULE s
-		WHERE TO_CHAR(TO_DATE(SCHE_END, 'yyyy-mm-dd'), 'yyyy-mm-dd') = TO_CHAR(SYSDATE+1,'yyyy-mm-dd')
 		</insert>
 		
 		
@@ -18,7 +17,6 @@
 		AND d.DOC_ID = t.DOC_ID 
 		AND t.TOP_ID = f.TOP_ID 
 		AND f.MID_ID = w.MID_ID
-		AND TO_CHAR(TO_DATE(WBS_END_DATE, 'yyyy-mm-dd'), 'yyyy-mm-dd') = TO_CHAR(SYSDATE+1,'yyyy-mm-dd')
 		</insert>
 		
 		<select id="notification_my_noti"  parameterType="java.util.Map" resultType="NotiVo">
@@ -48,6 +46,10 @@
 		FROM NOTIFICATION n    
 		WHERE NOTI_NOTIFIDED = 'N' AND MEM_ID=#{memId}
 		</select>
+		
+		<update id="notification_delete_All"  parameterType="NotiVo">
+		DELETE FROM NOTIFICATION n
+		</update>
 		
 		<!-- chatting -->
 		<select id="chatting_groupName" parameterType="java.util.Map" resultType="MemListVo">
