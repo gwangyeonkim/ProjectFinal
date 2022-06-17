@@ -48,4 +48,11 @@ public interface IProjectService {
 	 */
 	public ProjectVo chkProjKey(String memId);
 	
+	/**
+	 * 프로젝트를 삭제하는 메소드
+	 * @param projName 프로젝트 이름
+	 * @return
+	 */
+	public int deleteProj(String projName);
+	
 }

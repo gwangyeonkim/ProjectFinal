@@ -69,6 +69,12 @@ public class ProjectDaoImpl implements IProjectDao{
 		return sqlSession.selectOne(NS+"chkProjKey",memId);
 	}
 
+	@Override
+	public int deleteProj(String projName) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(NS+"deleteProj",projName);
+	}
+
 	
 	
 

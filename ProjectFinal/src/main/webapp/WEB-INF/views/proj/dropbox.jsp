@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Document</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <style type="text/css">
@@ -17,11 +19,17 @@
 </style>
 </head>
 <%@ include file="../header.jsp" %>
+<style type="text/css">
+.navb{
+    width: 1050px;
+    height: 80px;
+}
+</style>
 <body>
 	<div class="wrapper">
-		<div class="content">
+		<div class="content" style="position: absolute;">
 			<div class="area1" style="width:280px; height: 680px; background-color: white;">
-				<div class="inArea" style="width: 600px; height: 680px; text-align: center;">
+				<div class="inArea" style="text-align: center;position: relative;width: 450px;top: 30px;left: 40px;">
 				<h1>도움말</h1><br>
 					<h3>
 						템플릿으로 제공되는 FBS, WBS 문서를 제외한<br>
@@ -34,8 +42,9 @@
 						파일 업로드시에 폴더안에 있어야 업로드가 완료 됩니다.<br>
 					</h3>
 				</div>
-				<div id="grid" style="width: 450px;position: relative;left: 800px;bottom: 500px;""></div>
-				<button onclick="location.href='./dropBaseDown.do'">다운로드</button>
+				<div id="grid" style="position: relative;left: 600px;bottom: 450px;"></div>
+				<button onclick="location.href='./dropBaseDown.do'" class="btn btn-primary" style="position: relative;bottom: 400px;left: 650px;">다운로드</button>
+				<button onclick="" class="btn btn-primary" style="position: relative;bottom: 400px;left: 650px;">업로드</button>
 			</div>
 		</div>
 	</div>
@@ -74,7 +83,5 @@ const data = [
 			],
 			data
 		});
-	
-	
 </script>
 </html>
