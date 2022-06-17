@@ -41,6 +41,10 @@
                                            WHERE MEM_ID = #{memId} AND PROJ_DELFLAG = 'N')
 	</select>
 	
+	<delete id="deleteProj">
+	DELETE FROM PROJECT WHERE PROJ_NAME = #{projName}
+	</delete>
+	
 	<!-- Document -->
 	<insert id="newDoc" parameterType="java.lang.String">
 	INSERT INTO DOCUMENT 

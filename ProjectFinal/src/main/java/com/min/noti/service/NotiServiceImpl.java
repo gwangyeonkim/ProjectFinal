@@ -56,4 +56,9 @@ public class NotiServiceImpl implements INotiService {
 	public MemListVo chatting_groupName(Map<String, Object> map) {
 		return dao.chatting_groupName(map);
 	}
+
+	@Override
+	public int notification_delete_All() {
+		return dao.notification_delete_All();
+	}
 }

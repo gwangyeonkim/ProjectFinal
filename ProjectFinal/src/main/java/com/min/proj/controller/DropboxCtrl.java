@@ -55,7 +55,7 @@ public class DropboxCtrl {
 			for (Metadata metadata : result.getEntries()) {
 				//TODO 9. 변경점
 //                if(metadata.getPathLower().equals("/자두과")) {
-				if (metadata.getPathLower().equals("/자두과")) {
+				if (metadata.getPathLower().equals("/"+session.getAttribute("projName"))) {
 					cnt++;
 					break;
 				}
@@ -70,11 +70,11 @@ public class DropboxCtrl {
 		if(cnt==0) {
 			// TODO 7. 변경점
 //			client.files().createFolder("/"+session.getAttribute("projName"));
-			client.files().createFolder("/자두과/문서1");
-			client.files().createFolder("/자두과/문서2");
-			client.files().createFolder("/자두과/문서3");
-			client.files().createFolder("/자두과/문서4");
-			client.files().createFolder("/자두과/문서5");
+			client.files().createFolder("/"+session.getAttribute("projName")+"/문서1");
+			client.files().createFolder("/"+session.getAttribute("projName")+"/문서2");
+			client.files().createFolder("/"+session.getAttribute("projName")+"/문서3");
+			client.files().createFolder("/"+session.getAttribute("projName")+"/문서4");
+			client.files().createFolder("/"+session.getAttribute("projName")+"/문서5");
 		}
 		
 		return "/proj/dropbox";

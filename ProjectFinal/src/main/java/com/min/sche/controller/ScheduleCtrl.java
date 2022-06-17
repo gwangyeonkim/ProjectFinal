@@ -15,7 +15,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -30,12 +29,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.annotation.RequestScope;
 
 import com.min.mema.vo.MemberVo;
 import com.min.proj.service.IProjMemListService;
 import com.min.proj.vo.ProjMemListVo;
-import com.min.sche.mapper.IScheduleDao;
 import com.min.sche.service.IScheduleService;
 import com.min.sche.vo.ScheduleVo;
 import com.min.sche.vo.WbsViewVo;
@@ -61,21 +58,13 @@ public class ScheduleCtrl {
 	 * 처음 접속을 할 때 현재 년도 정보를 가져간다.
 	 */
 	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET,produces = "application/text;charset-UTF-8")
-	public String home(Locale locale, Model model, HttpServletRequest req) {
-		HttpSession session = req.getSession();
-		String projName = (String)session.getAttribute("projName");
+	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		Date today = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY");
 		String year = simpleDateFormat.format(today);
 		model.addAttribute("serverTime", year );
-		List<ProjMemListVo> lists = pService.projMemList(projName);
-		List<String> memberList = new ArrayList<String>();
-		for (int i = 0; i < lists.size(); i++) {
-			memberList.add(service.getProjectMember(lists.get(i).getMemId()));
-		}
-		session.setAttribute("mLists", memberList);
-		System.out.println(memberList);
+		
 		return "scheduler";
 	}
 	
@@ -83,6 +72,13 @@ public class ScheduleCtrl {
 	public String showChart(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession();
 		String projName = (String)session.getAttribute("projName");
+		
+		List<ProjMemListVo> mlists = pService.projMemList(projName);
+		List<String> memberList = new ArrayList<String>();
+		for (int i = 0; i < mlists.size(); i++) {
+			memberList.add(service.getProjectMember(mlists.get(i).getMemId()));
+		}
+		session.setAttribute("mLists", memberList);
 		
 		int allCount = service.getAllCount(projName); //전체 일정의 갯수
 		int perValue = Math.round(100/allCount);//일정 1개완료당 진척도 올라가는량
@@ -237,11 +233,13 @@ public class ScheduleCtrl {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/callSchedule.do",method=RequestMethod.POST)
 	@ResponseBody
-	public JSONArray callSchedule(@RequestParam(value="list[]") List<String> nameList) {
+	public JSONArray callSchedule(@RequestParam(value="list[]") List<String> nameList , HttpServletRequest req) {
 		System.out.println(nameList);
+		HttpSession session = req.getSession();
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userList", nameList);
-		map.put("memId", "GD001"); //접속한 사용자 아이디
+		map.put("memId", loginVo.getMemberId()); //접속한 사용자 아이디
 		List<WbsViewVo> lists = service.getTeamSchedule(map);//DB에서 일정목록을 불러옴
 		System.out.println("받아온 리스트@@@@@@@@@@@@@@@@@@@@@@@@@");
 		System.out.println(lists);
@@ -257,6 +255,7 @@ public class ScheduleCtrl {
 			jsonObj.put("isAllDay","true");
 			jsonObj.put("isPrivate","true");
 			jsonObj.put("isReadOnly", "true");
+			jsonObj.put("body", lists.get(i).getWbsManager());
 			jsonObj.put("location", lists.get(i).getWbsConent());
 			arr.add(jsonObj);
 		}
@@ -267,12 +266,14 @@ public class ScheduleCtrl {
 	@RequestMapping(value="/insertSchedule.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int insertSchedule(@RequestParam
-				String title, String content, String start, String end
+				String title, String content, String start, String end, HttpServletRequest req
 			){
 		logger.info("받아온 값 : {}",title +"/"+ content +"/"+ start +"/"+ end);
+		HttpSession session = req.getSession();
 		Map<String, Object> map = new HashMap<String, Object>();
 		System.out.println(title + content);
-		map.put("mId", "GD001");//로그인된 회원의 ID
+		MemberVo loginVo = (MemberVo)session.getAttribute("loginVo");
+		map.put("mId", loginVo.getMemberId());//로그인된 회원의 ID
 		map.put("sName", title);
 		map.put("sCont", content);
 		map.put("start", start);
@@ -365,8 +366,8 @@ public class ScheduleCtrl {
 	public boolean checkAuth(@RequestParam String memId) {
 		boolean isc = false;
 		logger.info("PM 유무 체크 받은 값 {}",memId);
-		int cnt = service.checkAuth(memId);
-		if(cnt==1){
+		String auth = service.checkAuth(memId);
+		if(auth.equals("Y")){
 			isc = true;
 		}else {
 			isc = false;

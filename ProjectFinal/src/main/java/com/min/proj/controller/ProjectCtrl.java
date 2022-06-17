@@ -173,6 +173,19 @@ public class ProjectCtrl {
 		
 		int cnt = projMemService.changePm(map);
 		System.out.println(cnt);
-		return "/proj/project";
+		if(cnt>1) {
+			projMemService.changePm(map);
+		}
+		
+		return "redirect:/moveProj.do";
 	}
+	
+	@RequestMapping(value = "/deleteProj.do",method = RequestMethod.POST)
+	public String deleteProj (HttpSession session){
+		logger.info("ProjectCtrl deleteProj");
+		projService.deleteProj((String)session.getAttribute("projName"));
+		
+		return "redirect:/project.do";
+	}
+	
 }

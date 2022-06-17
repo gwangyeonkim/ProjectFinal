@@ -21,54 +21,67 @@
 }
 </style>
 <body>
-   <div class="wrapper" >
-      <div class="content" style="position: absolute;">
-         <div class="area1" style="width:280px; height: 680px; background-color: white;">
-         <div class="inArea" style="height: 120px; width:280px;text-align: center;position: relative;top: 10px;left: 10px;">
-         <h3>프로젝트 초대 키</h3>         
-         ${projToken}
-         </div><br>
-         <div class="inArea" style="height: 500px; width:280px; text-align: center; position: relative;top: 10px;left: 10px;">
-         <h3>프로젝트 멤버</h3>
-         <c:forEach var="i" begin="0" end="${fn:length(projMemList)-1}" step="1">
-         ${projMemList.get(i).memId}<br><br>
-         </c:forEach>
-         <div class="inArea" style="position: relative;left: 800px;width: 166px;top: 150px;">
-         <h1>안녕</h1>
-         </div>
-         </div>
-            <div class="inArea"style="height: 166px;text-align: center;position: relative;left: 320px;bottom: 650\;bottom: 650px;bottom: 150px;width: 466px;">
-               <h3>PM 변경란</h3>
-               <form action="#" method="get">
-                  <input type="text" >
-                  ${loginVo.memberId }
-               </form>
-            </div>
-            
-         </div>
-         </div>
-         <table id="myTable" class="cell-border" style="width: 450px;"> 
-      <thead>
-         <tr>
-            <td>아이디</td>
-            <td>이름</td>
-            <td>이메일</td>
-         </tr>
-      </thead>
-      <tbody>
-         <c:forEach var="mVo" items="${lists}"  varStatus="vs">
-         <tr>
-            <td><a href="#" onclick="memberSelect('${mVo.memberId}')">${mVo.memberId}</a></td>
-            <td>${mVo.memName}</td>
-            <td>${mVo.memEmail}</td>
-         </tr>
-         </c:forEach>
-      </tbody>
-      </table>
-      </div>
-      
+<input id="iscPm" value="${iscPm }">
+	<div class="wrapper" >
+		<div class="content" style="position: absolute;">
+			<div class="area1" style="width:280px; height: 680px; background-color: white;">
+			<div class="inArea" style="height: 120px; width:280px;text-align: center;position: relative;top: 10px;left: 10px;">
+			<h3>프로젝트 초대 키</h3>			
+			${projToken}
+			</div><br>
+				<div class="inArea"
+					style="height: 500px; width: 280px; text-align: center; position: relative; top: 10px; left: 10px;">
+					<h3>프로젝트 멤버</h3>
+					<c:forEach var="i" begin="0" end="${fn:length(projMemList)-1}"
+						step="1">
+			${projMemList.get(i).memId}<br>
+						<br>
+					</c:forEach>
+					<div class="inArea" style="position: relative; left: 800px; width: 186px; top: 100px; bottom: 50px;">
+						<button onclick="exitProj()" class="btn btn-primary">탈퇴</button>
+					</div>
+					<div class="inArea" style="position: relative; left: 800px; width: 186px; top: 120px;">
+						<button onclick="deleteProj()" class="btn btn-primary">삭제</button>
+					</div>
+				</div>
+				<div class="inArea"style="height: 166px;text-align: center;position: relative;left: 320px;bottom: 650\;bottom: 650px;bottom: 150px;width: 466px;">
+					<h3>PM 변경란</h3>
+					<form action="./changPm.do" method="get">
+						<input type="text" >
+						<input type="text"  value="${userId }"><br>
+						<c:if test="${iscPm=='Y'}">
+							<button type="submit" class="btn btn-primary">변경</button>
+						</c:if>
+						<c:if test="${iscPm=='N'}">
+							<h3>PM만이 가능합니다.</h3>
+						</c:if>
+					</form>
+				</div>
+				
+			</div>
+			</div>
+			<table id="myTable" class="cell-border" style="width: 600px;margin-left: 370px;"> 
+		<thead>
+			<tr>
+				<td>아이디</td>
+				<td>이름</td>
+				<td>이메일</td>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="mVo" items="${lists}"  varStatus="vs">
+			<tr>
+				<td><a href="#" onclick="memberSelect('${mVo.memberId}')">${mVo.memberId}</a></td>
+				<td>${mVo.memName}</td>
+				<td>${mVo.memEmail}</td>
+			</tr>
+			</c:forEach>
+		</tbody>
+		</table>
+		</div>
        <!-- ----------------- 모달 띄우기 ------------------ -->
       <div class="modal fade" id="loginModal" role="dialog">
+
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -153,6 +166,29 @@ $(document).ready( function () {
     
     });
 } );
+
+function  exitProj(){
+	let iscPm = document.getElementById('iscPm').value;
+	console.log(iscPm);
+	if(iscPm=='Y'){
+		alert('PM은 탈퇴가 불가능합니다');
+		return false;
+	}
+	alert('탈퇴가 완료되었습니다');
+	console.log('false 이후');
+	location.href='./moveFixhistory.do';
+}
+function  deleteProj(){
+	let iscPm = document.getElementById('iscPm').value;
+	console.log(iscPm);
+	if(iscPm=='N'){
+		alert('PM만 삭제가 가능합니다');
+		return false;
+	}
+	alert('삭제가 완료되었습니다');
+	console.log('false 이후');
+	location.href='./deleteProj.do';
+}
 </script>
 <style>
 .inArea{
@@ -173,11 +209,6 @@ $(document).ready( function () {
 }
 .dataTables_wrapper {
     position: relative;
-    padding-left : 800px;
-    clear: both;
-    width : 700px;
-    bottom: 600px;
-/*     left: 600px; */
 }
 </style>
 </html>
