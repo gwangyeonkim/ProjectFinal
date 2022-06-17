@@ -27,7 +27,7 @@ public interface IScheduleDao {
 
 	public List<WbsViewVo> callComplete(String memId);
 	
-	public int checkAuth (String memId);
+	public String checkAuth (String memId);
 	
 	public int getFinCount(String projName);
 	public int getAllCount(String projName);

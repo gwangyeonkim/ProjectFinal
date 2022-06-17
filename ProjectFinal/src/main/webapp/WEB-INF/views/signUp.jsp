@@ -19,7 +19,15 @@
 <%@include file="./header.jsp" %>
 <style type="text/css">
 
-
+tbody, td, tfoot, th, thead, tr {
+    FONT-WEIGHT: 100;
+    border-color: inherit;
+    border-style: solid;
+    border-width: 2.5;
+}
+tbody{
+    height: 505px;
+}
 
 .navb{
 	height: 100px;
@@ -49,8 +57,8 @@ table .type02 {
 }
 
 
-table.type02 td{
-  width: 350px;
+table .type02 td{
+  width: 200px;
   padding: 10px;
   vertical-align: top;
   border-right: 1px solid #ccc;
@@ -138,7 +146,7 @@ h2{
                             <h3 id="h3">이메일</h3>
                         </th>
                         <td colspan="8">
-                            <input id="email" class="form-control" type="text" name="memEmail"  required/>
+                            <input id="memEmail" class="form-control" type="text" name="memEmail"  required/>
                         </td>
                         <td colspan="2" style="text-align: center;">
                             <input type="button" id="checkEmailBtn" class="btn btn-outline-primary btn-lg" value="인증번호 보내기"><br>
@@ -322,7 +330,7 @@ $("#name").blur(function(){
 	$("#checkEmailBtn").click(function() {
 	// 이메일 정규화 
 	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-	var inputEmail = $("#email").val();
+	var inputEmail = $("#memEmail").val();
 	if(regEmail.test(inputEmail) || !inputEmail.includes("")){
 		
 	$.ajax({
@@ -351,8 +359,8 @@ $("#name").blur(function(){
 // 			$("#email").attr("autofocus", true);
 			$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
 			$(".checkEmailComment").css("color", "red");
-			$("#email").focus();
-			$("#email").val("");
+			$("#memEmail").focus();
+			$("#memEmail").val("");
 	}
 });
 

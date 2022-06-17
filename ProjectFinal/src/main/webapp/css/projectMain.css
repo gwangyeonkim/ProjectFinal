@@ -42,6 +42,11 @@
     float: right;
 }
 
+.navb-right > b {
+   	font-size:25px;
+   	color:white;
+}
+
 /* @media screen and (max-width: 500px) {
     .navb a {
         float: none;
@@ -55,6 +60,21 @@
 } */
 
 /* -----------body--------------- */
+.logout{
+	border:none;
+	margin-top:5px;
+	width:90px;
+	height:40px;
+	font-size: 15px;
+	font-weight:1000;
+	transition : 0.3s;
+}
+
+.logout:hover{
+	background-color: black;
+	color:white;
+}
+
 body {
     background-color: rgb(128, 128, 128);
  	padding: 50px;
@@ -71,13 +91,23 @@ body {
 
 
 #loginInfo {
+	line-height:20px;
     position: relative;
+}
+
+#personIcon{
+	position: absolute;
+    right: 130px;
+    top:1px;
+    width:40px;
+    height:40px;
+    cursor: pointer;
 }
 
 #chatIcon {
     position: absolute;
-    right: 170px;
-    top: 10px;
+    right: 190px;
+    top:1px;
     width:40px;
     height:40px;
     cursor: pointer;
@@ -86,7 +116,7 @@ body {
 #notiIcon {
     position: absolute;
     right: 250px;
-    top: 10px;
+    top:1px;
     width:40px;
     height:40px;
     cursor: pointer;
@@ -94,16 +124,19 @@ body {
 
 #notiNonCheck{
     position: absolute;
-    right: 246px;
-    top: 1px;
+    bottom:20px;
+    width:15px;
+    height:15px;
+    right: 260px;
 }
 
 #notiCount{
     position: absolute;
-    right: 255px;
-    top: 1px;
+    right: 248px;
+    bottom:15px;
     font-size: 18px;
     font-weight: bold;
+    color:white;
 }
 
 .dropdown {

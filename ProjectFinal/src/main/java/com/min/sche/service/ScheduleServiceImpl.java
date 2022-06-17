@@ -71,7 +71,7 @@ public class ScheduleServiceImpl implements IScheduleService {
 	}
 
 	@Override
-	public int checkAuth(String memId) {
+	public String checkAuth(String memId) {
 		// TODO Auto-generated method stub
 		return dao.checkAuth(memId);
 	}
