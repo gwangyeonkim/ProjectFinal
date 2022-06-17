@@ -57,4 +57,9 @@ public class NotiDaoImpl implements INotiDao {
 	public MemListVo chatting_groupName(Map<String, Object> map) {
 		return session.selectOne(NS + "chatting_groupName", map);
 	}
+
+	@Override
+	public int notification_delete_All() {
+		return session.update(NS + "notification_delete_All");
+	}
 }

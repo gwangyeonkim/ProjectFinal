@@ -23,4 +23,6 @@ public interface INotiDao {
 	public int notification_count(Map<String, Object> map);
 	
 	public MemListVo chatting_groupName(Map<String, Object> map);
+	
+	public int notification_delete_All();
 }

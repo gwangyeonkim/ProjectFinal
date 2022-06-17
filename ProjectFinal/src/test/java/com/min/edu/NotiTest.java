@@ -81,12 +81,13 @@ public class NotiTest {
 		System.out.println(n);
 	}
 	
-	@Test
-	public void chatting_groupName() {
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("memId", "CH001");
-		MemListVo n =  sqlSession.selectOne("com.min.noti.mapper.NotiDaoImpl.chatting_groupName", map);
-		System.out.println(n);
-	}
+//	@Test
+//	public void chatting_groupName() {
+//		Map<String,Object> map = new HashMap<String, Object>();
+//		map.put("memId", "CH001");
+//		MemListVo n =  sqlSession.selectOne("com.min.noti.mapper.NotiDaoImpl.chatting_groupName", map);
+//		System.out.println(n);
+//	}
+	
 
 }
