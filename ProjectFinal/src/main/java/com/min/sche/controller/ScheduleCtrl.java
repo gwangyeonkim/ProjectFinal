@@ -260,6 +260,8 @@ public class ScheduleCtrl {
 			jsonObj.put("isAllDay","true");
 			jsonObj.put("isPrivate","true");
 			jsonObj.put("isReadOnly", "true");
+			jsonObj.put("color","white");
+			jsonObj.put("bgColor","gray");
 			jsonObj.put("body", lists.get(i).getWbsManager());
 			jsonObj.put("location", lists.get(i).getWbsConent());
 			arr.add(jsonObj);
