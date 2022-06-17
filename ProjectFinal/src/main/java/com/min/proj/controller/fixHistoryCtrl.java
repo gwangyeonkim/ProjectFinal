@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.min.mema.vo.MemberVo;
 import com.min.proj.service.IFixHistoryService;
 import com.min.proj.vo.FixHistoryVo;
 
@@ -43,8 +44,14 @@ public class fixHistoryCtrl {
 	public JSONArray selectFixhistory(HttpSession session) {
 		logger.info("fixHistoryCtrl selectFixhistory {}");
 		Map<String, String> map = new HashMap<String, String>();
+		
+		
+		MemberVo mVo =	(MemberVo)session.getAttribute("loginVo");
 //		TODO 12. 변경점
-		map.put("memId", (String)session.getAttribute("memId"));
+//		map.put("memId", (String)session.getAttribute("memId"));
+		map.put("memId", mVo.getMemberId());
+		System.out.println(map.toString());
+		
 //		map.put("memId", "CH001");
 		
 		List<FixHistoryVo> fixVo = 	fixService.selectFixHistory(map);
@@ -68,8 +75,9 @@ public class fixHistoryCtrl {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		
-//		map.put("memId", session.getAttribute("memId"));
-		map.put("memId", "CH001");
+//		map.put("memId", "CH001");
+		MemberVo mVo =	(MemberVo)session.getAttribute("loginVo");
+		map.put("memId", mVo.getMemberId());
 		map.put("fixName", fixName);
 		map.put("fixContent", fixContent);
 		

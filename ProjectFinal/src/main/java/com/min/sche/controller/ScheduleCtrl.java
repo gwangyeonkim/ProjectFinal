@@ -81,9 +81,12 @@ public class ScheduleCtrl {
 		session.setAttribute("mLists", memberList);
 		
 		int allCount = service.getAllCount(projName); //전체 일정의 갯수
-		int perValue = Math.round(100/allCount);//일정 1개완료당 진척도 올라가는량
-		int done = service.getFinCount(projName);//완료한 일정의 갯수
-		model.addAttribute("jinchuck",perValue*done);
+		if(allCount != 0) {
+			int perValue = Math.round(100/allCount);//일정 1개완료당 진척도 올라가는량
+			int done = service.getFinCount(projName);//완료한 일정의 갯수
+			model.addAttribute("jinchuck",perValue*done);
+		}
+		
 		
 		MemberVo loginVo = (MemberVo) session.getAttribute("loginVo");
 		String manager = loginVo.getMemName();
@@ -96,9 +99,11 @@ public class ScheduleCtrl {
 			map.put("projName",projName);
 			map.put("manager",service.getProjectMember(lists.get(i).getMemId()));
 			int memAll = service.memAllCount(map);
-			int memValue = Math.round(100/memAll);
-			int memFin = service.memFinCount(map);
-			memFinList.add(memValue*memFin);
+			if(memAll != 0) {
+				int memValue = Math.round(100/memAll);
+				int memFin = service.memFinCount(map);
+				memFinList.add(memValue*memFin);
+			}
 		}
 		model.addAttribute("finInfo",memFinList);
 		
@@ -255,6 +260,8 @@ public class ScheduleCtrl {
 			jsonObj.put("isAllDay","true");
 			jsonObj.put("isPrivate","true");
 			jsonObj.put("isReadOnly", "true");
+			jsonObj.put("color","white");
+			jsonObj.put("bgColor","gray");
 			jsonObj.put("body", lists.get(i).getWbsManager());
 			jsonObj.put("location", lists.get(i).getWbsConent());
 			arr.add(jsonObj);

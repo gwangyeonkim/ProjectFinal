@@ -61,9 +61,9 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public String chkHp(String hp) {
 		int certificatedNum = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
-//		String api_key = "NCS1ATWB7BLNOTJ7";
-//	    String api_secret = "XZZYP2EP9G8LOBAW0DTNELWOZJPROCGQ";
-//	    Message coolsms = new Message(api_key, api_secret);
+		String api_key = "NCS1ATWB7BLNOTJ7";
+	    String api_secret = "XZZYP2EP9G8LOBAW0DTNELWOZJPROCGQ";
+	    Message coolsms = new Message(api_key, api_secret);
 	    
 	    HashMap<String, String> params = new HashMap<String, String>();
 
@@ -73,14 +73,14 @@ public class MemberServiceImpl implements IMemberService {
         params.put("text", "휴대폰인증 메시지 : 인증번호는" + "["+certificatedNum+"]" + "입니다.");
       	params.put("app_version", "test app 1.2"); // application name and version
 	    
-//      	try {
-//  	      JSONObject obj = (JSONObject) coolsms.send(params);
-//  	      System.out.println(obj.toString());
-//  	    } catch (CoolsmsException e) {
-//  	      System.out.println(e.getMessage());
-//  	      System.out.println(e.getCode());
-// 	      return "error";
-//  	    }
+      	try {
+  	      JSONObject obj = (JSONObject) coolsms.send(params);
+  	      System.out.println(obj.toString());
+  	    } catch (CoolsmsException e) {
+  	      System.out.println(e.getMessage());
+  	      System.out.println(e.getCode());
+ 	      return "error";
+  	    }
 		
 		return Integer.toString(certificatedNum);
 	}

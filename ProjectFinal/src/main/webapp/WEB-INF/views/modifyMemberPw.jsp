@@ -23,9 +23,9 @@
 
 </style>
 <script>
-function closeW(){
-	window.close();
-}
+// function closeW(){
+// 	window.close();
+// }
 </script>
 </head>
 <body>
