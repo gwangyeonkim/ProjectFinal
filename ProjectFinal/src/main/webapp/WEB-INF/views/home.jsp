@@ -145,11 +145,11 @@
                     <div class="modal-header" style="padding:35px 50px;">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4>
-                            <span class="glyphicon glyphicon-lock"></span>LOGIN
+                            <span class="glyphicon glyphicon-lock"></span>LOGIN 
                         </h4>
                     </div>
                     <div class="modal-body" style="padding:40px 50px;">
-                        <form action="./loginPage.do" method="post" role="form">
+                        <form action="./loginPage.do" method="post" role="form">  
                             <div class="form-group">
                                 <label for="usrname">
                                     <span class="glyphicon glyphicon-user"></span>아이디
