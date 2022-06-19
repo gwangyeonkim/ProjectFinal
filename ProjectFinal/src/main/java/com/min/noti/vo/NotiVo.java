@@ -69,11 +69,7 @@ public class NotiVo {
 	private String notiContent   ;
 	private String notiNotifided ;
 	private String notiRegdate   ;
-	@Override
-	public String toString() {
-		return "NotiVo [notiId=" + notiId + ", projName=" + projName + ", memId=" + memId + ", notiContent="
-				+ notiContent + ", notiNotifided=" + notiNotifided + ", notiRegdate=" + notiRegdate + "]";
-	}
+	private String notiDelflag;
 	public String getNotiId() {
 		return notiId;
 	}
@@ -110,8 +106,20 @@ public class NotiVo {
 	public void setNotiRegdate(String notiRegdate) {
 		this.notiRegdate = notiRegdate;
 	}
+	public String getNotiDelflag() {
+		return notiDelflag;
+	}
+	public void setNotiDelflag(String notiDelflag) {
+		this.notiDelflag = notiDelflag;
+	}
+	@Override
+	public String toString() {
+		return "NotiVo [notiId=" + notiId + ", projName=" + projName + ", memId=" + memId + ", notiContent="
+				+ notiContent + ", notiNotifided=" + notiNotifided + ", notiRegdate=" + notiRegdate + ", notiDelflag="
+				+ notiDelflag + "]";
+	}
 	public NotiVo(String notiId, String projName, String memId, String notiContent, String notiNotifided,
-			String notiRegdate) {
+			String notiRegdate, String notiDelflag) {
 		super();
 		this.notiId = notiId;
 		this.projName = projName;
@@ -119,6 +127,7 @@ public class NotiVo {
 		this.notiContent = notiContent;
 		this.notiNotifided = notiNotifided;
 		this.notiRegdate = notiRegdate;
+		this.notiDelflag = notiDelflag;
 	}
 	
 	
