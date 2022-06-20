@@ -1,3 +1,3 @@
 # ProjectFinal
 
-<img src="https://thumbs.gfycat.com/GroundedJauntyAmbushbug-size_restricted.gif" style="width:100%;"/>
+<img src="https://thumbs.gfycat.com/GroundedJauntyAmbushbug-size_restricted.gif" width="100%"/>
