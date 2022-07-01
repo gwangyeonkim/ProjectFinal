@@ -67,53 +67,49 @@
 </body>
 
 <script type="text/javascript">
-$("#checkEmailBtn").click(function() {
-	// 이메일 정규화 
-	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
-	
-	var inputName = $("#memName").val();
-	var inputId = $("#memberId").val();
-	var inputEmail = $("#memEmail").val();
-	
-	console.log(inputEmail);
-	var sendData= {
-		"memName": inputName,
-		"memberId" : inputId,
-		"memEmail" : inputEmail
-	}
-	if(inputEmail != null){
-	$.ajax({
-		 	contentType: "application/json; charset=utf-8",
-			type : "POST",
-			url : "./findPwMember.do",
-			cache : false,
-			dataType : "json",
-			data: JSON.stringify(sendData),
-			success : function(data) {
-			if (data == "error") {
-						console.log(data)
-// 						alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
-// 						$("#email").attr("autofocus", true);
-// 						$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
-// 						$(".checkEmailComment").css("color", "red");
-					     } else {
-						alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
-						$("#validEmail").attr("disabled",false);
-						$("#validEmailBtn").css("display","inline-block");
-						$(".checkEmailComment").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
-						$(".checkEmailComment").css("color", "green");
-						code = data;
+
+	$("#checkEmailBtn").click(function() {
+		// 이메일 정규화 
+		var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var inputName = $("#memName").val();
+		var inputId = $("#memberId").val();
+		var inputEmail = $("#memEmail").val();
+		
+		console.log(inputEmail);
+		var sendData= {
+			"memName": inputName,
+			"memberId" : inputId,
+			"memEmail" : inputEmail
+		}
+		if(inputEmail != null){
+		$.ajax({
+			 	contentType: "application/json; charset=utf-8",
+				type : "POST",
+				url : "./findPwMember.do",
+				cache : false,
+				dataType : "json",
+				data: JSON.stringify(sendData),
+				success : function(data) {
+				if (data == "error") {
+							console.log(data)
+						     } else {
+							alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
+							$("#validEmail").attr("disabled",false);
+							$("#validEmailBtn").css("display","inline-block");
+							$(".checkEmailComment").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
+							$(".checkEmailComment").css("color", "green");
+							code = data;
+							}
 						}
-					}
-		});
-	}else {
-		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
-			$("#memEmail").attr("autofocus", true);
-			$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
-			$(".checkEmailComment").css("color", "red");
-	}
-});
+					});
+				}else {
+			alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+				$("#memEmail").attr("autofocus", true);
+				$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
+				$(".checkEmailComment").css("color", "red");
+		}
+	});
 
 </script>
 

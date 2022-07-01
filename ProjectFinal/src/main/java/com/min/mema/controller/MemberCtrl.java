@@ -108,6 +108,7 @@ public class MemberCtrl {
 		return Integer.toString(result);
 	}
 	
+	
 	@RequestMapping(value = "/checkMail.do" ,method = RequestMethod.GET)
 	@ResponseBody
 	public String checkMail(@RequestParam String email) {
@@ -121,6 +122,7 @@ public class MemberCtrl {
 	public String checkPh(@RequestParam String Hp) {
 		return service.chkHp(Hp);
 	}
+	
 	
 	@GetMapping(value = "/mamberInfo.do")
 	public String mamberInfo() {
@@ -145,6 +147,7 @@ public class MemberCtrl {
 		return "modifyMemberPw";
 	}
 	
+	
 	@RequestMapping(value = "/modifyMemberPw.do" , method = RequestMethod.POST)
 	public String modifyMemberPw(MemberVo vo, HttpServletResponse resp) throws IOException {
 		logger.info("MemberCtrl modifyMember {}", vo);
@@ -157,6 +160,8 @@ public class MemberCtrl {
 		}
 		return "/proj/project";
 	}
+	
+	
 	
 	@RequestMapping(value = "/findIdMember.do", method = RequestMethod.GET)
 	public String findIdMember() {

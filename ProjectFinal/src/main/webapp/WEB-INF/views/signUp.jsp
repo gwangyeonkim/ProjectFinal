@@ -190,7 +190,7 @@ h2{
                     </tr>
                     <tr>
                         <th colspan="2" rowspan="2">
-                            <h3 id="h3">폰번호</h3>
+                            <h3 id="h3">핸드폰<br>번호</h3>
                         </th>
                         <td colspan="6">
                             <input id="Hp" class="form-control" type="text" name="memPhone"  required />
@@ -204,13 +204,15 @@ h2{
                             <input id="validHp" class="form-control" type="text" name="sm_Hp2" title="인증번호 입력" required/>
                         </td>
                         <td colspan="4">
-                            <span id="validHpBtn" class="btn btn-outline-primary btn-lg">핸드폰인증</span><br>
-					        <span class="point checkHpComment">핸드폰번호 인증번호 보내기를 해주십시오.</span>
-					        <input type="hidden" id="doubleCheckHp"/>
+                            <span id="validHpBtn" class="btn btn-outline-primary btn-lg" style="text-align: center;">핸드폰인증</span><br>
+<!-- 					        <span>핸드폰번호 인증번호 보내기를 해주십시오.</span> -->
+					        <!-- <input type="hidden" id="doubleCheckHp"/> -->
                         </td>
                         <td colspan="4">
                         	<input type="hidden" id="doubleCheckHp"/>
-                            <h3>인증번호 확인 여부</h3>
+                        	<span class="point checkHpComment"></span>
+                        	<input type="hidden" id="doubleCheckHp"/>
+<!--                             <h3>인증번호 확인 여부</h3> -->
                         </td>
                     </tr>
                     <tr>
@@ -326,43 +328,38 @@ $("#name").blur(function(){
 		}
 	});
 
-	var code = "";
-	$("#checkEmailBtn").click(function() {
-	// 이메일 정규화 
-	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-	var inputEmail = $("#memEmail").val();
-	if(regEmail.test(inputEmail) || !inputEmail.includes("")){
-		
-	$.ajax({
-			type : "GET",
-			url : "./checkMail.do?email=" + inputEmail,
-			cache : false,
-			success : function(data) {
-			if (data == "error") {
-						console.log(data)
-// 						alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
-// 						$("#email").attr("autofocus", true);
-// 						$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
-// 						$(".checkEmailComment").css("color", "red");
-					     } else {
-						alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
-						$("#validEmail").attr("disabled",false);
-						$("#validEmailBtn").css("display","inline-block");
-						$(".checkEmailComment").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
-						$(".checkEmailComment").css("color", "green");
-						code = data;
+	
+		var code = "";
+		$("#checkEmailBtn").click(function() {
+		// 이메일 정규화 
+		var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var inputEmail = $("#memEmail").val();
+		if(regEmail.test(inputEmail) || !inputEmail.includes("")){
+			
+		$.ajax({
+				type : "GET",
+				url : "./checkMail.do?email=" + inputEmail,
+				cache : false,
+				success : function(data) {
+				if (data == "error") {
+							console.log(data)
+						     } else {
+							alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
+							$("#validEmail").attr("disabled",false);
+							$("#validEmailBtn").css("display","inline-block");
+							$(".checkEmailComment").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
+							$(".checkEmailComment").css("color", "green");
+							code = data;
+							}
 						}
-					}
-		});
-	}else {
-// 		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
-// 			$("#email").attr("autofocus", true);
-			$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
-			$(".checkEmailComment").css("color", "red");
-			$("#memEmail").focus();
-			$("#memEmail").val("");
-	}
-});
+			});
+		}else {
+				$(".checkEmailComment").text("유효한 이메일 주소를 입력해주세요.");
+				$(".checkEmailComment").css("color", "red");
+				$("#memEmail").focus();
+				$("#memEmail").val("");
+		}
+	});
 
 	//이메일 인증번호 대조
 	$("#validEmailBtn").click(function() {
@@ -399,10 +396,6 @@ $("#name").blur(function(){
 			success : function(data) {
 				if (data == "error") {
 					console.log(data)
-// 					alert("핸드폰 번호가 올바르지 않습니다. 유효한 핸드폰 번호를 입력해주세요.");
-// 					$("#Hp").attr("autofocus", true);
-// 					$(".checkHpComment").text("유효한 핸드폰번호를 입력해주세요.");
-// 					$(".checkHpComment").css("color", "red");
 				} else {
 					alert("인증번호 발송이 완료되었습니다.\n입력한 핸드폰에서 인증번호 확인을 해주십시오.");
 					$("#validHp").attr("disabled", false);
@@ -413,7 +406,6 @@ $("#name").blur(function(){
 				}
 			}
 		})
-			
 		}else{
 			alert("핸드폰 번호가 올바르지 않습니다. 유효한 핸드폰 번호를 입력해주세요.");
 			$("#Hp").attr("autofocus", true);
@@ -431,9 +423,7 @@ $("#name").blur(function(){
 			$(".checkHpComment").text("인증번호가 일치합니다.");
 			$(".checkHpComment").css("color", "green");
 			$("#doubleCheckHp").val("true");
-// 			$("#validHpBtn").attr("disabled", true);
-// 			$("#validHp").attr("disabled", true);
-			chkUserHp = true;
+				chkUserHp = true;
 		} else {
 			$(".checkHpComment").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
 			$(".checkHpComment").css("color", "red");

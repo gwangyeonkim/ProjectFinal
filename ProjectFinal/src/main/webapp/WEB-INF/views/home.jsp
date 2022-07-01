@@ -154,13 +154,13 @@
                                 <label for="usrname">
                                     <span class="glyphicon glyphicon-user"></span>아이디
                                 </label>
-                                <input type="text" class="form-control" name="memberId" id="usrname">
+                                <input type="text" class="form-control" value="rlarbcjf115" name="memberId" id="usrname">
                             </div>
                             <div class="form-group">
                                 <label for="psw">
                                     <span class="glyphicon glyphicon-eye-open"></span>비밀번호
                                 </label>
-                                <input type="password" class="form-control" name="memPw" id="psw">
+                                <input type="password" class="form-control" value="rlarbcjf1151" name="memPw" id="psw">
                             </div>
 <!--                             <div class="checkbox"> -->
 <!--                                 <label><input type="checkbox" value="" checked="checked">Remember me</label> -->

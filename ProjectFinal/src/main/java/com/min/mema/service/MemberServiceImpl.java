@@ -55,9 +55,9 @@ public class MemberServiceImpl implements IMemberService {
 	@Override
 	public String chkEmail(String email) {
 		return sendEmail(email, 0);
-		
 	}
 
+	
 	@Override
 	public String chkHp(String hp) {
 		int certificatedNum = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
@@ -67,23 +67,24 @@ public class MemberServiceImpl implements IMemberService {
 	    
 	    HashMap<String, String> params = new HashMap<String, String>();
 
-	    params.put("to", hp);    // 수신전화번호
-        params.put("from", "010-2731-4002");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨 -> 발신전화 번호는 coolSMS에 등록해줘야됨
-        params.put("type", "SMS");// type 방식
-        params.put("text", "휴대폰인증 메시지 : 인증번호는" + "["+certificatedNum+"]" + "입니다.");
-      	params.put("app_version", "test app 1.2"); // application name and version
+//	    params.put("to", hp);             // 수신전화번호
+//        params.put("from", "010-2731-4002");    
+//        params.put("type", "SMS");    // type 방식
+//        params.put("text", "휴대폰인증 메시지 : 인증번호는" + "["+certificatedNum+"]" + "입니다.");
+//      	params.put("app_version", "test app 1.2"); // application name and version
 	    
-      	try {
-  	      JSONObject obj = (JSONObject) coolsms.send(params);
-  	      System.out.println(obj.toString());
-  	    } catch (CoolsmsException e) {
-  	      System.out.println(e.getMessage());
-  	      System.out.println(e.getCode());
- 	      return "error";
-  	    }
-		
+//      	try {
+//  	      JSONObject obj = (JSONObject) coolsms.send(params);
+//  	      System.out.println(obj.toString());
+//  	    } catch (CoolsmsException e) {
+//  	      System.out.println(e.getMessage());
+//  	      System.out.println(e.getCode());
+// 	      return "error";
+//  	    }
 		return Integer.toString(certificatedNum);
 	}
+	
+	
 	
 	@Override
 	public int modifyMember(MemberVo vo) {
@@ -128,6 +129,8 @@ public class MemberServiceImpl implements IMemberService {
 		return upResult+"";
 	}
 	
+	
+	
 	// 임시비밀번호 난수 발생
 	private String getRamdomPassword(int size) {
         char[] charSet = new char[] {
@@ -142,7 +145,6 @@ public class MemberServiceImpl implements IMemberService {
         int idx = 0;
         int len = charSet.length;
         for (int i=0; i<size; i++) {
-            // idx = (int) (len * Math.random());
             idx = sr.nextInt(len);    // 강력한 난수를 발생시키기 위해 SecureRandom을 사용한다.
             sb.append(charSet[idx]);
         }
@@ -164,8 +166,8 @@ public class MemberServiceImpl implements IMemberService {
 		        result = certificatedNum+"";
 			}else {
 				String newPw = getRamdomPassword(10);
-				title = "회원님의 임시비밀번호 입니다.";
-				content = "회원님읜 임시비밀번호는 " + newPw + "입니다";
+				title = "임시비밀번호 입니다.";
+				content = "회원님의 임시비밀번호는 " + newPw + "입니다";
 				result = newPw;
 			}
 	        
@@ -188,10 +190,6 @@ public class MemberServiceImpl implements IMemberService {
 	
 	@Override
 	public String inviteMember(MemberVo vo) {
-		
-//		MemberVo id = new MemberVo();
-//		id.getMemberId();S
-//		System.out.println(id);
 		vo.getMemberId();
 		String token = dao.inviteMember(vo);
 		System.out.println(token+"!!!!!!!!!!!!!!!");

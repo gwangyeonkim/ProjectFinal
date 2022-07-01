@@ -121,11 +121,8 @@ function memberSelect(id){
          console.log(data);   
          $("#email").val(data.memEmail)
          $("#id").val(data.memName)
-      },
-      error:function(data){
-         alert("?????????????????");
-         console.log("오류다!!"+data.status);   
       }
+     
    })
      $("#loginModal").modal();
      
@@ -152,20 +149,24 @@ $(document).ready( function () {
                 "previous": "이전"
             }
         },
-        
         lengthChange: false, // 표시 건수기능 숨기기
         searching: true, // 검색 기능 숨기기
         ordering: true, // 정렬 기능 숨기기
         info: false, // 정보 표시 숨기기
         paging:true, // 페이징 기능 숨기기
-//         order: [ [ 3, "asc" ], [ 1, "desc"] ], //초기표기시 정렬, 만약 정렬을 안하겠다 => order: []
-  	  columnDefs: [{ targets: 1, width: 100 }], //열의 넓이 조절 
-      lengthMenu: [ 10 ] //표시건수 
-//       displayLength: 50, //기본표시건수 설정
-//         pagingType: "simple_numbers" // 페이징 타입 설정 : simple, simple_numbers, full_numbers 등
-    
+//      order: [ [ 3, "asc" ], [ 1, "desc"] ], //초기표기시 정렬, 만약 정렬을 안하겠다 => order: []
+  	 	columnDefs: [{ targets: 1, width: 100 }], //열의 넓이 조절 
+      	lengthMenu: [ 10 ] //표시건수 
+//      displayLength: 50, //기본표시건수 설정
+//      pagingType: "simple_numbers" // 페이징 타입 설정 : simple, simple_numbers, full_numbers 등
     });
 } );
+
+
+
+
+
+
 
 function  exitProj(){
 	let iscPm = document.getElementById('iscPm').value;

@@ -47,6 +47,8 @@
 						        SELECT MEM_ID FROM PROJMEMLIST p)
 	</select>
 	
+	
+	
 	<select id="memberSelect" parameterType="java.lang.String" resultType="MemVo">
 		SELECT MEMBER_ID , MEM_NAME ,MEM_EMAIL
 		FROM MEMBERLIST
